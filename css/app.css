@@ -10,6 +10,7 @@
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 li {
@@ -66,6 +67,14 @@ $gray-5: #666666;
   min-width: 256px;
 }
 
+.divider-horizontal {
+  width: 100%;
+  height: 1px;
+  display: block;
+  background-color: #33363c;
+  margin: 24px 0;
+}
+
 input {
   width: 100%;
   border-radius: 8px;
@@ -93,6 +102,7 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: pointer;
 }
 
 button.primary {
@@ -144,4 +154,107 @@ button.clr-primary p {
 body {
   font-family: "Poppins", sans-serif;
   background-color: #202225;
+  color: #ffffff;
+}
+
+header {
+  padding: 32px;
+  width: 70%;
+}
+
+header .logo {
+  margin-bottom: 40px;
+}
+
+header h1 {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+header a {
+  color: #ef6100;
+  display: inline-block;
+}
+
+header p {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+header button {
+  margin-top: 16px;
+}
+
+main {
+  padding: 32px;
+}
+
+h2 {
+  color: #ffffff;
+}
+
+.wrap-roadmap {
+  margin-top: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.wrap-roadmap .card {
+  margin-right: 24px;
+}
+
+.wrap-roadmap .card:last-child {
+  margin-right: 0px;
+}
+
+.wrap-roadmap .card .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #33363c;
+}
+
+.wrap-roadmap .card .title svg.playa {
+  stroke: #ffe800;
+}
+
+.wrap-roadmap .card .title svg.community {
+  stroke: #02a1fa;
+}
+
+.wrap-roadmap .card .title svg.beta {
+  stroke: #5fce5f;
+}
+
+.wrap-roadmap .card .title svg.yields {
+  stroke: #e7595a;
+}
+
+.wrap-roadmap .card .title p {
+  margin-left: 16px;
+}
+
+.wrap-roadmap .card .content li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 4px;
+}
+
+.wrap-roadmap .card .content li .done svg {
+  stroke: #5fce5f;
+}
+
+.wrap-roadmap .card .content li .in-progress svg {
+  stroke: #666666;
+}
+
+.wrap-roadmap .card .content li p {
+  margin-left: 16px;
 }

@@ -1,0 +1,96 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: $background;
+  color: $base-text;
+}
+
+header {
+  padding: 32px;
+  width: 70%;
+
+  .logo {
+    margin-bottom: 40px;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: $semi-bold;
+  }
+
+  a {
+    color: $primary;
+    display: inline-block;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: $regular;
+  }
+
+  button {
+    margin-top: 16px;
+  }
+}
+
+main {
+  padding: 32px;
+}
+
+h2 {
+  color: $base-text;
+}
+
+.wrap-roadmap {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+
+  .card {
+    margin-right: 24px;
+    &:last-child {
+      margin-right: 0px;
+    }
+    .title {
+      display: flex;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid $border;
+
+      svg.playa {
+        stroke: #ffe800;
+      }
+      svg.community {
+        stroke: #02a1fa;
+      }
+      svg.beta {
+        stroke: $done;
+      }
+      svg.yields {
+        stroke: #e7595a;
+      }
+
+      p {
+        margin-left: 16px;
+      }
+    }
+    .content {
+      li {
+        display: flex;
+        margin-bottom: 4px;
+        .done {
+          svg {
+            stroke: $done;
+          }
+        }
+        .in-progress {
+          svg {
+            stroke: $gray600;
+          }
+        }
+        p {
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+}
