@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+/* Colors */
+/*Typography */
+/*Assets */
+.icon-24 {
+  width: 24px;
+  height: 24px;
+  stroke: #ffffff;
+}
+
+/* LIGHT MODE
+$primary: #ef6100;
+$secondary: #fba367;
+$base-text: #202225;
+$background: #f9f9f9;
+$border: #eeeeee;
+$white: #ffffff;
+
+$gray-4: #999999;
+$gray-5: #666666;
+*/
+/* Colors */
+/*Typography */
+/*Assets */
+.icon-24 {
+  width: 24px;
+  height: 24px;
+  stroke: #ffffff;
+}
+
+/* LIGHT MODE
+$primary: #ef6100;
+$secondary: #fba367;
+$base-text: #202225;
+$background: #f9f9f9;
+$border: #eeeeee;
+$white: #ffffff;
+
+$gray-4: #999999;
+$gray-5: #666666;
+*/
+.card {
+  padding: 24px;
+  background-color: #292c30;
+  border: 1px solid #33363c;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.05);
+  min-width: 256px;
+}
+
+input {
+  width: 100%;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 10px 16px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+}
+
+button {
+  height: 40px;
+  font-size: 14px;
+  line-height: 0px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 16px 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+button.primary {
+  font-size: 16px;
+  background-color: #33363c;
+  color: #ef6100;
+}
+
+button.secondary {
+  font-size: 16px;
+  background-color: inherit;
+  color: #ffffff;
+}
+
+button:disabled {
+  opacity: 0.5;
+  color: #666666;
+}
+
+button.wallet {
+  font-size: 16px;
+  font-weight: 700;
+  background-color: #292c30;
+  color: #ffffff;
+}
+
+button.wallet p {
+  margin-right: 16px;
+}
+
+button.bg-gray600 {
+  background-color: #666666;
+}
+
+button.bg-surface {
+  background-color: #292c30;
+}
+
+button.clr-base-text,
+button.clr-base-text p {
+  color: #ffffff;
+}
+
+button.clr-primary,
+button.clr-primary p {
+  color: #ef6100;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #202225;
+}
