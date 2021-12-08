@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<template>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/app.css" />
     <title>Local Terra Roadmap</title>
   </head>
   <body>
     <header>
       <img
-        src="./assets/abstract-local.svg"
+        src="@/assets/abstract-local.svg"
         alt="Background Image"
         class="header-bg"
       />
       <div class="wrap">
         <img
-          src="./assets/logo-horizontal-dark.svg"
+          src="@/assets/logo-horizontal-dark.svg"
           alt="Local Terra Logo"
           class="logo"
         />
@@ -437,4 +432,17 @@
       </section>
     </main>
   </body>
-</html>
+</template>
+
+<script>
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "Home",
+  components: {},
+});
+</script>
+
+<style lang="scss">
+@import "@/style/app.scss";
+</style>
