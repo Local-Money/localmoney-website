@@ -9,23 +9,26 @@ body {
 }
 
 header {
-  background: linear-gradient(
-    0deg,
-    rgba(32, 34, 37, 1) 0%,
-    rgba(51, 54, 60, 1) 100%
-  );
+  // background: linear-gradient(
+  //   0deg,
+  //   rgba(32, 34, 37, 1) 0%,
+  //   rgba(51, 54, 60, 1) 100%
+  // );
+  position: relative;
+  border-bottom: 1px solid $border;
   .header-bg {
     position: absolute;
-    width: 60%;
-    max-width: 800px;
-    top: -7%;
-    right: -7%;
-    opacity: 0.3;
-    overflow: hidden;
+    width: 80%;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    // opacity: 0.7;
   }
   .wrap {
+    position: relative;
     padding: 80px;
     width: 60%;
+    z-index: 10;
 
     .logo {
       width: 250px;
@@ -47,6 +50,10 @@ header {
       font-weight: $regular;
     }
 
+    .wrap-cta {
+      margin-top: 56px;
+    }
+
     button {
       margin-top: 16px;
       transition: background-color 0.2s ease;
@@ -59,8 +66,10 @@ header {
 }
 
 main {
+  position: relative;
   margin-top: 56px;
   padding: 0 80px;
+  z-index: 10;
 }
 
 h2 {
@@ -134,11 +143,12 @@ h2 {
 
       .logo {
         width: 150px;
-        margin-bottom: 32px;
+        margin-bottom: 120px;
       }
       h1 {
-        font-size: 24px;
-        margin-bottom: 8px;
+        font-size: 30px;
+        line-height: 34px;
+        margin-bottom: 24px;
       }
       p {
         font-size: 16px;

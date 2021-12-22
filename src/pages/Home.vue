@@ -4,29 +4,31 @@
   </head>
   <body>
     <header>
-      <img
-        src="@/assets/abstract-local.svg"
-        alt="Background Image"
-        class="header-bg"
-      />
       <div class="wrap">
         <img
           src="@/assets/logo-horizontal-dark.svg"
           alt="Local Terra Logo"
           class="logo"
         />
-        <h1>Welcome to Local Terra.</h1>
+        <h1>Trade with your peers, locally.</h1>
         <p>
           We are a decentralized P2P marketplace for
           <a href="https://www.terra.money/" target="_blank">@terra_money</a>
           assets.
         </p>
-        <div class="divider-horizontal"></div>
-        <p>Want to get notified on launch?</p>
-        <a href="https://twitter.com/local_terra" target="_blank">
-          <button class="primary">Follow us</button>
-        </a>
+        <!-- <div class="divider-horizontal"></div> -->
+        <div class="wrap-cta">
+          <p>Want to get notified on launch?</p>
+          <a href="https://twitter.com/local_terra" target="_blank">
+            <button class="primary">Follow us</button>
+          </a>
+        </div>
       </div>
+      <img
+        src="@/assets/header-bg-4.png"
+        alt="Background Image"
+        class="header-bg"
+      />
     </header>
     <main>
       <h2>Roadmap</h2>
