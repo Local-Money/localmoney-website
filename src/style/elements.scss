@@ -1,5 +1,15 @@
 @import "tokens.scss";
 
+.page-layout {
+  max-width: 1440px;
+  padding: 80px;
+  margin: 0 auto;
+
+  @media only screen and (max-width: 600px) {
+    padding: 24px;
+  }
+}
+
 .card {
   padding: 24px;
   background-color: $surface;

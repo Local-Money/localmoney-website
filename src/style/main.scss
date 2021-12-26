@@ -15,10 +15,6 @@ header {
   //   rgba(51, 54, 60, 1) 100%
   // );
   position: relative;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 80px;
-  border-bottom: 1px solid $border;
 }
 nav {
   display: flex;
@@ -52,17 +48,16 @@ nav {
       margin-top: 56px;
     }
 
-    p {
-      font-size: 20px;
-      font-weight: $regular;
-    }
-
     .wrap-cta {
-      margin-top: 56px;
+      margin-top: 64px;
+      p {
+        font-size: 24px;
+        font-weight: $regular;
+      }
     }
 
     button {
-      margin-top: 16px;
+      margin-top: 24px;
       transition: background-color 0.2s ease;
 
       &:hover {
@@ -72,75 +67,106 @@ nav {
   }
 
   .hero-img {
-    position: relative;
     width: 50%;
+    img {
+      width: 100%;
+    }
   }
 }
 
 main {
-  position: relative;
-  margin-top: 56px;
-  padding: 0 80px;
-  z-index: 10;
-}
+  h2 {
+    font-size: 40px;
+    font-weight: $bold;
+    color: $base-text;
+  }
 
-h2 {
-  font-size: 32px;
-  font-weight: $semi-bold;
-  color: $base-text;
-}
-
-.wrap-roadmap {
-  margin-top: 32px;
-  display: flex;
-  justify-content: flex-start;
-
-  .card {
-    width: 25%;
-    margin-right: 24px;
-    &:last-child {
-      margin-right: 0px;
-    }
-
-    .title {
-      display: flex;
-      padding-bottom: 16px;
-      margin-bottom: 24px;
-      border-bottom: 1px solid $border;
-
-      svg.playa {
-        stroke: #ffe800;
+  .team {
+    background-color: $surface;
+    border-top: 1px solid $border;
+    .wrap-team {
+      h2 {
+        margin-bottom: 64px;
       }
-      svg.community {
-        stroke: #02a1fa;
-      }
-      svg.beta {
-        stroke: $done;
-      }
-      svg.yields {
-        stroke: #e7595a;
-      }
-
-      p {
-        margin-left: 16px;
-      }
-    }
-    .content {
-      li {
+      .wrap-members {
         display: flex;
-        margin-bottom: 4px;
-        .done {
-          svg {
-            stroke: $done;
+        justify-content: space-between;
+        .team-member {
+          text-align: center;
+          .avatar {
+            width: 150px;
+            border-radius: 32px;
+          }
+          .name {
+            font-size: 20px;
+            font-weight: $bold;
+            color: $primary;
+            padding: 24px 0 4px 0;
+          }
+          .role {
+            font-size: 16px;
+            font-weight: $regular;
           }
         }
-        .in-progress {
-          svg {
-            stroke: $gray600;
-          }
+      }
+    }
+  }
+
+  .roadmap {
+  }
+
+  .wrap-roadmap {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-start;
+
+    .card {
+      width: 25%;
+      margin-right: 24px;
+      &:last-child {
+        margin-right: 0px;
+      }
+
+      .title {
+        display: flex;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid $border;
+
+        svg.playa {
+          stroke: #ffe800;
         }
+        svg.community {
+          stroke: #02a1fa;
+        }
+        svg.beta {
+          stroke: $done;
+        }
+        svg.yields {
+          stroke: #e7595a;
+        }
+
         p {
           margin-left: 16px;
+        }
+      }
+      .content {
+        li {
+          display: flex;
+          margin-bottom: 4px;
+          .done {
+            svg {
+              stroke: $done;
+            }
+          }
+          .in-progress {
+            svg {
+              stroke: $gray600;
+            }
+          }
+          p {
+            margin-left: 16px;
+          }
         }
       }
     }
@@ -149,35 +175,90 @@ h2 {
 
 @media only screen and (max-width: 600px) {
   header {
-    .wrap {
-      width: 100%;
-      padding: 24px;
-
+    nav {
+      margin-bottom: 32px;
       .logo {
         width: 150px;
-        margin-bottom: 120px;
       }
+    }
+    .wrap-hero {
+      flex-direction: column-reverse;
+      article {
+        width: 100%;
+      }
+
       h1 {
-        font-size: 30px;
-        line-height: 34px;
-        margin-bottom: 24px;
+        font-size: 32px;
+        text-align: center;
       }
-      p {
-        font-size: 16px;
+      .sub-header {
+        width: 100%;
+        font-size: 20px;
+        margin-top: 24px;
+        padding-bottom: 32px;
+        text-align: center;
+        border-bottom: 1px solid $border;
+      }
+      .wrap-cta {
+        display: flex;
+        margin-top: 32px;
+        align-items: center;
+        justify-content: space-between;
+        p {
+          width: 50%;
+          font-size: 16px;
+        }
+        button {
+          margin-top: 0;
+        }
+      }
+      .hero-img {
+        width: 90%;
+        margin: 0 auto 24px;
       }
     }
   }
 
   main {
-    margin-top: 0;
-    padding: 24px;
-  }
-  .wrap-roadmap {
-    display: block;
-    margin-top: 24px;
-    .card {
-      width: 100%;
-      margin-bottom: 24px;
+    margin-top: 32px;
+    h2 {
+      font-size: 24px;
+    }
+    .team {
+      .wrap-team {
+        h2 {
+          margin-bottom: 32px;
+        }
+        .wrap-members {
+          flex-wrap: wrap;
+          justify-content: space-around;
+          gap: 16px;
+          .team-member {
+            width: 45%;
+            margin-bottom: 16px;
+
+            .avatar {
+              width: 90%;
+              border-radius: 24px;
+            }
+            .name {
+              font-size: 18px;
+              padding: 8px 0 4px;
+            }
+            .role {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    .wrap-roadmap {
+      flex-direction: column;
+      .card {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 24px;
+      }
     }
   }
 
