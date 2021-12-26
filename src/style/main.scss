@@ -15,34 +15,41 @@ header {
   //   rgba(51, 54, 60, 1) 100%
   // );
   position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px;
   border-bottom: 1px solid $border;
-  .header-bg {
-    position: absolute;
-    width: 80%;
-    top: 0;
-    right: 0;
-    z-index: 0;
-    // opacity: 0.7;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 80px;
+
+  .logo {
+    width: 250px;
   }
-  .wrap {
-    position: relative;
-    padding: 80px;
-    width: 60%;
-    z-index: 10;
+}
+.wrap-hero {
+  display: flex;
 
-    .logo {
-      width: 250px;
-      margin-bottom: 40px;
-    }
-
+  article {
+    width: 50%;
     h1 {
-      font-size: 40px;
+      font-size: 80px;
       font-weight: $semi-bold;
+      line-height: 110%;
     }
 
     a {
       color: $primary;
       display: inline-block;
+    }
+
+    .sub-header {
+      width: 80%;
+      font-size: 32px;
+      line-height: 140%;
+      margin-top: 56px;
     }
 
     p {
@@ -62,6 +69,11 @@ header {
         background-color: $gray200;
       }
     }
+  }
+
+  .hero-img {
+    position: relative;
+    width: 50%;
   }
 }
 
