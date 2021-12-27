@@ -113,59 +113,64 @@ main {
   }
 
   .roadmap {
-  }
+    position: relative;
 
-  .wrap-roadmap {
-    margin-top: 32px;
-    display: flex;
-    justify-content: flex-start;
+    h2 {
+      margin-bottom: 64px;
+    }
 
-    .card {
-      width: 25%;
-      margin-right: 24px;
-      &:last-child {
-        margin-right: 0px;
-      }
+    .timeline-line {
+      position: absolute;
+      width: 4px;
+      height: 85%;
+      left: 126px;
+      margin-top: -32px;
+      background-color: $surface;
+      z-index: -1;
+    }
 
-      .title {
+    .roadmap-item {
+      margin-bottom: 32px;
+      margin-left: 40px;
+      .wrap-date {
         display: flex;
-        padding-bottom: 16px;
-        margin-bottom: 24px;
-        border-bottom: 1px solid $border;
+        align-items: center;
 
-        svg.playa {
-          stroke: #ffe800;
+        .circle {
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          border-radius: 56px;
+          background-color: $primary;
         }
-        svg.community {
-          stroke: #02a1fa;
-        }
-        svg.beta {
-          stroke: $done;
-        }
-        svg.yields {
-          stroke: #e7595a;
-        }
-
-        p {
-          margin-left: 16px;
+        .date {
+          color: $primary;
+          font-size: 24px;
+          font-weight: $bold;
+          margin-left: 24px;
         }
       }
-      .content {
-        li {
-          display: flex;
-          margin-bottom: 4px;
-          .done {
-            svg {
-              stroke: $done;
-            }
+      .wrap-content {
+        display: flex;
+        flex-direction: column;
+
+        .content {
+          display: inline-flex;
+          flex-direction: column;
+          padding: 24px 32px;
+          background-color: $surface;
+          border-radius: 24px;
+          border: 1px solid $border;
+          margin-top: 24px;
+          margin-left: 40px;
+
+          .title {
+            font-size: 24px;
+            font-weight: $bold;
           }
-          .in-progress {
-            svg {
-              stroke: $gray600;
-            }
-          }
-          p {
-            margin-left: 16px;
+          .description {
+            margin-top: 8px;
+            font-size: 16px;
           }
         }
       }
@@ -238,8 +243,9 @@ main {
             margin-bottom: 16px;
 
             .avatar {
-              width: 90%;
+              width: 80%;
               border-radius: 24px;
+              border: 1px solid $border;
             }
             .name {
               font-size: 18px;
@@ -252,12 +258,48 @@ main {
         }
       }
     }
-    .wrap-roadmap {
-      flex-direction: column;
-      .card {
-        width: 100%;
-        margin-right: 0;
+    .roadmap {
+      h2 {
+        margin-bottom: 32px;
+      }
+
+      .timeline-line {
+        width: 3px;
+        height: 95%;
+        left: 37px;
+        margin-top: -16px;
+      }
+
+      .roadmap-item {
         margin-bottom: 24px;
+        margin-left: 8px;
+        .wrap-date {
+          .circle {
+            width: 12px;
+            height: 12px;
+          }
+          .date {
+            font-size: 18px;
+
+            margin-left: 16px;
+          }
+        }
+        .wrap-content {
+          .content {
+            padding: 16px 24px;
+
+            border-radius: 16px;
+
+            margin-left: 32px;
+
+            .title {
+              font-size: 18px;
+            }
+            .description {
+              font-size: 16px;
+            }
+          }
+        }
       }
     }
   }
