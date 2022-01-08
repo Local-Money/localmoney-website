@@ -11,7 +11,7 @@
     "@terra-money/terra.js": "^3.0.1",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
-    "vue-currency-input": "^2.2.0",
+    "vue-currency-input": "^2.4.0",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
   },
