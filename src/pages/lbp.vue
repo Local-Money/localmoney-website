@@ -12,24 +12,48 @@
         />
       </router-link>
       <nav>
-        <a href="#">Dashboard</a>
-        <a href="#">Swap</a>
+        <!-- <a href="#">Dashboard</a>
+        <a href="#">Swap</a> -->
         <button class="primary">connect wallet</button>
       </nav>
     </header>
 
     <main>
-      <section class="wrap-content page-layout section-spacer">
-        <div class="lbp-info card">
-          <p>Price: $0.03</p>
-          <p>Coins remaining: 9,000,000</p>
-          <p>Time remaining: 1d 23h</p>
-          <p>Current LBP Weight: 28:72</p>
+      <section class="lbp-info page-layout">
+        <div class="info card">
+          <p class="label">Price</p>
+          <p class="value">$0.03</p>
         </div>
+        <div class="info card">
+          <p class="label">Coins remaining</p>
+          <p class="value">9,000,000</p>
+        </div>
+        <div class="info card">
+          <p class="label">Current LBP Weight</p>
+          <p class="value">28:72</p>
+        </div>
+        <div class="info card">
+          <p class="label">Time remaining</p>
+          <p class="value"><span class="text-primary">1d 23h</span></p>
+        </div>
+      </section>
+
+      <section class="wrap-content page-layout">
         <div class="swap card">
+          <h2>Swap</h2>
           <form action="">
             <label>From</label>
-            <input type="text" />
+            <div class="input-wrap">
+              <div class="meta">
+                <p class="currency">UST</p>
+                <img src="../../src/assets/ic_ust.svg" alt="UST icon" />
+              </div>
+              <input type="number" placeholder="0.000" />
+              <p class="balance">
+                Balance:
+                <span style="text-decoration: underline">420.623 UST</span>
+              </p>
+            </div>
             <svg
               width="24"
               height="24"
@@ -65,11 +89,25 @@
               </g>
             </svg>
             <label>To (estimated)</label>
-            <input type="text" />
+            <div class="input-wrap">
+              <div class="meta">
+                <p class="currency">LOCAL</p>
+                <img src="../../src/assets/ic_local_24.svg" alt="UST icon" />
+              </div>
+              <input type="number" placeholder="0.000" />
+              <p class="balance">
+                Balance:
+                <span style="text-decoration: underline">0.000 LOCAL</span>
+              </p>
+            </div>
             <button class="primary" @click="swap()" :disabled="!valid">
-              swap
+              Swap
             </button>
           </form>
+        </div>
+
+        <div class="graph card">
+          <h2>LOCAL Price</h2>
         </div>
       </section>
     </main>
@@ -87,27 +125,129 @@
   gap: 24px;
 }
 
+.lbp-info {
+  display: flex;
+  gap: 24px;
+  margin-top: 80px;
+  margin-bottom: 24px;
+
+  .info {
+    width: 25%;
+    text-align: center;
+    transition: border 150ms ease-in;
+
+    &:hover {
+      border: 1px solid $primary;
+      transition: border 500ms ease-out;
+    }
+
+    .label {
+      font-size: 14px;
+      color: $gray700;
+    }
+    .value {
+      font-size: 30px;
+      font-weight: $semi-bold;
+    }
+  }
+}
+.graph {
+  width: 63%;
+
+  h2 {
+    font-size: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $border;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+}
 .swap {
-  width: 500px;
+  width: 37%;
+
+  h2 {
+    font-size: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $border;
+    margin-bottom: 24px;
+    text-align: center;
+  }
 
   label {
     display: block;
     margin-bottom: 8px;
+    font-size: 14px;
+    color: $gray700;
   }
 
-  input {
-    background-color: $gray100;
-    height: 48px;
-  }
-
-  svg {
-    display: block;
-    margin: 24px auto;
-    stroke: $primary;
+  .balance {
+    font-size: 14px;
+    color: $gray700;
+    text-align: right;
+    margin-top: 8px;
+    margin-right: 8px;
   }
 
   button {
-    margin-top: 24px;
+    width: 100%;
+    display: block;
+    margin-top: 32px;
+  }
+
+  .input-wrap {
+    position: relative;
+    .meta {
+      position: absolute;
+      right: 24px;
+      top: 11px;
+      display: flex;
+      p {
+        margin-right: 8px;
+      }
+      img {
+        vertical-align: middle;
+        width: 24px;
+        height: 24px;
+      }
+    }
+    input {
+      height: 48px;
+      background-color: $gray100;
+      font-size: 16px;
+      font-weight: $regular;
+      appearance: none;
+      margin: 0;
+      color: $primary;
+      border: 1px solid $gray100;
+
+      &:hover,
+      &:focus {
+        border: 1px solid $primary;
+      }
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      opacity: 0;
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin: 16px auto;
+    stroke: $gray700;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .wrap-content {
+    flex-direction: column;
+
+    .graph,
+    .swap {
+      width: 100%;
+    }
   }
 }
 </style>

@@ -62,7 +62,7 @@
                 alt="Local Terra Bull"
                 class="avatar"
               />
-              <p class="name">gb</p>
+              <p class="name">gabs.ust</p>
               <p class="role">Designer</p>
             </div>
 
