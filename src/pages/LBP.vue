@@ -11,7 +11,13 @@
           class="logo"
         />
         <a href="#" target="_blank">
-          <button class="primary">webapp</button>
+          <button class="wallet" @click="initWallet()">
+            <p v-if="walletAddress.length > 0">
+              {{ formatAddress(walletAddress) }}
+            </p>
+            <p v-if="walletAddress.length === 0">connect</p>
+            <img src="@/assets/ic_wallet.svg" alt="Connect your wallet" />
+          </button>
         </a>
       </nav>
     </header>
@@ -70,6 +76,8 @@
 <script>
 import { defineComponent } from "vue";
 import CurrencyInput from "../components/CurrencyInput.vue";
+import { formatAddress, formatAmount } from "@/shared";
+import { mapActions, mapGetters } from "vuex";
 
 export default defineComponent({
   name: "LBP",
@@ -82,7 +90,11 @@ export default defineComponent({
       valid: true
     }
   },
+  computed: mapGetters(["walletAddress"]),
   methods: {
+    ...mapActions([]),
+    formatAmount,
+    formatAddress,
     swap: function () {
 
     }
