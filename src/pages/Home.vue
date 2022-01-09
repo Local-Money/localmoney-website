@@ -50,7 +50,7 @@
               <img
                 src="@/assets/bull-3.jpg"
                 alt="Local Terra Bull"
-                class="avatar"
+                class="avatar squircicle"
               />
               <p class="name">Sam B.UST</p>
               <p class="role">Rust Intern</p>
@@ -60,7 +60,7 @@
               <img
                 src="@/assets/gb-avatar.png"
                 alt="Local Terra Bull"
-                class="avatar"
+                class="avatar squircicle"
               />
               <p class="name">gabs.ust</p>
               <p class="role">Designer</p>
@@ -70,7 +70,7 @@
               <img
                 src="@/assets/davi-avatar.jpg"
                 alt="Local Terra Bull"
-                class="avatar"
+                class="avatar squircicle"
               />
               <p class="name">davirds.ust</p>
               <p class="role">Team Member</p>
@@ -80,7 +80,7 @@
               <img
                 src="@/assets/bull-1.jpg"
                 alt="Local Terra Bull"
-                class="avatar"
+                class="avatar squircicle"
               />
               <p class="name">Revo</p>
               <p class="role">Team Member</p>
@@ -90,7 +90,7 @@
               <img
                 src="@/assets/bull-2.jpg"
                 alt="Local Terra Bull"
-                class="avatar"
+                class="avatar squircicle"
               />
               <p class="name">Gus</p>
               <p class="role">Team Member</p>
@@ -111,7 +111,8 @@
           </div>
           <div class="wrap-content">
             <div class="content">
-              <p class="title">LBP - Token Offer</p>
+              <p class="title">LBP</p>
+              <p class="description">$LOCAL token initial offer</p>
             </div>
             <div class="content">
               <p class="title">v1.0 - UST Trading</p>
@@ -198,4 +199,9 @@ export default defineComponent({
 
 <style lang="scss">
 @import "@/style/app.scss";
+
+.squircicle {
+  mask: url(../assets/squircicle.svg);
+  mask-size: 100%;
+}
 </style>

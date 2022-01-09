@@ -52,15 +52,15 @@ nav {
 
     .sub-header {
       width: 80%;
-      font-size: 32px;
+      font-size: 24px;
       line-height: 140%;
       margin-top: 56px;
     }
 
     .wrap-cta {
-      margin-top: 64px;
+      margin-top: 56px;
       p {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: $regular;
       }
     }
@@ -85,7 +85,7 @@ nav {
 
 main {
   h2 {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: $bold;
     color: $base-text;
   }
@@ -103,8 +103,7 @@ main {
         .team-member {
           text-align: center;
           .avatar {
-            width: 150px;
-            border-radius: 32px;
+            width: 140px;
           }
           .name {
             font-size: 20px;
@@ -130,17 +129,19 @@ main {
 
     .timeline-line {
       position: absolute;
-      width: 4px;
+      width: 2px;
       height: 85%;
-      left: 126px;
+      left: 127px;
       margin-top: -32px;
       background-color: $surface;
-      z-index: -1;
+      z-index: 10;
     }
 
     .roadmap-item {
+      position: relative;
       margin-bottom: 32px;
       margin-left: 40px;
+      z-index: 100;
       .wrap-date {
         display: flex;
         align-items: center;
@@ -154,7 +155,7 @@ main {
         }
         .date {
           color: $primary;
-          font-size: 24px;
+          font-size: 20px;
           font-weight: $bold;
           margin-left: 24px;
         }
@@ -175,7 +176,7 @@ main {
 
           .title {
             font-size: 24px;
-            font-weight: $bold;
+            font-weight: $semi-bold;
           }
           .description {
             margin-top: 8px;
@@ -254,7 +255,7 @@ main {
 
             .avatar {
               width: 80%;
-              border-radius: 24px;
+
               border: 1px solid $border;
             }
             .name {
