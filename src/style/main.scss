@@ -15,14 +15,23 @@ header {
   //   rgba(51, 54, 60, 1) 100%
   // );
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 80px;
+
+  .logo {
+    width: 250px;
+  }
 }
 nav {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 80px;
+  align-items: center;
+  gap: 80px;
 
-  .logo {
-    width: 250px;
+  a {
+    color: $base-text;
   }
 }
 .wrap-hero {
@@ -180,18 +189,19 @@ main {
 
 @media only screen and (max-width: 600px) {
   header {
-    nav {
-      margin-bottom: 32px;
-      .logo {
-        width: 150px;
-      }
+    padding-top: 24px;
+    .logo {
+      width: 150px;
+      vertical-align: middle;
     }
-    .wrap-hero {
-      flex-direction: column-reverse;
-      article {
-        width: 100%;
-      }
-
+    nav {
+      gap: none;
+    }
+  }
+  .wrap-hero {
+    flex-direction: column-reverse;
+    article {
+      width: 100%;
       h1 {
         font-size: 32px;
         text-align: center;
@@ -217,10 +227,10 @@ main {
           margin-top: 0;
         }
       }
-      .hero-img {
-        width: 90%;
-        margin: 0 auto 24px;
-      }
+    }
+    .hero-img {
+      width: 90%;
+      margin: 0 auto 24px;
     }
   }
 

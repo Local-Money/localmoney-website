@@ -4,43 +4,45 @@
   </head>
   <body>
     <header class="page-layout">
-      <nav>
+      <router-link to="/">
         <img
           src="@/assets/logo-horizontal-dark.svg"
           alt="Local Terra Logo"
           class="logo"
         />
-        <a href="#" target="_blank">
-          <button class="primary">webapp</button>
-        </a>
+      </router-link>
+      <nav>
+        <button class="primary">
+          <router-link to="/lbp">webapp</router-link>
+        </button>
       </nav>
-
-      <div class="wrap-hero">
-        <article>
-          <h1>Trade with your peers, locally.</h1>
-          <p class="sub-header">
-            And get access to all that
-            <a href="https://www.terra.money/" target="_blank">@terra_money</a>
-            has to offer.
-          </p>
-          <div class="wrap-cta">
-            <p>Want to get notified when we launch?</p>
-            <a href="https://twitter.com/local_terra" target="_blank">
-              <button class="primary">Follow us</button>
-            </a>
-          </div>
-        </article>
-        <div class="hero-img">
-          <img
-            src="@/assets/header-img.png"
-            alt="Two people making a successful trade"
-          />
-        </div>
-      </div>
     </header>
 
+    <div class="wrap-hero page-layout section-spacer">
+      <article>
+        <h1>Trade with your peers, locally.</h1>
+        <p class="sub-header">
+          And get access to all that
+          <a href="https://www.terra.money/" target="_blank">@terra_money</a>
+          has to offer.
+        </p>
+        <div class="wrap-cta">
+          <p>Want to get notified when we launch?</p>
+          <a href="https://twitter.com/local_terra" target="_blank">
+            <button class="primary">Follow us</button>
+          </a>
+        </div>
+      </article>
+      <div class="hero-img">
+        <img
+          src="@/assets/header-img.png"
+          alt="Two people making a successful trade"
+        />
+      </div>
+    </div>
+
     <main>
-      <section class="team">
+      <section class="team section-spacer">
         <div class="wrap-team page-layout">
           <h2>Meet the <span class="text-primary">team</span></h2>
           <div class="wrap-members">
@@ -97,7 +99,7 @@
         </div>
       </section>
 
-      <section class="roadmap page-layout">
+      <section class="roadmap page-layout section-spacer">
         <h2>Roadmap</h2>
 
         <div class="timeline-line"></div>
