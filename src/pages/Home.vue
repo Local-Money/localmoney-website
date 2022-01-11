@@ -10,9 +10,9 @@
           alt="Local Terra Logo"
           class="logo"
         />
-        <a href="#" target="_blank">
+        <router-link to="/lbp" target="_blank">
           <button class="primary">webapp</button>
-        </a>
+        </router-link>
       </nav>
 
       <div class="wrap-hero">

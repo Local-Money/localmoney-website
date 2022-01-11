@@ -10,7 +10,7 @@
           alt="Local Terra Logo"
           class="logo"
         />
-        <a href="#" target="_blank">
+        <a href="#">
           <button class="wallet" @click="initWallet()">
             <p v-if="walletAddress.length > 0">
               {{ formatAddress(walletAddress) }}
@@ -28,41 +28,41 @@
         <p>Coins remaining: 9,000,000</p>
         <p>Time remaining: 1d 23h</p>
         <p>Current LBP Weight: 28:72</p>
-
       </section>
       <section class="expanded">
         <form action="">
-
           <label>From</label>
           <div class="input">
             <CurrencyInput
-                v-model="ustAmount"
-                @focus="true"
-                :placeholder="0"
-                :options="{
-                  currency: 'UST',
-                  currencyDisplay: 'hidden',
-                  hideCurrencySymbolOnFocus: false,
-                  hideGroupingSeparatorOnFocus: false,
-                  valueRange: {
-                    min: 0,
-                    max: 500,
-                  },
-                }"/>
+              v-model="ustAmount"
+              @focus="true"
+              :placeholder="0"
+              :options="{
+                currency: 'UST',
+                currencyDisplay: 'hidden',
+                hideCurrencySymbolOnFocus: false,
+                hideGroupingSeparatorOnFocus: false,
+                valueRange: {
+                  min: 0,
+                  max: 500,
+                },
+              }"
+            />
           </div>
 
           <label>To (estimated)</label>
           <div class="input">
             <CurrencyInput
-                v-model="ustAmount"
-                @focus="true"
-                :placeholder="0"
-                :options="{
-                  currency: 'UST',
-                  currencyDisplay: 'hidden',
-                  hideCurrencySymbolOnFocus: false,
-                  hideGroupingSeparatorOnFocus: false,
-                }"/>
+              v-model="ustAmount"
+              @focus="true"
+              :placeholder="0"
+              :options="{
+                currency: 'UST',
+                currencyDisplay: 'hidden',
+                hideCurrencySymbolOnFocus: false,
+                hideGroupingSeparatorOnFocus: false,
+              }"
+            />
           </div>
           <button class="primary" @click="swap()" :disabled="!valid">
             swap
@@ -87,18 +87,16 @@ export default defineComponent({
   data() {
     return {
       ustAmount: 0,
-      valid: true
-    }
+      valid: true,
+    };
   },
   computed: mapGetters(["walletAddress"]),
   methods: {
-    ...mapActions([]),
+    ...mapActions(["initWallet"]),
     formatAmount,
     formatAddress,
-    swap: function () {
-
-    }
-  }
+    swap: function () {},
+  },
 });
 </script>
 
