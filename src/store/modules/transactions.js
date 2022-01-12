@@ -5,6 +5,7 @@ import { getBalance, getLBPs, getReverseSimulation, getSimulation, getTokenBalan
 import { PAIR_CONTRACT } from "../../constants";
 import { nativeTokenFromPair, saleAssetFromPair } from "../../helpers/asset_pairs";
 import { Dec } from "@terra-money/terra.js";
+import { dropInsignificantZeroes } from "../../helpers/number_formatters";
 
 let terra = buildClient({
   URL: 'http://143.244.190.1:3060',
@@ -72,7 +73,7 @@ const actions = {
     dispatch("fetchWeights")
     dispatch("fetchTokenBalance")
     dispatch("fetchBalance")
-    //dispatch("fetchTokenPrice")
+    dispatch("fetchTokenPrice")
   },
   async fetchSaleTokenInfo({ getters, commit }) {
     const saleTokenAddress = saleAssetFromPair(getters.currentPair.asset_infos).info.token.contract_addr
@@ -87,7 +88,7 @@ const actions = {
   },
   async fetchBalance({ getters, commit }) {
     const walletAddress = getters.walletAddress
-    if (walletAddress.length === 0) {
+    if (walletAddress.length !== 0) {
       const pair = getters.currentPair
       const nativeToken = nativeTokenFromPair(pair.asset_infos).info.native_token.denom;
       const balance = await getBalance(terra, nativeToken, walletAddress)
@@ -96,7 +97,7 @@ const actions = {
   },
   async fetchTokenBalance({ getters, commit }) {
     const walletAddress = getters.walletAddress
-    if (walletAddress.length === 0) {
+    if (walletAddress.length !== 0) {
       const pair = getters.currentPair
       const tokenAddress = saleAssetFromPair(pair.asset_infos).info.token.contract_addr
       const tokenBalance = await getTokenBalance(terra, tokenAddress, walletAddress)
@@ -105,19 +106,21 @@ const actions = {
   },
   async fetchTokenPrice({ dispatch, commit }) {
     const oneUst = (new Dec(1)).mul(10 ** 6).toInt()
-    console.log(oneUst)
     const tokenPrice = await dispatch("getReverseSimulation", oneUst)
-    commit("setTokenPrice", tokenPrice)
+    // Set token price formatted
+    commit("setTokenPrice", dropInsignificantZeroes(tokenPrice.toFixed(6)))
   },
   async getSimulation({ getters }, amount) {
     const pair = getters.currentPair
     const assetInfo = nativeTokenFromPair(pair.asset_infos).info
-    return await getSimulation(terra, pair.contract_addr, amount, assetInfo)
+    const simulation = await getSimulation(terra, pair.contract_addr, amount, assetInfo)
+    return Dec.withPrec(simulation['return_amount'], 6)
   },
   async getReverseSimulation({ getters }, amount) {
     const pair = getters.currentPair
     const assetInfo = saleAssetFromPair(pair.asset_infos).info
-    return await getReverseSimulation(terra, pair.contract_addr, amount, assetInfo)
+    const simulation = await getReverseSimulation(terra, pair.contract_addr, amount, assetInfo)
+    return Dec.withPrec(simulation['offer_amount'], 6)
   },
 };
 
