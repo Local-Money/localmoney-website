@@ -2,11 +2,23 @@
 
 .page-layout {
   max-width: 1440px;
-  padding: 80px;
+  padding-left: 80px;
+  padding-right: 80px;
   margin: 0 auto;
 
   @media only screen and (max-width: 600px) {
-    padding: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.section-spacer {
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  @media only screen and (max-width: 600px) {
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 }
 
