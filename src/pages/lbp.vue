@@ -137,7 +137,12 @@
         </div>
 
         <div class="graph card">
-          <h2>LOCAL Price</h2>
+          <apexchart
+            width="500"
+            type="area"
+            :options="options"
+            :series="series"
+          ></apexchart>
         </div>
       </section>
     </main>
@@ -150,6 +155,7 @@ import { formatAddress, formatAmount } from "@/shared";
 import { mapActions, mapGetters } from "vuex";
 import { formatTokenAmount } from "../helpers/number_formatters";
 import { durationString } from "../helpers/time_formatters";
+
 export default defineComponent({
   name: "lbp",
   components: {},
@@ -157,8 +163,23 @@ export default defineComponent({
     return {
       ustAmount: 0,
       valid: true,
+      options: {
+        chart: {
+          id: "vuechart-example",
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+        },
+      },
+      series: [
+        {
+          name: "series-1",
+          data: [30, 40, 45, 50, 49, 60, 70, 91],
+        },
+      ],
     };
   },
+
   created: async function () {
     this.fetchCurrentPair();
     this.$nextTick(function () {
