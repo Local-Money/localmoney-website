@@ -19,7 +19,7 @@
             <p v-if="walletAddress.length > 0">
               {{ formatAddress(walletAddress) }}
             </p>
-            <p v-if="walletAddress.length === 0">connect</p>
+            <p v-else>connect</p>
             <img src="@/assets/ic_wallet.svg" alt="Connect your wallet" />
           </button>
         </a>
@@ -56,26 +56,16 @@
         <div class="swap card">
           <h2>Swap</h2>
           <form action="">
-            <label>From</label>
-            <div class="input-wrap">
-              <div class="meta">
-                <p class="currency">{{ nativeTokenSymbol }}</p>
-                <img src="../../src/assets/ic_ust.svg" alt="UST icon" />
-              </div>
-              <input type="number" placeholder="0.000" />
-              <p class="balance">
-                Balance:
-                <span style="text-decoration: underline">
-                  {{
-                    formatTokenAmount(
-                      walletAddress.length !== 0 ? balance : 0,
-                      6
-                    )
-                  }}
-                  {{ nativeTokenSymbol }}
-                </span>
-              </p>
-            </div>
+            <token-input
+              v-model="saleTokenAmount"
+              :options="{ currency: 'USD' }"
+              :label="'From'"
+              :tokenBalance="
+                formatTokenAmount(walletAddress.length > 0 ? balance : 0, 6)
+              "
+              :tokenSymbol="nativeTokenSymbol"
+            />
+
             <svg
               width="24"
               height="24"
@@ -110,26 +100,20 @@
                 />
               </g>
             </svg>
-            <label>To (estimated)</label>
-            <div class="input-wrap">
-              <div class="meta">
-                <p class="currency">{{ saleTokenInfo.symbol }}</p>
-                <img src="../../src/assets/ic_local_24.svg" alt="UST icon" />
-              </div>
-              <input type="number" placeholder="0.000" />
-              <p class="balance">
-                Balance:
-                <span style="text-decoration: underline">
-                  {{
-                    formatTokenAmount(
-                      walletAddress.length !== 0 ? tokenBalance : 0,
-                      6
-                    )
-                  }}
-                  {{ saleTokenInfo.symbol }}
-                </span>
-              </p>
-            </div>
+
+            <token-input
+              v-model="nativeTokenAmount"
+              :options="{ currency: 'USD' }"
+              :label="'To (estimated)'"
+              :tokenBalance="
+                formatTokenAmount(
+                  walletAddress.length > 0 ? tokenBalance : 0,
+                  6
+                )
+              "
+              :tokenSymbol="saleTokenInfo.symbol"
+            />
+
             <button class="primary" @click="swap()" :disabled="!valid">
               Swap
             </button>
@@ -155,13 +139,17 @@ import { formatAddress, formatAmount } from "@/shared";
 import { mapActions, mapGetters } from "vuex";
 import { formatTokenAmount } from "../helpers/number_formatters";
 import { durationString } from "../helpers/time_formatters";
+import TokenInput from "../components/TokenInput.vue";
 
 export default defineComponent({
   name: "lbp",
-  components: {},
+  components: {
+    TokenInput,
+  },
   data() {
     return {
-      ustAmount: 0,
+      nativeTokenAmount: 0,
+      saleTokenAmount: 0,
       valid: true,
       options: {
         chart: {
