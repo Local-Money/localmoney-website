@@ -121,8 +121,9 @@
         </div>
 
         <div class="graph card">
+          <h2>Price</h2>
           <apexchart
-            width="500"
+            width="100%"
             type="area"
             :options="options"
             :series="series"
@@ -154,15 +155,99 @@ export default defineComponent({
       options: {
         chart: {
           id: "vuechart-example",
+          width: "100%",
+          height: "100%",
+          toolbar: { show: false },
+          zoom: { enabled: false },
+        },
+        colors: ["#ef6100"],
+        fill: {
+          gradient: {
+            opacityFrom: 0.3,
+            opacityTo: 0,
+          },
+        },
+        stroke: {
+          width: 3,
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          tooltip: { enabled: false },
+          axisTicks: { show: false },
+          labels: {
+            style: {
+              colors: "#666666",
+              fontSize: "12px",
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 400,
+              cssClass: "graph-xaxis-label",
+            },
+            offsetY: 0,
+          },
+          crosshairs: {
+            show: true,
+            stroke: {
+              color: "#444444",
+              width: 1,
+              dashArray: 4,
+            },
+          },
+          axisBorder: { show: false },
+          categories: [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+        },
+        yaxis: {
+          show: false,
+          labels: {
+            style: {
+              colors: "#666666",
+              fontSize: "12px",
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 400,
+              cssClass: "graph-xaxis-label",
+            },
+            offsetX: 0,
+          },
+        },
+        grid: {
+          show: false,
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        tooltip: {
+          enabled: true,
+          fixed: {
+            enabled: false,
+            position: "topRight",
+            offsetX: 50,
+            offsetY: 0,
+          },
+          custom: function ({ series, seriesIndex, dataPointIndex }) {
+            return (
+              '<div class="graph-tooltip">' +
+              "<p>" +
+              series[seriesIndex][dataPointIndex] +
+              "</p>" +
+              "</div>"
+            );
+          },
+        },
+        markers: {
+          colors: "#ef6100",
+          strokeColors: "#ef6100",
+          strokeWidth: 0,
+          hover: {
+            size: 6,
+          },
         },
       },
+
       series: [
         {
           name: "series-1",
-          data: [30, 40, 45, 50, 49, 60, 70, 91],
+          data: [
+            2.654893, 2.194162, 1.745621, 1.476856, 1.323456, 1.2334556,
+            0.754921, 0.584326, 0.974501,
+          ],
         },
       ],
     };
@@ -246,6 +331,7 @@ export default defineComponent({
     text-align: center;
   }
 }
+
 .swap {
   width: 37%;
 
@@ -274,6 +360,7 @@ export default defineComponent({
 
   button {
     width: 100%;
+    height: 48px;
     display: block;
     margin-top: 32px;
   }
