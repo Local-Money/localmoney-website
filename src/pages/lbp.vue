@@ -35,15 +35,7 @@
         <div class="info card">
           <p class="label">Coins remaining</p>
           <p class="value">
-            {{
-              formatTokenAmount(
-                coinsRemaining.slice(
-                  0,
-                  coinsRemaining.length - saleTokenInfo.decimals
-                ),
-                0
-              )
-            }}
+            {{ formatTokenAmount(coinsRemaining, 0) }}
             ({{ coinsRemainingPercentage }}%)
           </p>
         </div>

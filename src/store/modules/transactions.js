@@ -46,14 +46,30 @@ const getters = {
   walletAddress: (state) => state.walletAddress,
   balance: (state) => state.balance,
   tokenBalance: (state) => state.tokenBalance,
-  nativeTokenSymbol: (state) => NATIVE_TOKEN_SYMBOLS[state.pair ? nativeTokenFromPair(state.pair).denom : "uusd"],
+  nativeTokenSymbol: (state) => {
+    const denom = state.pair ? nativeTokenFromPair(state.pair).denom : "uusd"
+    return NATIVE_TOKEN_SYMBOLS[denom]
+  },
   tokenPrice: (state) => state.tokenPrice,
   pairWeights: (state) => state.pairWeights,
   nativeTokenWeight: (state) => (state.pairWeights.nativeTokenWeight ?? new Dec()).toFixed(0),
   saleTokenWeight: (state) => (state.pairWeights.saleTokenWeight ?? new Dec()).toFixed(0),
   pool: (state) => state.pool,
-  coinsRemaining: (state) => state.pool.assets ? saleAssetFromPair(state.pool.assets).amount : 0,
-  coinsRemainingPercentage: (state) => Math.round((saleAssetFromPair(state.pool.assets).amount / state.saleTokenInfo.total_supply) * 100),
+  coinsRemaining: (state) => {
+    if (state.pool.assets) {
+      const coinsRemaining = saleAssetFromPair(state.pool.assets).amount
+      return coinsRemaining.slice(0, coinsRemaining.length - state.saleTokenInfo.decimals)
+    }
+    return 0
+  },
+  coinsRemainingPercentage: (state) => {
+    if (state.pool.assets) {
+      const coinsRemaining = saleAssetFromPair(state.pool.assets).amount
+      const totalSupply = state.saleTokenInfo.total_supply
+      return Math.round((coinsRemaining / totalSupply) * 100)
+    }
+    return 0
+  },
   currentPair: (state) => state.currentPair,
   secondsRemaining: (state) => state.secondsRemaining,
   saleTokenInfo: (state) => state.saleTokenInfo,
@@ -68,20 +84,16 @@ const getters = {
 };
 
 const mutations = {
-  setWalletAddress: (state, walletAddress) =>
-    (state.walletAddress = walletAddress),
+  setWalletAddress: (state, walletAddress) => (state.walletAddress = walletAddress),
   setBalance: (state, balance) => (state.balance = balance),
   setTokenBalance: (state, tokenBalance) => (state.tokenBalance = tokenBalance),
-  setFactoryConfig: (state, factoryConfig) =>
-    (state.factoryConfig = factoryConfig),
+  setFactoryConfig: (state, factoryConfig) => (state.factoryConfig = factoryConfig),
   setTokenPrice: (state, tokenPrice) => (state.tokenPrice = tokenPrice),
   setPairWeights: (state, pairWeights) => (state.pairWeights = pairWeights),
   setPool: (state, pool) => (state.pool = pool),
   setCurrentPair: (state, currentPair) => (state.currentPair = currentPair),
-  setSecondsRemaining: (state, secondsRemaining) =>
-    (state.secondsRemaining = secondsRemaining),
-  setSaleTokenInfo: (state, saleTokenInfo) =>
-    (state.saleTokenInfo = saleTokenInfo),
+  setSecondsRemaining: (state, secondsRemaining) => (state.secondsRemaining = secondsRemaining),
+  setSaleTokenInfo: (state, saleTokenInfo) => (state.saleTokenInfo = saleTokenInfo),
   setPriceHistory: (state, priceHistory) => {
     state.price = priceHistory.price
     state.time = priceHistory.time
