@@ -46,19 +46,14 @@ const getters = {
   walletAddress: (state) => state.walletAddress,
   balance: (state) => state.balance,
   tokenBalance: (state) => state.tokenBalance,
-  nativeTokenSymbol: (state) =>
-    NATIVE_TOKEN_SYMBOLS[
-      state.pair ? nativeTokenFromPair(state.pair).denom : "uusd"
-    ],
+  nativeTokenSymbol: (state) => NATIVE_TOKEN_SYMBOLS[state.pair ? nativeTokenFromPair(state.pair).denom : "uusd"],
   tokenPrice: (state) => state.tokenPrice,
   pairWeights: (state) => state.pairWeights,
-  nativeTokenWeight: (state) =>
-    (state.pairWeights.nativeTokenWeight ?? new Dec()).toFixed(0),
-  saleTokenWeight: (state) =>
-    (state.pairWeights.saleTokenWeight ?? new Dec()).toFixed(0),
+  nativeTokenWeight: (state) => (state.pairWeights.nativeTokenWeight ?? new Dec()).toFixed(0),
+  saleTokenWeight: (state) => (state.pairWeights.saleTokenWeight ?? new Dec()).toFixed(0),
   pool: (state) => state.pool,
-  coinsRemaining: (state) =>
-    state.pool.assets ? saleAssetFromPair(state.pool.assets).amount : 0,
+  coinsRemaining: (state) => state.pool.assets ? saleAssetFromPair(state.pool.assets).amount : 0,
+  coinsRemainingPercentage: (state) => Math.round((saleAssetFromPair(state.pool.assets).amount / state.saleTokenInfo.total_supply) * 100),
   currentPair: (state) => state.currentPair,
   secondsRemaining: (state) => state.secondsRemaining,
   saleTokenInfo: (state) => state.saleTokenInfo,
@@ -178,7 +173,8 @@ const actions = {
     const oneUst = new Dec(1).mul(10 ** 6).toInt();
     const tokenPrice = await dispatch("getReverseSimulation", oneUst);
     // Set token price formatted
-    commit("setTokenPrice", dropInsignificantZeroes(tokenPrice.toFixed(6)));
+    // TODO round up/down price
+    commit("setTokenPrice", dropInsignificantZeroes(tokenPrice.toFixed(3)));
   },
   async fetchPriceHistory({ commit }) {
     //TODO: Cleanup
@@ -189,8 +185,8 @@ const actions = {
     let series = [];
     data.forEach(d => {
       time.push(new Date(d.time))
-      price.push((d.offer_amount/1000000).toFixed(3))
-      series.push([d.time, (d.offer_amount/1000000).toFixed(3)])
+      price.push((d.offer_amount / 1000000).toFixed(3))
+      series.push([d.time, (d.offer_amount / 1000000).toFixed(3)])
     })
     commit("setPriceHistory", { time, price, series })
   },

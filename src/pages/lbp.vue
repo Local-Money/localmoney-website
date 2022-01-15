@@ -35,7 +35,16 @@
         <div class="info card">
           <p class="label">Coins remaining</p>
           <p class="value">
-            {{ formatTokenAmount(coinsRemaining, saleTokenInfo.decimals) }}
+            {{
+              formatTokenAmount(
+                coinsRemaining.slice(
+                  0,
+                  coinsRemaining.length - saleTokenInfo.decimals
+                ),
+                0
+              )
+            }}
+            ({{ coinsRemainingPercentage }}%)
           </p>
         </div>
         <div class="info card">
@@ -171,7 +180,7 @@ export default defineComponent({
           width: 3,
         },
         xaxis: {
-          type: 'datetime',
+          type: "datetime",
           tooltip: { enabled: true },
           axisTicks: { show: false },
           labels: {
@@ -187,11 +196,11 @@ export default defineComponent({
             formatter: undefined,
             datetimeUTC: true,
             datetimeFormatter: {
-              year: 'yyyy',
+              year: "yyyy",
               month: "MMM 'yy",
-              day: 'dd MMM',
-              hour: 'dd MMM',
-            }
+              day: "dd MMM",
+              hour: "dd MMM",
+            },
           },
           crosshairs: {
             show: true,
@@ -266,15 +275,14 @@ export default defineComponent({
       setInterval(() => this.fetchCurrentPair(), 60000);
     });
   },
-  mounted: async function() {
+  mounted: async function () {
     await this.fetchPriceHistory();
     this.$nextTick(() => {
       let priceData = this.priceHistory();
       // this.$data.options.xaxis.categories = priceData.time;
       // this.$data.series[0].data= priceData.price;
-      this.$data.series[0].data = priceData.series
-      console.log(priceData.series)
-    })
+      this.$data.series[0].data = priceData.series;
+    });
   },
   beforeUnmount: async function () {
     clearInterval();
@@ -288,9 +296,10 @@ export default defineComponent({
     "nativeTokenWeight",
     "saleTokenWeight",
     "coinsRemaining",
+    "coinsRemainingPercentage",
     "secondsRemaining",
     "saleTokenInfo",
-    "priceHistory"
+    "priceHistory",
   ]),
   methods: {
     ...mapActions(["initWallet", "fetchCurrentPair", "fetchPriceHistory"]),
