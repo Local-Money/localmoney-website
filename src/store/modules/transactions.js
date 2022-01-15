@@ -181,6 +181,7 @@ const actions = {
     commit("setTokenPrice", dropInsignificantZeroes(tokenPrice.toFixed(6)));
   },
   async fetchPriceHistory({ commit }) {
+    //TODO: Cleanup
     let res = await fetch('http://143.244.190.178/');
     let data = await res.json();
     let time = [];
