@@ -171,7 +171,8 @@ export default defineComponent({
           width: 3,
         },
         xaxis: {
-          tooltip: { enabled: false },
+          type: 'datetime',
+          tooltip: { enabled: true },
           axisTicks: { show: false },
           labels: {
             style: {
@@ -182,6 +183,15 @@ export default defineComponent({
               cssClass: "graph-xaxis-label",
             },
             offsetY: 0,
+            format: undefined,
+            formatter: undefined,
+            datetimeUTC: true,
+            datetimeFormatter: {
+              year: 'yyyy',
+              month: "MMM 'yy",
+              day: 'dd MMM',
+              hour: 'dd MMM',
+            }
           },
           crosshairs: {
             show: true,
@@ -192,10 +202,10 @@ export default defineComponent({
             },
           },
           axisBorder: { show: false },
-          categories: [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          //categories: [],
         },
         yaxis: {
-          show: false,
+          show: true,
           labels: {
             style: {
               colors: "#666666",
@@ -244,10 +254,7 @@ export default defineComponent({
       series: [
         {
           name: "series-1",
-          data: [
-            2.654893, 2.194162, 1.745621, 1.476856, 1.323456, 1.2334556,
-            0.754921, 0.584326, 0.974501,
-          ],
+          data: [],
         },
       ],
     };
@@ -258,6 +265,16 @@ export default defineComponent({
     this.$nextTick(function () {
       setInterval(() => this.fetchCurrentPair(), 60000);
     });
+  },
+  mounted: async function() {
+    await this.fetchPriceHistory();
+    this.$nextTick(() => {
+      let priceData = this.priceHistory();
+      // this.$data.options.xaxis.categories = priceData.time;
+      // this.$data.series[0].data= priceData.price;
+      this.$data.series[0].data = priceData.series
+      console.log(priceData.series)
+    })
   },
   beforeUnmount: async function () {
     clearInterval();
@@ -273,9 +290,10 @@ export default defineComponent({
     "coinsRemaining",
     "secondsRemaining",
     "saleTokenInfo",
+    "priceHistory"
   ]),
   methods: {
-    ...mapActions(["initWallet", "fetchCurrentPair"]),
+    ...mapActions(["initWallet", "fetchCurrentPair", "fetchPriceHistory"]),
     formatTokenAmount,
     durationString,
     formatAmount,

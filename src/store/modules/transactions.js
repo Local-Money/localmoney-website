@@ -63,6 +63,13 @@ const getters = {
   secondsRemaining: (state) => state.secondsRemaining,
   saleTokenInfo: (state) => state.saleTokenInfo,
   loading: (state) => state.loading,
+  priceHistory: (state) => () => {
+    return {
+      time: state.time,
+      price: state.price,
+      series: state.series
+    }
+  }
 };
 
 const mutations = {
@@ -80,6 +87,11 @@ const mutations = {
     (state.secondsRemaining = secondsRemaining),
   setSaleTokenInfo: (state, saleTokenInfo) =>
     (state.saleTokenInfo = saleTokenInfo),
+  setPriceHistory: (state, priceHistory) => {
+    state.price = priceHistory.price
+    state.time = priceHistory.time
+    state.series = priceHistory.series
+  }
 };
 
 const actions = {
@@ -167,6 +179,19 @@ const actions = {
     const tokenPrice = await dispatch("getReverseSimulation", oneUst);
     // Set token price formatted
     commit("setTokenPrice", dropInsignificantZeroes(tokenPrice.toFixed(6)));
+  },
+  async fetchPriceHistory({ commit }) {
+    let res = await fetch('http://143.244.190.178/');
+    let data = await res.json();
+    let time = [];
+    let price = [];
+    let series = [];
+    data.forEach(d => {
+      time.push(new Date(d.time))
+      price.push((d.offer_amount/1000000).toFixed(3))
+      series.push([d.time, (d.offer_amount/1000000).toFixed(3)])
+    })
+    commit("setPriceHistory", { time, price, series })
   },
   async getSimulation({ getters }, amount) {
     const pair = getters.currentPair;
