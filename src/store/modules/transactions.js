@@ -17,7 +17,7 @@ import {
   saleAssetFromPair,
 } from "../../helpers/asset_pairs";
 import { Dec } from "@terra-money/terra.js";
-import { dropInsignificantZeroes } from "../../helpers/number_formatters";
+import { dropInsignificantZeroes, formatTokenAmount } from "../../helpers/number_formatters";
 import { NATIVE_TOKEN_SYMBOLS } from "../../helpers/token_info";
 
 let terra = buildClient({
@@ -34,7 +34,7 @@ const state = {
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,
-  tokenPrice: 0,
+  tokenPrice: "0",
   currentPair: {},
   secondsRemaining: 0,
   pairWeights: {},
@@ -44,8 +44,8 @@ const state = {
 
 const getters = {
   walletAddress: (state) => state.walletAddress,
-  balance: (state) => state.balance,
-  tokenBalance: (state) => state.tokenBalance,
+  balance: (state) => formatTokenAmount(state.walletAddress.length > 0 ? state.balance : 0, 6),
+  tokenBalance: (state) => formatTokenAmount(state.walletAddress.length > 0 ? state.tokenBalance : 0, 6),
   nativeTokenSymbol: (state) => {
     const denom = state.pair ? nativeTokenFromPair(state.pair).denom : "uusd"
     return NATIVE_TOKEN_SYMBOLS[denom]
@@ -125,8 +125,7 @@ const actions = {
     const walletAddress = getters.walletAddress;
     if (walletAddress.length !== 0) {
       const pair = getters.currentPair;
-      const tokenAddress = saleAssetFromPair(pair.asset_infos).info.token
-        .contract_addr;
+      const tokenAddress = saleAssetFromPair(pair.asset_infos).info.token.contract_addr;
       const tokenBalance = await getTokenBalance(
         terra,
         tokenAddress,
