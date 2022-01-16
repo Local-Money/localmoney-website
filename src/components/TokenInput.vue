@@ -28,9 +28,11 @@ import { useCurrencyInput } from "vue-currency-input";
 export default {
   name: "TokenInput",
   props: {
-    modelValue: Number,
+    modelValue: {
+      type: Number,
+      required: false,
+    },
     tokenBalance: String,
-    options: Object,
     label: String,
     tokenSymbol: {
       type: String,
@@ -38,7 +40,24 @@ export default {
     },
   },
   setup(props) {
-    const { inputRef, setOptions, setValue } = useCurrencyInput(props.options);
+    const { inputRef, formattedValue, setValue } = useCurrencyInput({
+      locale: "en",
+      currency: "USD",
+      currencyDisplay: "hidden",
+      precision: {
+        min: 2,
+        max: 6,
+      },
+      hideCurrencySymbolOnFocus: false,
+      hideGroupingSeparatorOnFocus: false,
+      hideNegligibleDecimalDigitsOnFocus: false,
+      autoDecimalDigits: false,
+      valueScaling: "precision",
+      autoSign: false,
+      useGrouping: false,
+      accountingSign: true,
+    });
+
     watch(
       () => props.modelValue,
       (value) => {
@@ -46,14 +65,7 @@ export default {
       }
     );
 
-    watch(
-      () => props.options,
-      (options) => {
-        setOptions(options);
-      }
-    );
-
-    return { inputRef };
+    return { inputRef, formattedValue };
   },
   methods: {},
 };

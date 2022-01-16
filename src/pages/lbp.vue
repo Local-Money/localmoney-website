@@ -59,7 +59,6 @@
           <form action="">
             <token-input
               v-model="saleTokenAmount"
-              :options="{ currency: 'USD' }"
               :label="'From'"
               :tokenBalance="
                 formatTokenAmount(walletAddress.length > 0 ? balance : 0, 6)
@@ -104,7 +103,6 @@
 
             <token-input
               v-model="nativeTokenAmount"
-              :options="{ currency: 'USD' }"
               :label="'To (estimated)'"
               :tokenBalance="
                 formatTokenAmount(
@@ -150,8 +148,8 @@ export default defineComponent({
   },
   data() {
     return {
-      nativeTokenAmount: 0,
-      saleTokenAmount: 0,
+      nativeTokenAmount: undefined,
+      saleTokenAmount: undefined,
       valid: true,
       options: {
         chart: {
