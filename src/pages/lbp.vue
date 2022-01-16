@@ -29,14 +29,16 @@
     <main>
       <section class="lbp-info page-layout">
         <div class="info card">
-          <p class="label">Price</p>
-          <p class="value">${{ tokenPrice }}</p>
+          <p class="label">LOCAL Price</p>
+          <p class="value">
+            <span class="text-primary">${{ tokenPrice }}</span>
+          </p>
         </div>
         <div class="info card">
-          <p class="label">Coins remaining</p>
+          <p class="label">Tokens Remaining</p>
           <p class="value">
             {{ formatTokenAmount(coinsRemaining, 0) }}
-            ({{ coinsRemainingPercentage }}%)
+            <span class="percentage">({{ coinsRemainingPercentage }}%)</span>
           </p>
         </div>
         <div class="info card">
@@ -44,11 +46,9 @@
           <p class="value">{{ nativeTokenWeight }} : {{ saleTokenWeight }}</p>
         </div>
         <div class="info card">
-          <p class="label">Time remaining</p>
+          <p class="label">Time Remaining</p>
           <p class="value">
-            <span class="text-primary">{{
-              durationString(secondsRemaining)
-            }}</span>
+            {{ durationString(secondsRemaining) }}
           </p>
         </div>
       </section>
@@ -120,7 +120,7 @@
         </div>
 
         <div class="graph card">
-          <h2>Price</h2>
+          <h2>LOCAL Chart</h2>
           <apexchart
             width="100%"
             type="area"
@@ -309,6 +309,7 @@ export default defineComponent({
 .wrap-content {
   display: flex;
   gap: 24px;
+  padding-bottom: 24px;
 }
 
 .lbp-info {
@@ -330,10 +331,18 @@ export default defineComponent({
     .label {
       font-size: 14px;
       color: $gray700;
+      margin-bottom: 8px;
     }
     .value {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: $semi-bold;
+
+      .percentage {
+        vertical-align: middle;
+        font-size: 16px;
+        font-weight: $semi-bold;
+        color: $gray700;
+      }
     }
   }
 }
@@ -341,7 +350,7 @@ export default defineComponent({
   width: 63%;
 
   h2 {
-    font-size: 24px;
+    font-size: 20px;
     padding-bottom: 16px;
     border-bottom: 1px solid $border;
     margin-bottom: 24px;
@@ -353,7 +362,7 @@ export default defineComponent({
   width: 37%;
 
   h2 {
-    font-size: 24px;
+    font-size: 20px;
     padding-bottom: 16px;
     border-bottom: 1px solid $border;
     margin-bottom: 24px;
@@ -429,6 +438,31 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: 600px) {
+  .card {
+    padding: 16px;
+  }
+
+  .lbp-info {
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 24px;
+    margin-top: 40px;
+    margin-bottom: 24px;
+
+    .info {
+      width: 46%;
+      text-align: center;
+      transition: border 150ms ease-in;
+
+      .label {
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .value {
+        font-size: 20px;
+      }
+    }
+  }
   .wrap-content {
     flex-direction: column;
 
