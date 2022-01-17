@@ -1,2 +1,2 @@
-export const FACTORY_CONTRACT = "terra12s74xfyk7uz9pkruqt5d9cm8s3rzjuqpv5rg8r";
-export const PAIR_CONTRACT = "terra1nlwn4y0c4svqq7dp0z3z23lzjx2n5fe03j6x3p";
+export const FACTORY_CONTRACT = "terra16cgu3q8hn275mr0n43mdtyc5mj3td0w22w2qtf";
+export const PAIR_CONTRACT = "terra12nlf0qm945gr45r3rn2322ka8d44c2qjzn5mhf";

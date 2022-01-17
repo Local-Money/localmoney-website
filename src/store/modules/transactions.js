@@ -20,10 +20,18 @@ import { Dec } from "@terra-money/terra.js";
 import { dropInsignificantZeroes, formatTokenAmount } from "../../helpers/number_formatters";
 import { NATIVE_TOKEN_SYMBOLS } from "../../helpers/token_info";
 
-let terra = buildClient({
+let terrarium = buildClient({
   URL: "http://143.244.190.1:3060",
   chainID: "localterra",
 });
+
+let testnet = buildClient({
+  URL: "https://bombay-lcd.terra.dev",
+  chainID: "columbus-5",
+});
+
+let isTestNet = true
+let terra = isTestNet ? testnet : terrarium
 
 const state = {
   loading: {
