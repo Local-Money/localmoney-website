@@ -1,58 +1,51 @@
 <template>
   <div class="swap card">
     <h2>Swap</h2>
-    <form action="">
-      <TokenInput
-        v-model="fromToken"
-        :label="'From'"
-        :tokenBalance="balance"
-        :tokenSymbol="nativeTokenSymbol"
-      />
-
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        class="icon-24"
-      >
-        <g clip-path="url(#clip0_7_155)">
-          <path
-            d="M1 7L5 3L9 7"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M11 21L9 21C7.93913 21 6.92172 20.5786 6.17157 19.8284C5.42143 19.0783 5 18.0609 5 17L5 3"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M23 17L19 21L15 17"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M13 3L15 3C16.0609 3 17.0783 3.42143 17.8284 4.17157C18.5786 4.92172 19 5.93913 19 7L19 21"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </g>
-      </svg>
-
-      <TokenInput
-        v-model="toToken"
-        :label="'To (estimated)'"
-        :tokenBalance="tokenBalance"
-        :tokenSymbol="saleTokenInfo.symbol"
-      />
-
-      <button class="primary" @click="swap()" :disabled="!valid">Swap</button>
-    </form>
+    <TokenInput
+      :value="fromAmount"
+      :label="'From'"
+      :balance="balance"
+      :symbol="nativeTokenSymbol"
+      @change="setFrom"
+      @focus="this.isReverseSimulation = false"
+    />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="icon-24">
+      <g clip-path="url(#clip0_7_155)">
+        <path
+          d="M1 7L5 3L9 7"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M11 21L9 21C7.93913 21 6.92172 20.5786 6.17157 19.8284C5.42143 19.0783 5 18.0609 5 17L5 3"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M23 17L19 21L15 17"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M13 3L15 3C16.0609 3 17.0783 3.42143 17.8284 4.17157C18.5786 4.92172 19 5.93913 19 7L19 21"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </g>
+    </svg>
+    <TokenInput
+      :value="toAmount"
+      :label="'To (estimated)'"
+      :balance="tokenBalance"
+      :symbol="saleTokenInfo.symbol"
+      @change="setTo"
+      @focus="this.isReverseSimulation = true"
+    />
+    <button class="primary" @click="swap()" :disabled="!valid">Swap</button>
   </div>
 </template>
 
@@ -70,10 +63,18 @@ export default defineComponent({
   },
   data() {
     return {
-      fromToken: undefined,
-      toToken: undefined,
+      simulationTimeout: undefined,
+      fromAmount: undefined,
+      toAmount: undefined,
+      isReverseSimulation: true,
+      isSeling: false,
       valid: true,
     };
+  },
+  watch: {
+    isReverseSimulation(newValue) {
+      console.log(newValue);
+    },
   },
   computed: mapGetters([
     "walletAddress",
@@ -83,9 +84,35 @@ export default defineComponent({
     "saleTokenInfo",
   ]),
   methods: {
-    ...mapActions([]),
+    ...mapActions(["getSimulation", "getReverseSimulation"]),
     formatTokenAmount,
-    swap: function () {},
+    setFrom(value) {
+      if (!this.isReverseSimulation) {
+        clearTimeout(this.simulationTimeout);
+        this.simulationTimeout = setTimeout(async () => {
+          if (value == undefined) {
+            this.toAmount = null;
+            return;
+          }
+          const amount = await this.getSimulation(value.toString());
+          this.toAmount = parseInt(amount.mul(10 ** 6));
+        }, 500);
+      }
+    },
+    setTo(value) {
+      if (this.isReverseSimulation) {
+        clearTimeout(this.simulationTimeout);
+        this.simulationTimeout = setTimeout(async () => {
+          if (value == undefined) {
+            this.fromAmount = null;
+            return;
+          }
+          const amount = await this.getReverseSimulation(value.toString());
+          this.fromAmount = parseInt(amount.mul(10 ** 6));
+        }, 500);
+      }
+    },
+    swap() {},
   },
 });
 </script>

@@ -2,70 +2,62 @@
   <label>{{ label }}</label>
   <div class="input-wrap">
     <div class="meta">
-      <p class="currency">{{ tokenSymbol }}</p>
+      <p class="currency">{{ symbol }}</p>
       <img
-        :src="
-          require('@/assets/tokens/ic_' + tokenSymbol.toLowerCase() + '.svg')
-        "
-        :alt="tokenSymbol + ' icon'"
+        :src="require('@/assets/tokens/ic_' + symbol.toLowerCase() + '.svg')"
+        :alt="symbol + ' icon'"
       />
     </div>
-    <input ref="inputRef" type="number" placeholder="0.000" />
+    <CurrencyInput
+      v-model="this.localValue"
+      :placeholder="'0.000'"
+      @focus="this.$emit('focus')"
+    />
     <p class="balance">
       Balance:
       <span style="text-decoration: underline">
-        {{ tokenBalance }}
-        {{ tokenSymbol }}
+        {{ balance }}
+        {{ symbol }}
       </span>
     </p>
   </div>
 </template>
 
 <script>
-import { watch } from "vue";
-import { useCurrencyInput } from "vue-currency-input";
+import { ref, watch } from "vue-demi";
+import CurrencyInput from "./CurrencyInput.vue";
 
 export default {
   name: "TokenInput",
+  components: { CurrencyInput },
   props: {
-    modelValue: {
-      type: Number,
-      required: false,
-    },
-    tokenBalance: String,
+    value: Number,
+    balance: String,
     label: String,
-    tokenSymbol: {
+    symbol: {
       type: String,
       default: "LUNA",
     },
   },
+  emits: ["change", "focus"],
   setup(props) {
-    const { inputRef, formattedValue, setValue } = useCurrencyInput({
-      locale: "en",
-      currency: "USD",
-      currencyDisplay: "hidden",
-      precision: {
-        min: 2,
-        max: 6,
-      },
-      hideCurrencySymbolOnFocus: false,
-      hideGroupingSeparatorOnFocus: false,
-      hideNegligibleDecimalDigitsOnFocus: false,
-      autoDecimalDigits: false,
-      valueScaling: "precision",
-      autoSign: false,
-      useGrouping: false,
-      accountingSign: true,
-    });
-
+    const localValue = ref(props.value);
     watch(
-      () => props.modelValue,
+      () => props.value,
       (value) => {
-        setValue(value);
+        localValue.value = value;
       }
     );
-
-    return { inputRef, formattedValue };
+    return {
+      localValue,
+    };
+  },
+  watch: {
+    localValue: {
+      handler: function (newValue) {
+        this.$emit("change", newValue);
+      },
+    },
   },
   methods: {},
 };
