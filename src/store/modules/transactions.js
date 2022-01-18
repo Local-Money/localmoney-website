@@ -189,8 +189,8 @@ const actions = {
     commit("setPool", pool);
   },
   async fetchTokenPrice({ dispatch, commit }) {
-    const oneUst = new Dec(1).mul(10 ** 6).toInt();
-    const tokenPrice = await dispatch("getReverseSimulation", oneUst);
+    const oneToken = new Dec(1).mul(10 ** 6).toInt();
+    const tokenPrice = await dispatch("getReverseSimulation", oneToken);
     // Set token price formatted
     // TODO round up/down price
     commit("setTokenPrice", dropInsignificantZeroes(tokenPrice.toFixed(3)));
