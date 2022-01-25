@@ -4,12 +4,19 @@
     <TokenInput
       :value="fromAmount"
       :label="'From'"
-      :balance="balance"
-      :symbol="nativeTokenSymbol"
+      :balance="isSelling ? nativeAsset.balance : tokenAsset.balance"
+      :symbol="isSelling ? nativeAsset.symbol : tokenAsset.symbol"
       @change="setFrom"
       @focus="this.isReverseSimulation = false"
     />
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="icon-24">
+    <svg
+      @click="isSelling = !isSelling"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      class="icon-24"
+    >
       <g clip-path="url(#clip0_7_155)">
         <path
           d="M1 7L5 3L9 7"
@@ -40,8 +47,8 @@
     <TokenInput
       :value="toAmount"
       :label="'To (estimated)'"
-      :balance="tokenBalance"
-      :symbol="saleTokenInfo.symbol"
+      :balance="isSelling ? tokenAsset.balance : nativeAsset.balance"
+      :symbol="isSelling ? tokenAsset.symbol : nativeAsset.symbol"
       @change="setTo"
       @focus="this.isReverseSimulation = true"
     />
@@ -64,19 +71,31 @@ export default defineComponent({
   data() {
     return {
       simulationTimeout: undefined,
+      simulate: this.getSimulation,
+      reverseSimulate: this.getReverseSimulation,
       fromAmount: undefined,
       toAmount: undefined,
       isReverseSimulation: true,
-      isSeling: false,
+      isSelling: false,
       valid: true,
     };
   },
   watch: {
-    isReverseSimulation(newValue) {
-      console.log(newValue);
+    isSelling(selling) {
+      if (selling) {
+        this.simulate = this.getReverseSimulation;
+        this.reverseSimulate = this.getSimulation;
+      } else {
+        this.simulate = this.getSimulation;
+        this.reverseSimulate = this.getReverseSimulation;
+      }
+      this.fromAmount = this.toAmount;
+      this.toAmount = null;
     },
   },
   computed: mapGetters([
+    "tokenAsset",
+    "nativeAsset",
     "walletAddress",
     "balance",
     "tokenBalance",
@@ -90,12 +109,12 @@ export default defineComponent({
       if (!this.isReverseSimulation) {
         clearTimeout(this.simulationTimeout);
         this.simulationTimeout = setTimeout(async () => {
-          if (value == undefined) {
+          if (value === undefined || value === null) {
             this.toAmount = null;
-            return;
+          } else {
+            const amount = await this.simulate(value.toString());
+            this.toAmount = parseInt(amount.mul(10 ** 6));
           }
-          const amount = await this.getSimulation(value.toString());
-          this.toAmount = parseInt(amount.mul(10 ** 6));
         }, 500);
       }
     },
@@ -103,12 +122,12 @@ export default defineComponent({
       if (this.isReverseSimulation) {
         clearTimeout(this.simulationTimeout);
         this.simulationTimeout = setTimeout(async () => {
-          if (value == undefined) {
+          if (value === undefined || value === null) {
             this.fromAmount = null;
-            return;
+          } else {
+            const amount = await this.reverseSimulate(value.toString());
+            this.fromAmount = parseInt(amount.mul(10 ** 6));
           }
-          const amount = await this.getReverseSimulation(value.toString());
-          this.fromAmount = parseInt(amount.mul(10 ** 6));
         }, 500);
       }
     },
