@@ -1,4 +1,4 @@
-import { FACTORY_CONTRACT } from "../../constants";
+import { FACTORY_CONTRACT, PAIR_CONTRACT } from "../../constants";
 import { connectExtension } from "@/terra/extension";
 import { buildClient } from "../../terra/client";
 import {
@@ -11,13 +11,15 @@ import {
   getTokenInfo,
   getWeights,
 } from "../../terra/queries";
-import { PAIR_CONTRACT } from "../../constants";
 import {
   nativeTokenFromPair,
   saleAssetFromPair,
 } from "../../helpers/asset_pairs";
 import { Dec } from "@terra-money/terra.js";
-import { dropInsignificantZeroes, formatTokenAmount } from "../../helpers/number_formatters";
+import {
+  dropInsignificantZeroes,
+  formatTokenAmount,
+} from "../../helpers/number_formatters";
 import { NATIVE_TOKEN_SYMBOLS } from "../../helpers/token_info";
 
 let terrarium = buildClient({
@@ -30,8 +32,8 @@ let testnet = buildClient({
   chainID: "columbus-5",
 });
 
-let isTestNet = true
-let terra = isTestNet ? testnet : terrarium
+let isTestNet = true;
+let terra = isTestNet ? testnet : terrarium;
 
 const state = {
   loading: {
@@ -52,31 +54,40 @@ const state = {
 
 const getters = {
   walletAddress: (state) => state.walletAddress,
-  balance: (state) => formatTokenAmount(state.walletAddress.length > 0 ? state.balance : 0, 6),
-  tokenBalance: (state) => formatTokenAmount(state.walletAddress.length > 0 ? state.tokenBalance : 0, 6),
+  balance: (state) =>
+    formatTokenAmount(state.walletAddress.length > 0 ? state.balance : 0, 6),
+  tokenBalance: (state) =>
+    formatTokenAmount(
+      state.walletAddress.length > 0 ? state.tokenBalance : 0,
+      6
+    ),
   nativeTokenSymbol: (state) => {
-    const denom = state.pair ? nativeTokenFromPair(state.pair).denom : "uusd"
-    return NATIVE_TOKEN_SYMBOLS[denom]
+    const denom = state.pair ? nativeTokenFromPair(state.pair).denom : "uusd";
+    return NATIVE_TOKEN_SYMBOLS[denom];
   },
   tokenPrice: (state) => state.tokenPrice,
-  pairWeights: (state) => state.pairWeights,
-  nativeTokenWeight: (state) => (state.pairWeights.nativeTokenWeight ?? new Dec()).toFixed(0),
-  saleTokenWeight: (state) => (state.pairWeights.saleTokenWeight ?? new Dec()).toFixed(0),
+  nativeTokenWeight: (state) =>
+    (state.pairWeights.nativeTokenWeight ?? new Dec()).toFixed(0),
+  saleTokenWeight: (state) =>
+    (state.pairWeights.saleTokenWeight ?? new Dec()).toFixed(0),
   pool: (state) => state.pool,
   coinsRemaining: (state) => {
     if (state.pool.assets) {
-      const coinsRemaining = saleAssetFromPair(state.pool.assets).amount
-      return coinsRemaining.slice(0, coinsRemaining.length - state.saleTokenInfo.decimals)
+      const coinsRemaining = saleAssetFromPair(state.pool.assets).amount;
+      return coinsRemaining.slice(
+        0,
+        coinsRemaining.length - state.saleTokenInfo.decimals
+      );
     }
-    return 0
+    return 0;
   },
   coinsRemainingPercentage: (state) => {
     if (state.pool.assets) {
-      const coinsRemaining = saleAssetFromPair(state.pool.assets).amount
-      const totalSupply = state.saleTokenInfo.total_supply
-      return Math.round((coinsRemaining / totalSupply) * 100)
+      const coinsRemaining = saleAssetFromPair(state.pool.assets).amount;
+      const totalSupply = state.saleTokenInfo.total_supply;
+      return Math.round((coinsRemaining / totalSupply) * 100);
     }
-    return 0
+    return 0;
   },
   currentPair: (state) => state.currentPair,
   secondsRemaining: (state) => state.secondsRemaining,
@@ -86,27 +97,43 @@ const getters = {
     return {
       time: state.time,
       price: state.price,
-      series: state.series
-    }
-  }
+      series: state.series,
+    };
+  },
+  nativeAsset: (state) => {
+    return {
+      balance: getters.tokenBalance(state),
+      symbol: state.saleTokenInfo.symbol,
+    };
+  },
+  tokenAsset: (state) => {
+    return {
+      balance: getters.balance(state),
+      symbol: getters.nativeTokenSymbol(state),
+    };
+  },
 };
 
 const mutations = {
-  setWalletAddress: (state, walletAddress) => (state.walletAddress = walletAddress),
+  setWalletAddress: (state, walletAddress) =>
+    (state.walletAddress = walletAddress),
   setBalance: (state, balance) => (state.balance = balance),
   setTokenBalance: (state, tokenBalance) => (state.tokenBalance = tokenBalance),
-  setFactoryConfig: (state, factoryConfig) => (state.factoryConfig = factoryConfig),
+  setFactoryConfig: (state, factoryConfig) =>
+    (state.factoryConfig = factoryConfig),
   setTokenPrice: (state, tokenPrice) => (state.tokenPrice = tokenPrice),
   setPairWeights: (state, pairWeights) => (state.pairWeights = pairWeights),
   setPool: (state, pool) => (state.pool = pool),
   setCurrentPair: (state, currentPair) => (state.currentPair = currentPair),
-  setSecondsRemaining: (state, secondsRemaining) => (state.secondsRemaining = secondsRemaining),
-  setSaleTokenInfo: (state, saleTokenInfo) => (state.saleTokenInfo = saleTokenInfo),
+  setSecondsRemaining: (state, secondsRemaining) =>
+    (state.secondsRemaining = secondsRemaining),
+  setSaleTokenInfo: (state, saleTokenInfo) =>
+    (state.saleTokenInfo = saleTokenInfo),
   setPriceHistory: (state, priceHistory) => {
-    state.price = priceHistory.price
-    state.time = priceHistory.time
-    state.series = priceHistory.series
-  }
+    state.price = priceHistory.price;
+    state.time = priceHistory.time;
+    state.series = priceHistory.series;
+  },
 };
 
 const actions = {
@@ -133,7 +160,8 @@ const actions = {
     const walletAddress = getters.walletAddress;
     if (walletAddress.length !== 0) {
       const pair = getters.currentPair;
-      const tokenAddress = saleAssetFromPair(pair.asset_infos).info.token.contract_addr;
+      const tokenAddress = saleAssetFromPair(pair.asset_infos).info.token
+        .contract_addr;
       const tokenBalance = await getTokenBalance(
         terra,
         tokenAddress,
@@ -197,17 +225,17 @@ const actions = {
   },
   async fetchPriceHistory({ commit }) {
     //TODO: Cleanup
-    let res = await fetch('http://143.244.190.178/');
+    let res = await fetch("http://143.244.190.178/");
     let data = await res.json();
     let time = [];
     let price = [];
     let series = [];
-    data.forEach(d => {
-      time.push(new Date(d.time))
-      price.push((d.offer_amount / 1000000).toFixed(3))
-      series.push([d.time, (d.offer_amount / 1000000).toFixed(3)])
-    })
-    commit("setPriceHistory", { time, price, series })
+    data.forEach((d) => {
+      time.push(new Date(d.time));
+      price.push((d.offer_amount / 1000000).toFixed(3));
+      series.push([d.time, (d.offer_amount / 1000000).toFixed(3)]);
+    });
+    commit("setPriceHistory", { time, price, series });
   },
   async getSimulation({ getters }, amount) {
     const pair = getters.currentPair;
