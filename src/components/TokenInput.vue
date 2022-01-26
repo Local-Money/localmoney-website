@@ -53,10 +53,8 @@ export default {
     };
   },
   watch: {
-    localValue: {
-      handler: function (newValue) {
-        this.$emit("change", newValue);
-      },
+    localValue(newValue) {
+      this.$emit("change", newValue);
     },
   },
   methods: {},
