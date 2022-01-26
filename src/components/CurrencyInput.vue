@@ -4,7 +4,7 @@
 
 <script>
 import { useCurrencyInput } from "vue-currency-input";
-import { watch } from "vue-demi";
+import { watch } from "vue";
 
 export default {
   name: "CurrencyInput",

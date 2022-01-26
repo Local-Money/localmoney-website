@@ -59,8 +59,8 @@
 <script>
 import { defineComponent } from "vue";
 import { mapActions, mapGetters } from "vuex";
-import { formatTokenAmount } from "../helpers/number_formatters";
-import TokenInput from "../components/TokenInput.vue";
+import { formatTokenAmount } from "@/helpers/number_formatters";
+import TokenInput from "@/components/TokenInput.vue";
 
 export default defineComponent({
   name: "SwapForm",
