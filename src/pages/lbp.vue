@@ -28,29 +28,24 @@
 
     <main>
       <section class="lbp-info page-layout">
-        <div class="info card">
-          <p class="label">LOCAL Price</p>
-          <p class="value">
-            <span class="text-primary">${{ tokenPrice }}</span>
-          </p>
-        </div>
-        <div class="info card">
-          <p class="label">Tokens Remaining</p>
-          <p class="value">
-            {{ formatTokenAmount(coinsRemaining, 0) }}
-            <span class="percentage">({{ coinsRemainingPercentage }}%)</span>
-          </p>
-        </div>
-        <div class="info card">
-          <p class="label">Current LBP Weight</p>
-          <p class="value">{{ nativeTokenWeight }} : {{ saleTokenWeight }}</p>
-        </div>
-        <div class="info card">
-          <p class="label">Time Remaining</p>
-          <p class="value">
-            {{ durationString(secondsRemaining) }}
-          </p>
-        </div>
+        <InfoCard
+          class="text-primary"
+          :label="'LOCAL Price'"
+          :value="'$' + tokenPrice"
+        />
+        <InfoCard
+          :label="'Tokens Remaining'"
+          :value="formatTokenAmount(coinsRemaining, 0)"
+          :more="coinsRemainingPercentage + '%'"
+        />
+        <InfoCard
+          :label="'Current LBP Weight'"
+          :value="nativeTokenWeight + ' : ' + saleTokenWeight"
+        />
+        <InfoCard
+          :label="'Time Remaining'"
+          :value="durationString(secondsRemaining)"
+        />
       </section>
 
       <section class="wrap-content page-layout">
@@ -73,14 +68,16 @@
 import { defineComponent } from "vue";
 import { formatAddress, formatAmount } from "@/shared";
 import { mapActions, mapGetters } from "vuex";
-import { formatTokenAmount } from "../helpers/number_formatters";
-import { durationString } from "../helpers/time_formatters";
-import SwapForm from "../components/SwapForm.vue";
+import { formatTokenAmount } from "@/helpers/number_formatters";
+import { durationString } from "@/helpers/time_formatters";
+import SwapForm from "@/components/SwapForm.vue";
+import InfoCard from "@/components/InfoCard.vue";
 
 export default defineComponent({
   name: "lbp",
   components: {
     SwapForm,
+    InfoCard,
   },
   data() {
     return {
@@ -246,35 +243,8 @@ export default defineComponent({
   gap: 24px;
   margin-top: 80px;
   margin-bottom: 24px;
-
-  .info {
-    width: 25%;
-    text-align: center;
-    transition: border 150ms ease-in;
-
-    &:hover {
-      border: 1px solid $primary;
-      transition: border 500ms ease-out;
-    }
-
-    .label {
-      font-size: 14px;
-      color: $gray700;
-      margin-bottom: 8px;
-    }
-    .value {
-      font-size: 28px;
-      font-weight: $semi-bold;
-
-      .percentage {
-        vertical-align: middle;
-        font-size: 16px;
-        font-weight: $semi-bold;
-        color: $gray700;
-      }
-    }
-  }
 }
+
 .graph {
   width: 63%;
 
@@ -298,21 +268,8 @@ export default defineComponent({
     gap: 24px;
     margin-top: 40px;
     margin-bottom: 24px;
-
-    .info {
-      width: 46%;
-      text-align: center;
-      transition: border 150ms ease-in;
-
-      .label {
-        font-size: 14px;
-        margin-bottom: 4px;
-      }
-      .value {
-        font-size: 20px;
-      }
-    }
   }
+
   .wrap-content {
     flex-direction: column;
 
