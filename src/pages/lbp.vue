@@ -48,7 +48,7 @@
 
       <section class="wrap-content page-layout">
         <SwapForm />
-        <Chart />
+        <Chart :title="'LOCAL Chart'" />
       </section>
     </main>
   </body>

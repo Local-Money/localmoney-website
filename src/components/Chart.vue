@@ -1,6 +1,6 @@
 <template>
   <div class="graph card">
-    <h2>LOCAL Chart</h2>
+    <h2>{{ title }}</h2>
     <apexchart type="area" :options="options" :series="series"></apexchart>
   </div>
 </template>
@@ -10,6 +10,9 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Chart",
+  props: {
+    title: String,
+  },
   data() {
     return {
       options: {
