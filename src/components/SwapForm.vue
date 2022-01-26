@@ -139,6 +139,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/style/app.scss";
 @import "@/style/tokens.scss";
+
 .swap {
   width: 37%;
 
@@ -215,6 +216,12 @@ export default defineComponent({
     display: block;
     margin: 16px auto;
     stroke: $gray700;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .swap {
+    width: 100%;
   }
 }
 </style>
