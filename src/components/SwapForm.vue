@@ -120,7 +120,8 @@ export default defineComponent({
     ...mapActions(["getSimulation", "getReverseSimulation", "swapTokens"]),
     formatTokenAmount,
     setFrom(value) {
-      this.fromAmount = value;
+      console.log('setFrom, type of value is :', typeof value)
+      this.fromAmount = parseInt(value);
       if (!this.isReverseSimulation) {
         clearTimeout(this.simulationTimeout);
         this.simulationTimeout = setTimeout(async () => {

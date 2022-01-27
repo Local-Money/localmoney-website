@@ -15,13 +15,17 @@ import {
   nativeTokenFromPair,
   saleAssetFromPair,
 } from "../../helpers/asset_pairs";
-import { Dec } from "@terra-money/terra.js";
+import {Dec} from "@terra-money/terra.js";
 import {
   dropInsignificantZeroes,
   formatTokenAmount,
 } from "../../helpers/number_formatters";
 import { NATIVE_TOKEN_SYMBOLS } from "../../helpers/token_info";
-import {buildSwapFromContractTokenMsg, buildSwapFromNativeTokenMsg, postMsg} from "@/terra/swap";
+import {
+  buildSwapFromContractTokenMsg,
+  buildSwapFromNativeTokenMsg,
+  postMsg
+} from "@/terra/swap";
 
 let terrarium = buildClient({
   URL: "http://143.244.190.1:3060",
@@ -260,26 +264,28 @@ const actions = {
     );
     return Dec.withPrec(simulation["offer_amount"], 6);
   },
-  async swapTokens({ getters }, swapInfo) {
+  async swapTokens({ getters, dispatch }, swapInfo) {
     let msg;
     let buildSwapOptions = {
       pair: getters.currentPair,
       walletAddress: getters.walletAddress,
       intAmount: swapInfo.fromAmount
     };
-    console.log('buildSwapOptions', buildSwapOptions);
     if (swapInfo.fromSymbol.toLowerCase() === getters.nativeTokenSymbol.toLowerCase()) {
-      console.log('from UST')
       msg = buildSwapFromNativeTokenMsg(buildSwapOptions);
     } else if (swapInfo.fromSymbol.toLowerCase() === getters.saleTokenInfo.symbol.toLowerCase()) {
-      console.log('from token')
       msg = buildSwapFromContractTokenMsg(buildSwapOptions);
     } else {
       throw "Swapping from ?"
     }
-    console.log('Swap MSG', JSON.stringify(msg));
-    let result = await postMsg(terra, {msg})
-    console.log('swap result ', result)
+    let postRes = await postMsg(terra, {msg})
+    const txInterval = setInterval(async () => {
+      let txInfo = await terra.tx.txInfo(postRes.txhash)
+      if (txInfo) {
+        clearInterval(txInterval)
+        dispatch("fetchCurrentPair")
+      }
+    }, 1000)
   }
 };
 
