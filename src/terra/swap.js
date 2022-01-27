@@ -1,6 +1,9 @@
 import { Extension, MsgExecuteContract, StdFee, Int, Coin, Coins } from '@terra-money/terra.js';
 import { nativeTokenFromPair, saleAssetFromPair } from '../helpers/asset_pairs';
 import { getBalance, getTokenBalance } from './queries';
+import {StdSignature} from "@terra-money/terra.js/dist/core/StdSignature";
+import {StdSignMsg} from "@terra-money/terra.js/dist/core/StdSignMsg";
+import {StdTx} from "@terra-money/terra.js/dist/core/StdTx";
 
 /**
  * Terra account address
@@ -14,26 +17,6 @@ export function estimateFee(terraClient, msg) {
 
 export function postMsg(terraClient, { msg, fee }) {
   const extension = new Extension();
-
-  /*
-      NOTE: There's no guarantee that the onPost event that triggers
-            this callback is for the message that we care about.
-            The Extension interface does not currently offer a way to
-            wait for an event for a specific message or to solve it
-            ourself by registering a callback for all onPost events
-            and then removing it once we've received the event for the
-            message we're tracking.
-
-            Removing a handler is possible, but we'd need access to the inpageStream.
-            The Extension also offers an async request() function, but it suffers from the same
-            issue and might resolve with an event for a different message.
-
-            To see this in action: Create a transaction, then ignore the extension
-            prompt and create another transaction. The extension will prompt again,
-            and present you with a queue of messages to sign. Whatever you do to
-            the first one will cause request() or this function to resolve,
-            even though you only care about the second message at that time.
-  */
   const promise = new Promise((resolve, reject) => {
     extension.once('onPost', ({ success, error, result }) => {
       if (success) {
@@ -76,7 +59,6 @@ export function buildSwapFromNativeTokenMsg({ pair, walletAddress, intAmount }) 
           },
           amount: intAmount.toString()
         },
-        to: walletAddress
       }
     },
     { [denom]: intAmount }

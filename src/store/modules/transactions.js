@@ -15,12 +15,17 @@ import {
   nativeTokenFromPair,
   saleAssetFromPair,
 } from "../../helpers/asset_pairs";
-import { Dec } from "@terra-money/terra.js";
+import {Dec} from "@terra-money/terra.js";
 import {
   dropInsignificantZeroes,
   formatTokenAmount,
 } from "../../helpers/number_formatters";
 import { NATIVE_TOKEN_SYMBOLS } from "../../helpers/token_info";
+import {
+  buildSwapFromContractTokenMsg,
+  buildSwapFromNativeTokenMsg,
+  postMsg
+} from "@/terra/swap";
 
 let terrarium = buildClient({
   URL: "http://143.244.190.1:3060",
@@ -259,6 +264,29 @@ const actions = {
     );
     return Dec.withPrec(simulation["offer_amount"], 6);
   },
+  async swapTokens({ getters, dispatch }, swapInfo) {
+    let msg;
+    let buildSwapOptions = {
+      pair: getters.currentPair,
+      walletAddress: getters.walletAddress,
+      intAmount: swapInfo.fromAmount
+    };
+    if (swapInfo.fromSymbol.toLowerCase() === getters.nativeTokenSymbol.toLowerCase()) {
+      msg = buildSwapFromNativeTokenMsg(buildSwapOptions);
+    } else if (swapInfo.fromSymbol.toLowerCase() === getters.saleTokenInfo.symbol.toLowerCase()) {
+      msg = buildSwapFromContractTokenMsg(buildSwapOptions);
+    } else {
+      throw "Swapping from ?"
+    }
+    let postRes = await postMsg(terra, {msg})
+    const txInterval = setInterval(async () => {
+      let txInfo = await terra.tx.txInfo(postRes.txhash)
+      if (txInfo) {
+        clearInterval(txInterval)
+        dispatch("fetchCurrentPair")
+      }
+    }, 1000)
+  }
 };
 
 export default {
