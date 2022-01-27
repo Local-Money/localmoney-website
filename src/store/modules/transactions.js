@@ -259,6 +259,9 @@ const actions = {
     );
     return Dec.withPrec(simulation["offer_amount"], 6);
   },
+  async swapTokens({ getters, dispatch }, swapInfo) {
+    console.log('swap', getters, dispatch, swapInfo)
+  }
 };
 
 export default {

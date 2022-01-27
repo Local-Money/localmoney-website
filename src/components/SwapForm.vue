@@ -4,8 +4,8 @@
     <TokenInput
       :value="fromAmount"
       :label="'From'"
-      :balance="isSelling ? nativeAsset.balance : tokenAsset.balance"
-      :symbol="isSelling ? nativeAsset.symbol : tokenAsset.symbol"
+      :balance="fromBalance"
+      :symbol="fromSymbol"
       @change="setFrom"
       @focus="this.isReverseSimulation = false"
     />
@@ -47,8 +47,8 @@
     <TokenInput
       :value="toAmount"
       :label="'To (estimated)'"
-      :balance="isSelling ? tokenAsset.balance : nativeAsset.balance"
-      :symbol="isSelling ? tokenAsset.symbol : nativeAsset.symbol"
+      :balance="toBalance"
+      :symbol="toSymbol"
       @change="setTo"
       @focus="this.isReverseSimulation = true"
     />
@@ -93,19 +93,34 @@ export default defineComponent({
       this.toAmount = null;
     },
   },
-  computed: mapGetters([
-    "tokenAsset",
-    "nativeAsset",
-    "walletAddress",
-    "balance",
-    "tokenBalance",
-    "nativeTokenSymbol",
-    "saleTokenInfo",
-  ]),
+  computed: {
+    ...mapGetters([
+      "tokenAsset",
+      "nativeAsset",
+      "walletAddress",
+      "balance",
+      "tokenBalance",
+      "nativeTokenSymbol",
+      "saleTokenInfo",
+    ]),
+    fromSymbol() {
+      return this.isSelling ? this.nativeAsset.symbol : this.tokenAsset.symbol
+    },
+    toSymbol() {
+      return this.isSelling ? this.tokenAsset.symbol : this.nativeAsset.symbol
+    },
+    fromBalance() {
+      return this.isSelling ? this.nativeAsset.balance : this.tokenAsset.balance
+    },
+    toBalance() {
+      return this.isSelling ? this.tokenAsset.balance : this.nativeAsset.balance
+    }
+  },
   methods: {
-    ...mapActions(["getSimulation", "getReverseSimulation"]),
+    ...mapActions(["getSimulation", "getReverseSimulation", "swapTokens"]),
     formatTokenAmount,
     setFrom(value) {
+      this.fromAmount = value;
       if (!this.isReverseSimulation) {
         clearTimeout(this.simulationTimeout);
         this.simulationTimeout = setTimeout(async () => {
@@ -119,6 +134,7 @@ export default defineComponent({
       }
     },
     setTo(value) {
+      this.toAmount = value;
       if (this.isReverseSimulation) {
         clearTimeout(this.simulationTimeout);
         this.simulationTimeout = setTimeout(async () => {
@@ -131,7 +147,13 @@ export default defineComponent({
         }, 500);
       }
     },
-    swap() {},
+    async swap() {
+      await this.swapTokens({
+        fromAmount: this.fromAmount,
+        fromSymbol: this.fromSymbol
+      })
+      console.log('Done')
+    },
   },
 });
 </script>
