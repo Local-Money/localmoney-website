@@ -120,7 +120,6 @@ export default defineComponent({
     ...mapActions(["getSimulation", "getReverseSimulation", "swapTokens"]),
     formatTokenAmount,
     setFrom(value) {
-      console.log('setFrom, type of value is :', typeof value)
       this.fromAmount = parseInt(value);
       if (!this.isReverseSimulation) {
         clearTimeout(this.simulationTimeout);
@@ -153,7 +152,6 @@ export default defineComponent({
         fromAmount: this.fromAmount,
         fromSymbol: this.fromSymbol
       })
-      console.log('Done')
     },
   },
 });
