@@ -15,7 +15,7 @@ import {
   nativeTokenFromPair,
   saleAssetFromPair,
 } from "../../helpers/asset_pairs";
-import {Dec} from "@terra-money/terra.js";
+import { Dec } from "@terra-money/terra.js";
 import {
   dropInsignificantZeroes,
   formatTokenAmount,
@@ -24,7 +24,7 @@ import { NATIVE_TOKEN_SYMBOLS } from "../../helpers/token_info";
 import {
   buildSwapFromContractTokenMsg,
   buildSwapFromNativeTokenMsg,
-  postMsg
+  postMsg,
 } from "@/terra/swap";
 
 let terrarium = buildClient({
@@ -107,14 +107,14 @@ const getters = {
   },
   nativeAsset: (state) => {
     return {
-      balance: getters.tokenBalance(state),
-      symbol: state.saleTokenInfo.symbol,
+      balance: getters.balance(state),
+      symbol: getters.nativeTokenSymbol(state),
     };
   },
   tokenAsset: (state) => {
     return {
-      balance: getters.balance(state),
-      symbol: getters.nativeTokenSymbol(state),
+      balance: getters.tokenBalance(state),
+      symbol: state.saleTokenInfo.symbol,
     };
   },
 };
@@ -269,24 +269,30 @@ const actions = {
     let buildSwapOptions = {
       pair: getters.currentPair,
       walletAddress: getters.walletAddress,
-      intAmount: swapInfo.fromAmount
+      intAmount: swapInfo.fromAmount,
     };
-    if (swapInfo.fromSymbol.toLowerCase() === getters.nativeTokenSymbol.toLowerCase()) {
+    if (
+      swapInfo.fromSymbol.toLowerCase() ===
+      getters.nativeTokenSymbol.toLowerCase()
+    ) {
       msg = buildSwapFromNativeTokenMsg(buildSwapOptions);
-    } else if (swapInfo.fromSymbol.toLowerCase() === getters.saleTokenInfo.symbol.toLowerCase()) {
+    } else if (
+      swapInfo.fromSymbol.toLowerCase() ===
+      getters.saleTokenInfo.symbol.toLowerCase()
+    ) {
       msg = buildSwapFromContractTokenMsg(buildSwapOptions);
     } else {
-      throw "Swapping from ?"
+      throw "Swapping from ?";
     }
-    let postRes = await postMsg(terra, {msg})
+    let postRes = await postMsg(terra, { msg });
     const txInterval = setInterval(async () => {
-      let txInfo = await terra.tx.txInfo(postRes.txhash)
+      let txInfo = await terra.tx.txInfo(postRes.txhash);
       if (txInfo) {
-        clearInterval(txInterval)
-        dispatch("fetchCurrentPair")
+        clearInterval(txInterval);
+        dispatch("fetchCurrentPair");
       }
-    }, 1000)
-  }
+    }, 1000);
+  },
 };
 
 export default {

@@ -1,7 +1,7 @@
 <template>
   <label>{{ label }}</label>
   <div class="input-wrap">
-    <div class="meta">
+    <div v-if="symbol != null" class="meta">
       <p class="currency">{{ symbol }}</p>
       <img
         :src="require('@/assets/tokens/ic_' + symbol.toLowerCase() + '.svg')"
@@ -13,7 +13,7 @@
       :placeholder="'0.000'"
       @focus="this.$emit('focus')"
     />
-    <p class="balance">
+    <p v-if="symbol != null" class="balance">
       Balance:
       <span style="text-decoration: underline">
         {{ balance }}
@@ -36,7 +36,7 @@ export default {
     label: String,
     symbol: {
       type: String,
-      default: "LUNA",
+      default: null,
     },
   },
   emits: ["change", "focus"],

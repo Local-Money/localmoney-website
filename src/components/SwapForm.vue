@@ -104,17 +104,21 @@ export default defineComponent({
       "saleTokenInfo",
     ]),
     fromSymbol() {
-      return this.isSelling ? this.nativeAsset.symbol : this.tokenAsset.symbol
+      return this.isSelling ? this.tokenAsset.symbol : this.nativeAsset.symbol;
     },
     toSymbol() {
-      return this.isSelling ? this.tokenAsset.symbol : this.nativeAsset.symbol
+      return this.isSelling ? this.nativeAsset.symbol : this.tokenAsset.symbol;
     },
     fromBalance() {
-      return this.isSelling ? this.nativeAsset.balance : this.tokenAsset.balance
+      return this.isSelling
+        ? this.tokenAsset.balance
+        : this.nativeAsset.balance;
     },
     toBalance() {
-      return this.isSelling ? this.tokenAsset.balance : this.nativeAsset.balance
-    }
+      return this.isSelling
+        ? this.nativeAsset.balance
+        : this.tokenAsset.balance;
+    },
   },
   methods: {
     ...mapActions(["getSimulation", "getReverseSimulation", "swapTokens"]),
@@ -150,8 +154,10 @@ export default defineComponent({
     async swap() {
       await this.swapTokens({
         fromAmount: this.fromAmount,
-        fromSymbol: this.fromSymbol
-      })
+        fromSymbol: this.fromSymbol,
+      });
+      this.fromAmount = null;
+      this.toAmount = null;
     },
   },
 });

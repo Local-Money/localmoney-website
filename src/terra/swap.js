@@ -1,9 +1,13 @@
-import { Extension, MsgExecuteContract, StdFee, Int, Coin, Coins } from '@terra-money/terra.js';
-import { nativeTokenFromPair, saleAssetFromPair } from '../helpers/asset_pairs';
-import { getBalance, getTokenBalance } from './queries';
-import {StdSignature} from "@terra-money/terra.js/dist/core/StdSignature";
-import {StdSignMsg} from "@terra-money/terra.js/dist/core/StdSignMsg";
-import {StdTx} from "@terra-money/terra.js/dist/core/StdTx";
+import {
+  Coin,
+  Coins,
+  Extension,
+  Int,
+  MsgExecuteContract,
+  StdFee,
+} from "@terra-money/terra.js";
+import { nativeTokenFromPair, saleAssetFromPair } from "@/helpers/asset_pairs";
+import { getBalance, getTokenBalance } from "./queries";
 
 /**
  * Terra account address
@@ -18,7 +22,7 @@ export function estimateFee(terraClient, msg) {
 export function postMsg(terraClient, { msg, fee }) {
   const extension = new Extension();
   const promise = new Promise((resolve, reject) => {
-    extension.once('onPost', ({ success, error, result }) => {
+    extension.once("onPost", ({ success, error, result }) => {
       if (success) {
         resolve(result);
       } else {
@@ -29,7 +33,7 @@ export function postMsg(terraClient, { msg, fee }) {
 
   extension.post({
     msgs: [msg],
-    fee
+    fee,
   });
 
   return promise;
@@ -43,7 +47,11 @@ export function postMsg(terraClient, { msg, fee }) {
  * @param {Int} intAmount - Int amount to swap in smallest unit of native token
  * @returns {MsgExecuteContract} - Contract message to perform swap
  */
-export function buildSwapFromNativeTokenMsg({ pair, walletAddress, intAmount }) {
+export function buildSwapFromNativeTokenMsg({
+  pair,
+  walletAddress,
+  intAmount,
+}) {
   const denom = nativeTokenFromPair(pair.asset_infos).info.native_token.denom;
 
   return new MsgExecuteContract(
@@ -54,12 +62,12 @@ export function buildSwapFromNativeTokenMsg({ pair, walletAddress, intAmount }) 
         offer_asset: {
           info: {
             native_token: {
-              denom
-            }
+              denom,
+            },
           },
-          amount: intAmount.toString()
+          amount: intAmount.toString(),
         },
-      }
+      },
     },
     { [denom]: intAmount }
   );
@@ -73,24 +81,25 @@ export function buildSwapFromNativeTokenMsg({ pair, walletAddress, intAmount }) 
  * @param {Int} intAmount - Int amount to swap in smallest unit of token
  * @returns {MsgExecuteContract} - Contract message to perform swap
  */
-export function buildSwapFromContractTokenMsg({ pair, walletAddress, intAmount }) {
-  const tokenAddr = saleAssetFromPair(pair.asset_infos).info.token.contract_addr;
+export function buildSwapFromContractTokenMsg({
+  pair,
+  walletAddress,
+  intAmount,
+}) {
+  const tokenAddr = saleAssetFromPair(pair.asset_infos).info.token
+    .contract_addr;
 
-  return new MsgExecuteContract(
-    walletAddress,
-    tokenAddr,
-    {
-      send: {
-        contract: pair.contract_addr,
-        amount: intAmount.toString(),
-        msg: btoa(
-          JSON.stringify({
-            swap: {}
-          })
-        )
-      }
-    }
-  );
+  return new MsgExecuteContract(walletAddress, tokenAddr, {
+    send: {
+      contract: pair.contract_addr,
+      amount: intAmount.toString(),
+      msg: btoa(
+        JSON.stringify({
+          swap: {},
+        })
+      ),
+    },
+  });
 }
 
 /**
@@ -104,13 +113,20 @@ export function buildSwapFromContractTokenMsg({ pair, walletAddress, intAmount }
  * @param {Int} intBalance - Native token balance of wallet
  * @returns {StdFee} - Gas and fee (gas + stability fee/tax)
  */
-export async function feeForMaxNativeToken(terraClient, { pair, walletAddress, intBalance }) {
+export async function feeForMaxNativeToken(
+  terraClient,
+  { pair, walletAddress, intBalance }
+) {
   const denom = nativeTokenFromPair(pair.asset_infos).info.native_token.denom;
   const balanceCoin = new Coin(denom, intBalance);
   const balanceCoins = new Coins([balanceCoin]);
 
   // Estimate gas usage (use 1 as amount to ignore taxes)
-  const msg = buildSwapFromNativeTokenMsg({ pair, walletAddress, intAmount: new Int(1) });
+  const msg = buildSwapFromNativeTokenMsg({
+    pair,
+    walletAddress,
+    intAmount: new Int(1),
+  });
   const fee = await estimateFee(terraClient, msg);
 
   // NOTE: There's no stability fee for uluna,
@@ -124,14 +140,13 @@ export async function feeForMaxNativeToken(terraClient, { pair, walletAddress, i
   const taxRate = await terraClient.treasury.taxRate();
 
   // Find max spendable amount after tax
-  const balanceAfterFees = balanceCoinsAfterGas.get(denom).amount.div(taxRate.add(1));
+  const balanceAfterFees = balanceCoinsAfterGas
+    .get(denom)
+    .amount.div(taxRate.add(1));
 
   // Cap tax
   const taxCap = await terraClient.treasury.taxCap(denom);
-  const tax = Math.min(
-    balanceAfterFees.mul(taxRate).ceil(),
-    taxCap.amount
-  );
+  const tax = Math.min(balanceAfterFees.mul(taxRate).ceil(), taxCap.amount);
   const taxCoin = new Coin(denom, tax);
 
   // Return combined gas and tax fee for denom
@@ -162,7 +177,11 @@ export async function sufficientBalance(terraClient, walletAddress, tx) {
 
   // Check contract token balance(s) if sending
   if (tx.msg.execute_msg.send) {
-    const balance = await getTokenBalance(terraClient, tx.msg.contract, walletAddress);
+    const balance = await getTokenBalance(
+      terraClient,
+      tx.msg.contract,
+      walletAddress
+    );
 
     if (balance.lessThan(tx.msg.execute_msg.send.amount)) {
       return false;
