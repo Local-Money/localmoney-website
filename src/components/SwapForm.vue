@@ -156,8 +156,11 @@ export default defineComponent({
         fromAmount: this.fromAmount,
         fromSymbol: this.fromSymbol,
       });
-      this.fromAmount = null;
-      this.toAmount = null;
+      console.log('hey')
+      await this.$nextTick(() => {
+        this.fromAmount = null;
+        this.toAmount = null;
+      })
     },
   },
 });
