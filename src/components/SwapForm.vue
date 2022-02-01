@@ -52,7 +52,7 @@
       @change="setTo"
       @focus="this.isReverseSimulation = true"
     />
-    <button class="primary" @click="swap()" :disabled="!valid">Swap</button>
+    <button class="primary" @click="swap()" :disabled="!isValid">Swap</button>
   </div>
 </template>
 
@@ -77,7 +77,6 @@ export default defineComponent({
       toAmount: undefined,
       isReverseSimulation: true,
       isSelling: false,
-      valid: true,
     };
   },
   watch: {
@@ -119,6 +118,10 @@ export default defineComponent({
         ? this.nativeAsset.balance
         : this.tokenAsset.balance;
     },
+    isValid() {
+      const fromBalanceInt = parseInt(this.fromBalance.replace(/\D/g,''))
+      return this.walletAddress.length > 0 && this.fromAmount > 0 && this.fromAmount <= fromBalanceInt;
+    }
   },
   methods: {
     ...mapActions(["getSimulation", "getReverseSimulation", "swapTokens"]),
