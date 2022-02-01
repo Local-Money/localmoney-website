@@ -1,6 +1,6 @@
-import { FACTORY_CONTRACT, PAIR_CONTRACT } from "../../constants";
+import { FACTORY_CONTRACT, PAIR_CONTRACT } from "@/constants";
 import { connectExtension } from "@/terra/extension";
-import { buildClient } from "../../terra/client";
+import { buildClient } from "@/terra/client";
 import {
   getBalance,
   getLBPs,
@@ -10,22 +10,20 @@ import {
   getTokenBalance,
   getTokenInfo,
   getWeights,
-} from "../../terra/queries";
-import {
-  nativeTokenFromPair,
-  saleAssetFromPair,
-} from "../../helpers/asset_pairs";
+} from "@/terra/queries";
+import { nativeTokenFromPair, saleAssetFromPair } from "@/helpers/asset_pairs";
 import { Dec } from "@terra-money/terra.js";
 import {
   dropInsignificantZeroes,
   formatTokenAmount,
-} from "../../helpers/number_formatters";
-import { NATIVE_TOKEN_SYMBOLS } from "../../helpers/token_info";
+} from "@/helpers/number_formatters";
+import { NATIVE_TOKEN_SYMBOLS } from "@/helpers/token_info";
 import {
   buildSwapFromContractTokenMsg,
   buildSwapFromNativeTokenMsg,
   postMsg,
 } from "@/terra/swap";
+import { loading, success } from "@/terra/result";
 
 let terrarium = buildClient({
   URL: "http://143.244.190.1:3060",
@@ -49,9 +47,11 @@ const state = {
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,
-  tokenPrice: "0",
-  currentPair: {},
-  secondsRemaining: 0,
+  tokenPrice: loading(),
+  secondsRemaining: loading(),
+  tokensRemaining: loading({ amount: 0, percentage: 0 }),
+  currentLbpWeight: loading(),
+  currentPair: null,
   pairWeights: {},
   pool: {},
   saleTokenInfo: {},
@@ -71,29 +71,9 @@ const getters = {
     return NATIVE_TOKEN_SYMBOLS[denom];
   },
   tokenPrice: (state) => state.tokenPrice,
-  nativeTokenWeight: (state) =>
-    (state.pairWeights.nativeTokenWeight ?? new Dec()).toFixed(0),
-  saleTokenWeight: (state) =>
-    (state.pairWeights.saleTokenWeight ?? new Dec()).toFixed(0),
+  tokensRemaining: (state) => state.tokensRemaining,
+  currentLbpWeight: (state) => state.currentLbpWeight,
   pool: (state) => state.pool,
-  coinsRemaining: (state) => {
-    if (state.pool.assets) {
-      const coinsRemaining = saleAssetFromPair(state.pool.assets).amount;
-      return coinsRemaining.slice(
-        0,
-        coinsRemaining.length - state.saleTokenInfo.decimals
-      );
-    }
-    return 0;
-  },
-  coinsRemainingPercentage: (state) => {
-    if (state.pool.assets) {
-      const coinsRemaining = saleAssetFromPair(state.pool.assets).amount;
-      const totalSupply = state.saleTokenInfo.total_supply;
-      return Math.round((coinsRemaining / totalSupply) * 100);
-    }
-    return 0;
-  },
   currentPair: (state) => state.currentPair,
   secondsRemaining: (state) => state.secondsRemaining,
   saleTokenInfo: (state) => state.saleTokenInfo,
@@ -127,6 +107,10 @@ const mutations = {
   setFactoryConfig: (state, factoryConfig) =>
     (state.factoryConfig = factoryConfig),
   setTokenPrice: (state, tokenPrice) => (state.tokenPrice = tokenPrice),
+  setTokensRemaining: (state, tokensRemaining) =>
+    (state.tokensRemaining = tokensRemaining),
+  setCurrentLbpWeight: (state, currentLbpWeight) =>
+    (state.currentLbpWeight = currentLbpWeight),
   setPairWeights: (state, pairWeights) => (state.pairWeights = pairWeights),
   setPool: (state, pool) => (state.pool = pool),
   setCurrentPair: (state, currentPair) => (state.currentPair = currentPair),
@@ -177,33 +161,39 @@ const actions = {
   },
   async fetchCurrentPair({ commit, dispatch }) {
     const lbps = (await getLBPs(terra, FACTORY_CONTRACT)).filter(
-      (lbp) => lbp.contract_addr == PAIR_CONTRACT
+      (lbp) => lbp.contract_addr === PAIR_CONTRACT
     );
-    //const currentTime = Math.floor(Date.now() / 1000);
+    const currentTime = Math.floor(Date.now() / 1000);
     const currentPair = lbps.find(
-      (lbp) => lbp.contract_addr == PAIR_CONTRACT
-      //(lbp) => lbp.start_time <= currentTime && lbp.end_time > currentTime
+      (lbp) => lbp.start_time <= currentTime && lbp.end_time > currentTime
     );
+
     commit("setCurrentPair", currentPair);
-    dispatch("fetchSaleTokenInfo");
-    dispatch("fetchWeights");
-    dispatch("fetchPool");
-    dispatch("fetchSecondsRemaining");
-    dispatch("fetchTokenBalance");
-    dispatch("fetchBalance");
-    dispatch("fetchTokenPrice");
+    if (currentPair != null) {
+      dispatch("fetchSaleTokenInfo");
+      dispatch("fetchWeights");
+      dispatch("fetchSecondsRemaining");
+      dispatch("fetchTokenBalance");
+      dispatch("fetchBalance");
+      dispatch("fetchTokenPrice");
+    }
   },
   async fetchSecondsRemaining({ getters, commit }) {
     const pair = getters.currentPair;
     const secondsRemaining = pair.end_time - Math.floor(Date.now() / 1000);
-    commit("setSecondsRemaining", secondsRemaining > 0 ? secondsRemaining : 0);
+
+    commit(
+      "setSecondsRemaining",
+      success(secondsRemaining > 0 ? secondsRemaining : 0)
+    );
   },
-  async fetchSaleTokenInfo({ getters, commit }) {
+  async fetchSaleTokenInfo({ getters, commit, dispatch }) {
     const pair = getters.currentPair;
     const saleTokenAddress = saleAssetFromPair(pair.asset_infos).info.token
       .contract_addr;
     const saleTokenInfo = await getTokenInfo(terra, saleTokenAddress);
     commit("setSaleTokenInfo", saleTokenInfo);
+    dispatch("fetchPool");
   },
   async fetchWeights({ getters, commit }) {
     const pair = getters.currentPair;
@@ -214,19 +204,37 @@ const actions = {
       pair.contract_addr,
       nativeToken
     );
+    const currentLbpWeight =
+      nativeTokenWeight.toFixed(0) + " : " + saleTokenWeight.toFixed(0);
+
     commit("setPairWeights", { nativeTokenWeight, saleTokenWeight });
+    commit("setCurrentLbpWeight", success(currentLbpWeight));
   },
   async fetchPool({ getters, commit }) {
     const pair = getters.currentPair;
     const pool = await getPool(terra, pair.contract_addr);
     commit("setPool", pool);
+
+    const coinsRemaining = saleAssetFromPair(pool.assets).amount;
+    const amount = coinsRemaining.slice(
+      0,
+      coinsRemaining.length - getters.saleTokenInfo.decimals
+    );
+
+    const totalSupply = getters.saleTokenInfo.total_supply;
+    const percentage = Math.round((coinsRemaining / totalSupply) * 100);
+
+    commit("setTokensRemaining", success({ amount, percentage }));
   },
   async fetchTokenPrice({ dispatch, commit }) {
     const oneToken = new Dec(1).mul(10 ** 6).toInt();
     const tokenPrice = await dispatch("getReverseSimulation", oneToken);
     // Set token price formatted
     // TODO round up/down price
-    commit("setTokenPrice", dropInsignificantZeroes(tokenPrice.toFixed(3)));
+    commit(
+      "setTokenPrice",
+      success(dropInsignificantZeroes(tokenPrice.toFixed(3)))
+    );
   },
   async fetchPriceHistory({ commit }) {
     //TODO: Cleanup

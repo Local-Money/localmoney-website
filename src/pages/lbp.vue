@@ -28,21 +28,25 @@
       <section class="lbp-info page-layout">
         <InfoCard
           class="text-primary"
+          :loading="tokenPrice.loading"
           :label="'LOCAL Price'"
-          :value="'$' + tokenPrice"
+          :value="'$' + tokenPrice.value"
         />
         <InfoCard
           :label="'Tokens Remaining'"
-          :value="formatTokenAmount(coinsRemaining, 0)"
-          :more="coinsRemainingPercentage + '%'"
+          :loading="tokensRemaining.loading"
+          :value="formatTokenAmount(tokensRemaining.value.amount, 0)"
+          :more="tokensRemaining.value.percentage + '%'"
         />
         <InfoCard
           :label="'Current LBP Weight'"
-          :value="nativeTokenWeight + ' : ' + saleTokenWeight"
+          :loading="currentLbpWeight.loading"
+          :value="currentLbpWeight.value"
         />
         <InfoCard
           :label="'Time Remaining'"
-          :value="durationString(secondsRemaining)"
+          :loading="secondsRemaining.loading"
+          :value="durationString(secondsRemaining.value)"
         />
       </section>
 
@@ -80,10 +84,8 @@ export default defineComponent({
   computed: mapGetters([
     "walletAddress",
     "tokenPrice",
-    "nativeTokenWeight",
-    "saleTokenWeight",
-    "coinsRemaining",
-    "coinsRemainingPercentage",
+    "tokensRemaining",
+    "currentLbpWeight",
     "secondsRemaining",
   ]),
   methods: {
