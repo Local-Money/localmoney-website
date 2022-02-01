@@ -3,7 +3,10 @@
     <p class="label">
       {{ label }}
     </p>
-    <div class="value">
+
+    <Loading v-if="loading" />
+
+    <div v-else class="value">
       <p :class="$attrs.class">
         {{ value }}
         <span v-if="more != null" class="percentage">({{ more }})</span>
@@ -13,11 +16,15 @@
 </template>
 
 <script>
+import Loading from "@/components/Loading";
+
 export default {
   name: "InfoCard",
+  components: { Loading },
   props: {
     label: String,
     value: String,
+    loading: Boolean,
     more: {
       type: String,
       required: false,
