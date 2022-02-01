@@ -220,10 +220,8 @@ const actions = {
       0,
       coinsRemaining.length - getters.saleTokenInfo.decimals
     );
-
     const totalSupply = getters.saleTokenInfo.total_supply;
     const percentage = Math.round((coinsRemaining / totalSupply) * 100);
-
     commit("setTokensRemaining", success({ amount, percentage }));
   },
   async fetchTokenPrice({ dispatch, commit }) {
