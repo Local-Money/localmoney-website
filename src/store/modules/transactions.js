@@ -39,19 +39,19 @@ let isTestNet = true;
 let terra = isTestNet ? testnet : terrarium;
 
 const state = {
-  loading: {
+  pageLoading: {
     isLoading: false,
-    label: "Processing...",
-    transaction: "Follow the transaction",
+    label: undefined,
+    transaction: undefined,
   },
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,
+  currentPair: null,
   tokenPrice: loading(),
   secondsRemaining: loading(),
   tokensRemaining: loading({ amount: 0, percentage: 0 }),
   currentLbpWeight: loading(),
-  currentPair: null,
   pairWeights: {},
   pool: {},
   saleTokenInfo: {},
@@ -77,7 +77,7 @@ const getters = {
   currentPair: (state) => state.currentPair,
   secondsRemaining: (state) => state.secondsRemaining,
   saleTokenInfo: (state) => state.saleTokenInfo,
-  loading: (state) => state.loading,
+  pageLoading: (state) => state.pageLoading,
   priceHistory: (state) => () => {
     return {
       time: state.time,
@@ -100,12 +100,11 @@ const getters = {
 };
 
 const mutations = {
+  setPageLoading: (state, pageLoading) => (state.pageLoading = pageLoading),
   setWalletAddress: (state, walletAddress) =>
     (state.walletAddress = walletAddress),
   setBalance: (state, balance) => (state.balance = balance),
   setTokenBalance: (state, tokenBalance) => (state.tokenBalance = tokenBalance),
-  setFactoryConfig: (state, factoryConfig) =>
-    (state.factoryConfig = factoryConfig),
   setTokenPrice: (state, tokenPrice) => (state.tokenPrice = tokenPrice),
   setTokensRemaining: (state, tokensRemaining) =>
     (state.tokensRemaining = tokensRemaining),
@@ -132,31 +131,39 @@ const actions = {
       URL: info.lcd,
       chainID: info.chainID,
     });
+
+    commit("setPageLoading", { isLoading: true });
     commit("setWalletAddress", wallet.address);
+    const balance = await dispatch("fetchBalance");
+    const tokenBalance = await dispatch("fetchTokenBalance");
+    commit("setBalance", balance);
+    commit("setTokenBalance", tokenBalance);
+    commit("setPageLoading", { isLoading: false });
+
     dispatch("fetchCurrentPair");
   },
-  async fetchBalance({ getters, commit }) {
+  async updateBalance({ dispatch, commit }) {
+    const balance = await dispatch("fetchBalance");
+    const tokenBalance = await dispatch("fetchTokenBalance");
+    commit("setBalance", balance);
+    commit("setTokenBalance", tokenBalance);
+  },
+  async fetchBalance({ getters }) {
     const walletAddress = getters.walletAddress;
     if (walletAddress.length !== 0) {
       const pair = getters.currentPair;
       const nativeToken = nativeTokenFromPair(pair.asset_infos).info
         .native_token.denom;
-      const balance = await getBalance(terra, nativeToken, walletAddress);
-      commit("setBalance", balance);
+      return await getBalance(terra, nativeToken, walletAddress);
     }
   },
-  async fetchTokenBalance({ getters, commit }) {
+  async fetchTokenBalance({ getters }) {
     const walletAddress = getters.walletAddress;
     if (walletAddress.length !== 0) {
       const pair = getters.currentPair;
       const tokenAddress = saleAssetFromPair(pair.asset_infos).info.token
         .contract_addr;
-      const tokenBalance = await getTokenBalance(
-        terra,
-        tokenAddress,
-        walletAddress
-      );
-      commit("setTokenBalance", tokenBalance);
+      return await getTokenBalance(terra, tokenAddress, walletAddress);
     }
   },
   async fetchCurrentPair({ commit, dispatch }) {
@@ -173,8 +180,6 @@ const actions = {
       dispatch("fetchSaleTokenInfo");
       dispatch("fetchWeights");
       dispatch("fetchSecondsRemaining");
-      dispatch("fetchTokenBalance");
-      dispatch("fetchBalance");
       dispatch("fetchTokenPrice");
     }
   },
@@ -270,7 +275,7 @@ const actions = {
     );
     return Dec.withPrec(simulation["offer_amount"], 6);
   },
-  async swapTokens({ getters, dispatch }, swapInfo) {
+  async swapTokens({ getters, dispatch, commit }, swapInfo) {
     let msg;
     let buildSwapOptions = {
       pair: getters.currentPair,
@@ -290,14 +295,29 @@ const actions = {
     } else {
       throw "Swapping from ?";
     }
-    let postRes = await postMsg(terra, { msg });
-    const txInterval = setInterval(async () => {
-      let txInfo = await terra.tx.txInfo(postRes.txhash);
-      if (txInfo) {
-        clearInterval(txInterval);
-        dispatch("fetchCurrentPair");
+
+    commit("setPageLoading", { isLoading: true });
+    postMsg(terra, { msg }).then(
+      (result) => {
+        const txInterval = setInterval(async () => {
+          commit("setPageLoading", {
+            isLoading: true,
+            transaction: result.txhash,
+          });
+
+          let txInfo = await terra.tx.txInfo(result.txhash);
+          if (txInfo) {
+            clearInterval(txInterval);
+            dispatch("updateBalance");
+            dispatch("fetchCurrentPair");
+            commit("setPageLoading", { isLoading: false });
+          }
+        }, 1000);
+      },
+      () => {
+        commit("setPageLoading", { isLoading: false });
       }
-    }, 1000);
+    );
   },
 };
 

@@ -4,10 +4,15 @@
       <div class="loading">
         <Loading />
         <div class="loading-content">
-          <p class="label">{{ loading.label }}</p>
-          <a class="transaction" :href="'#' + loading.transaction">{{
-            formatAddress(loading.transaction)
-          }}</a>
+          <p v-if="loading.label !== undefined" class="label">
+            {{ loading.label }}
+          </p>
+          <a
+            v-if="loading.transaction !== undefined"
+            class="transaction"
+            :href="'#' + loading.transaction"
+            >{{ formatAddress(loading.transaction) }}</a
+          >
         </div>
       </div>
     </div>
