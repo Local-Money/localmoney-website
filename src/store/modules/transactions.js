@@ -12,7 +12,7 @@ import {
   getWeights,
 } from "@/terra/queries";
 import { nativeTokenFromPair, saleAssetFromPair } from "@/helpers/asset_pairs";
-import { Dec } from "@terra-money/terra.js";
+import { Dec, Int } from "@terra-money/terra.js";
 import {
   dropInsignificantZeroes,
   formatTokenAmount,
@@ -55,6 +55,7 @@ const state = {
   pairWeights: {},
   pool: {},
   saleTokenInfo: {},
+  maxSwapFee: null,
 };
 
 const getters = {
@@ -123,6 +124,7 @@ const mutations = {
     state.time = priceHistory.time;
     state.series = priceHistory.series;
   },
+  setMaxSwapFee: (state, maxSwapFee) => (state.maxSwapFee = maxSwapFee),
 };
 
 const actions = {
@@ -176,6 +178,7 @@ const actions = {
       dispatch("fetchTokenBalance");
       dispatch("fetchBalance");
       dispatch("fetchTokenPrice");
+      dispatch("fetchMaxSwapFee");
     }
   },
   async fetchSecondsRemaining({ getters, commit }) {
@@ -247,6 +250,28 @@ const actions = {
       series.push([d.time, (d.offer_amount / 1000000).toFixed(3)]);
     });
     commit("setPriceHistory", { time, price, series });
+  },
+  async fetchMaxSwapFee({ getters }) {
+    const opts = {
+      pair: getters.currentPair,
+      walletAddress: getters.walletAddress,
+      intBalance: parseInt(getters.balance.replace(/\D/g, "")),
+    };
+    // Estimate gas usage (use 1 as amount to ignore taxes)
+    const msg = buildSwapFromNativeTokenMsg({
+      pair: opts.pair,
+      walletAddress: opts.walletAddress,
+      intAmount: new Int(1),
+    });
+    const info = await terra.auth.accountInfo(getters.walletAddress);
+    console.log("accountInfo", info);
+    const signerData = {
+      sequenceNumber: info.sequence,
+      publicKey: info.public_key,
+    };
+    console.log("signerData", signerData);
+    const fee = await terra.tx.estimateFee([signerData], { msgs: [msg] });
+    console.log("fee", fee);
   },
   async getSimulation({ getters }, amount) {
     const pair = getters.currentPair;

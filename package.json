@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@terra-money/terra.js": "^2.0.15",
+    "@terra-money/terra.js": "^3.0.6",
     "apexcharts": "^3.33.0",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",

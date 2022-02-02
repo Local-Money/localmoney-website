@@ -1033,13 +1033,13 @@
   resolved "https://registry.npmjs.org/@soda/get-current-script/-/get-current-script-1.0.2.tgz"
   integrity sha512-T7VNNlYVM1SgQ+VsMYhnDkcGmWhQdL0bDyGm5TlQ3GBXnJscEClUUOKduWTmm2zCnvNLC1hc3JpuXjs/nFOc5w==
 
-"@terra-money/terra.js@^2.0.15":
-  version "2.1.23"
-  resolved "https://registry.yarnpkg.com/@terra-money/terra.js/-/terra.js-2.1.23.tgz#6e7ee7477b8cc5895ddcb2e4eb0446e71bb0e575"
-  integrity sha512-nSAR35zqjKUn1Jzqevf30s47XRlW/VXU01YgK3n9ndmX15lkdlgFvqaV7UezK0xAmCpm+7xWIrtBTMmZpVBkMQ==
+"@terra-money/terra.js@^3.0.6":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@terra-money/terra.js/-/terra.js-3.0.6.tgz#74e7babdf6f97a5b066601c34c75913857a29879"
+  integrity sha512-JA+FoJlZi8Q81Gy5IfnJjKyyBuH3NftuG5pr3ZvVWTm9IezM6WsMLhgsA0BNaCsOABapK1bFk3hWCkP03leW/g==
   dependencies:
     "@terra-money/terra.proto" "^0.1.7"
-    axios "^0.21.1"
+    axios "^0.24.0"
     bech32 "^2.0.0"
     bip32 "^2.0.6"
     bip39 "^3.0.3"
@@ -1050,7 +1050,7 @@
     secp256k1 "^4.0.2"
     tmp "^0.2.1"
     utf-8-validate "^5.0.5"
-    ws "^7.4.2"
+    ws "^7.5.5"
 
 "@terra-money/terra.proto@^0.1.7":
   version "0.1.7"
@@ -2042,12 +2042,12 @@ aws4@^1.8.0:
   resolved "https://registry.npmjs.org/aws4/-/aws4-1.11.0.tgz"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^0.21.1:
-  version "0.21.4"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
-  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
+axios@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
+  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
   dependencies:
-    follow-redirects "^1.14.0"
+    follow-redirects "^1.14.4"
 
 babel-eslint@^10.1.0:
   version "10.1.0"
@@ -4197,7 +4197,7 @@ follow-redirects@^1.0.0:
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.5.tgz"
   integrity sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==
 
-follow-redirects@^1.14.0:
+follow-redirects@^1.14.4:
   version "1.14.7"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.7.tgz#2004c02eb9436eee9a21446a6477debf17e81685"
   integrity sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==
@@ -9021,7 +9021,7 @@ ws@^6.0.0, ws@^6.2.1:
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^7.4.2:
+ws@^7.5.5:
   version "7.5.6"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.6.tgz#e59fc509fb15ddfb65487ee9765c5a51dec5fe7b"
   integrity sha512-6GLgCqo2cy2A2rjCNFlxQS6ZljG/coZfZXclldI8FB/1G3CCI36Zd8xy2HrFVACi8tfk5XrgLQEk+P0Tnz9UcA==
