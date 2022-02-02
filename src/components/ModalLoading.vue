@@ -10,7 +10,10 @@
           <a
             v-if="loading.transaction !== undefined"
             class="transaction"
-            :href="'#' + loading.transaction"
+            target="_blank"
+            :href="
+              'https://finder.terra.money/testnet/tx/' + loading.transaction
+            "
             >{{ formatAddress(loading.transaction) }}</a
           >
         </div>
