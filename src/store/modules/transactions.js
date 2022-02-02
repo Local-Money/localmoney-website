@@ -132,7 +132,10 @@ const actions = {
       chainID: info.chainID,
     });
 
-    commit("setPageLoading", { isLoading: true });
+    commit("setPageLoading", {
+      isLoading: true,
+      label: "Connecting wallet...",
+    });
     commit("setWalletAddress", wallet.address);
     const balance = await dispatch("fetchBalance");
     const tokenBalance = await dispatch("fetchTokenBalance");
@@ -296,12 +299,16 @@ const actions = {
       throw "Swapping from ?";
     }
 
-    commit("setPageLoading", { isLoading: true });
+    commit("setPageLoading", {
+      isLoading: true,
+      label: "Waiting for Terra Station",
+    });
     postMsg(terra, { msg }).then(
       (result) => {
         const txInterval = setInterval(async () => {
           commit("setPageLoading", {
             isLoading: true,
+            label: "Transaction hash:",
             transaction: result.txhash,
           });
 
