@@ -251,27 +251,26 @@ const actions = {
     });
     commit("setPriceHistory", { time, price, series });
   },
-  async fetchMaxSwapFee({ getters }) {
+  async fetchMaxSwapFee({ getters, commit }) {
     const opts = {
       pair: getters.currentPair,
       walletAddress: getters.walletAddress,
       intBalance: parseInt(getters.balance.replace(/\D/g, "")),
     };
-    // Estimate gas usage (use 1 as amount to ignore taxes)
     const msg = buildSwapFromNativeTokenMsg({
       pair: opts.pair,
       walletAddress: opts.walletAddress,
       intAmount: new Int(1),
     });
     const info = await terra.auth.accountInfo(getters.walletAddress);
-    console.log("accountInfo", info);
     const signerData = {
       sequenceNumber: info.sequence,
       publicKey: info.public_key,
     };
-    console.log("signerData", signerData);
     const fee = await terra.tx.estimateFee([signerData], { msgs: [msg] });
-    console.log("fee", fee);
+    const gasPricesRes = await fetch("https://fcd.terra.dev/v1/txs/gas_prices");
+    const gasPrices = await gasPricesRes.json();
+    commit("setMaxSwapFee", fee.gas_limit * gasPrices.uusd);
   },
   async getSimulation({ getters }, amount) {
     const pair = getters.currentPair;
