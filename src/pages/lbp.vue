@@ -56,6 +56,8 @@
       </section>
     </main>
   </body>
+
+  <ModalLoading :loading="pageLoading" />
 </template>
 
 <script>
@@ -67,10 +69,12 @@ import { durationString } from "@/helpers/time_formatters";
 import Chart from "@/components/Chart";
 import InfoCard from "@/components/InfoCard.vue";
 import SwapForm from "@/components/SwapForm.vue";
+import ModalLoading from "@/components/ModalLoading";
 
 export default defineComponent({
   name: "lbp",
   components: {
+    ModalLoading,
     Chart,
     InfoCard,
     SwapForm,
@@ -87,6 +91,7 @@ export default defineComponent({
     "tokensRemaining",
     "currentLbpWeight",
     "secondsRemaining",
+    "pageLoading",
   ]),
   methods: {
     ...mapActions(["initWallet", "fetchCurrentPair"]),
