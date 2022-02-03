@@ -280,7 +280,6 @@ const actions = {
     const gasPricesRes = await fetch("https://fcd.terra.dev/v1/txs/gas_prices");
     const gasPrices = await gasPricesRes.json();
     const maxSwapFee = fee.gas_limit * gasPrices.uusd;
-    console.log("maxSwapFee", maxSwapFee);
     commit("setMaxSwapFee", maxSwapFee);
   },
   async getSimulation({ getters }, amount) {
