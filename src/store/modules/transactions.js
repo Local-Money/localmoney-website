@@ -98,6 +98,7 @@ const getters = {
       symbol: state.saleTokenInfo.symbol,
     };
   },
+  maxSwapFee: (state) => state.maxSwapFee,
 };
 
 const mutations = {
@@ -270,7 +271,9 @@ const actions = {
     const fee = await terra.tx.estimateFee([signerData], { msgs: [msg] });
     const gasPricesRes = await fetch("https://fcd.terra.dev/v1/txs/gas_prices");
     const gasPrices = await gasPricesRes.json();
-    commit("setMaxSwapFee", fee.gas_limit * gasPrices.uusd);
+    const maxSwapFee = fee.gas_limit * gasPrices.uusd;
+    console.log("maxSwapFee", maxSwapFee);
+    commit("setMaxSwapFee", maxSwapFee);
   },
   async getSimulation({ getters }, amount) {
     const pair = getters.currentPair;
