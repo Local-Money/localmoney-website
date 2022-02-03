@@ -52,7 +52,7 @@
       @change="setTo"
       @focus="this.isReverseSimulation = true"
     />
-    <button class="primary" @click="swap()" :disabled="!valid">Swap</button>
+    <button class="primary" @click="swap()" :disabled="!isValid">Swap</button>
   </div>
 </template>
 
@@ -77,7 +77,6 @@ export default defineComponent({
       toAmount: undefined,
       isReverseSimulation: true,
       isSelling: false,
-      valid: true,
     };
   },
   watch: {
@@ -102,6 +101,7 @@ export default defineComponent({
       "tokenBalance",
       "nativeTokenSymbol",
       "saleTokenInfo",
+      "maxSwapFee",
     ]),
     fromSymbol() {
       return this.isSelling ? this.tokenAsset.symbol : this.nativeAsset.symbol;
@@ -118,6 +118,13 @@ export default defineComponent({
       return this.isSelling
         ? this.nativeAsset.balance
         : this.tokenAsset.balance;
+    },
+    isValid() {
+      const fromBalanceInt = parseInt(this.fromBalance.replace(/\D/g, ""));
+      const addressIsValid = this.walletAddress.length > 0;
+      let fromAmount = this.fromAmount;
+      const fromIsValid = fromAmount > 0 && fromAmount <= fromBalanceInt;
+      return addressIsValid && fromIsValid;
     },
   },
   methods: {
@@ -204,20 +211,24 @@ export default defineComponent({
 
   .input-wrap {
     position: relative;
+
     .meta {
       position: absolute;
       right: 24px;
       top: 11px;
       display: flex;
+
       p {
         margin-right: 8px;
       }
+
       img {
         vertical-align: middle;
         width: 24px;
         height: 24px;
       }
     }
+
     input {
       height: 48px;
       background-color: $gray100;
@@ -233,6 +244,7 @@ export default defineComponent({
         border: 1px solid $primary;
       }
     }
+
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
       opacity: 0;

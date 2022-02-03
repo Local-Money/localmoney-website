@@ -12,7 +12,7 @@ import {
   getWeights,
 } from "@/terra/queries";
 import { nativeTokenFromPair, saleAssetFromPair } from "@/helpers/asset_pairs";
-import { Dec } from "@terra-money/terra.js";
+import { Dec, Int } from "@terra-money/terra.js";
 import {
   dropInsignificantZeroes,
   formatTokenAmount,
@@ -55,6 +55,7 @@ const state = {
   pairWeights: {},
   pool: {},
   saleTokenInfo: {},
+  maxSwapFee: null,
 };
 
 const getters = {
@@ -97,6 +98,7 @@ const getters = {
       symbol: state.saleTokenInfo.symbol,
     };
   },
+  maxSwapFee: (state) => state.maxSwapFee,
 };
 
 const mutations = {
@@ -122,6 +124,7 @@ const mutations = {
     state.time = priceHistory.time;
     state.series = priceHistory.series;
   },
+  setMaxSwapFee: (state, maxSwapFee) => (state.maxSwapFee = maxSwapFee),
 };
 
 const actions = {
@@ -184,6 +187,7 @@ const actions = {
       dispatch("fetchWeights");
       dispatch("fetchSecondsRemaining");
       dispatch("fetchTokenPrice");
+      dispatch("fetchMaxSwapFee");
     }
   },
   async fetchSecondsRemaining({ getters, commit }) {
@@ -255,6 +259,28 @@ const actions = {
       series.push([d.time, (d.offer_amount / 1000000).toFixed(3)]);
     });
     commit("setPriceHistory", { time, price, series });
+  },
+  async fetchMaxSwapFee({ getters, commit }) {
+    const opts = {
+      pair: getters.currentPair,
+      walletAddress: getters.walletAddress,
+      intBalance: parseInt(getters.balance.replace(/\D/g, "")),
+    };
+    const msg = buildSwapFromNativeTokenMsg({
+      pair: opts.pair,
+      walletAddress: opts.walletAddress,
+      intAmount: new Int(1),
+    });
+    const info = await terra.auth.accountInfo(getters.walletAddress);
+    const signerData = {
+      sequenceNumber: info.sequence,
+      publicKey: info.public_key,
+    };
+    const fee = await terra.tx.estimateFee([signerData], { msgs: [msg] });
+    const gasPricesRes = await fetch("https://fcd.terra.dev/v1/txs/gas_prices");
+    const gasPrices = await gasPricesRes.json();
+    const maxSwapFee = fee.gas_limit * gasPrices.uusd;
+    commit("setMaxSwapFee", maxSwapFee);
   },
   async getSimulation({ getters }, amount) {
     const pair = getters.currentPair;
