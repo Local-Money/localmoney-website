@@ -53,9 +53,9 @@
       @focus="this.isReverseSimulation = true"
     />
     <h4>Transaction Summary:</h4>
-    <p>Transaction Fee: {{ transactionFee }}</p>
+    <p>Transaction Fee: ~{{ transactionFee }}</p>
     <p>Price Impact: {{ priceImpact }}</p>
-    <p>Simulated Price: {{ simulation.simulatedPrice }}</p>
+    <p>Simulated Price: ${{ formatTokenPrice(simulation.simulatedPrice) }}</p>
     <button class="primary" @click="swap()" :disabled="!isValid">Swap</button>
   </div>
 </template>
@@ -63,8 +63,12 @@
 <script>
 import { defineComponent } from "vue";
 import { mapActions, mapGetters } from "vuex";
-import { formatTokenAmount } from "@/helpers/number_formatters";
+import {
+  formatTokenAmount,
+  formatTokenPrice,
+} from "@/helpers/number_formatters";
 import TokenInput from "@/components/TokenInput.vue";
+import { Dec } from "@terra-money/terra.js";
 
 const DIRECTION_FROM = 0;
 const DIRECTION_TO = 1;
@@ -140,7 +144,7 @@ export default defineComponent({
     },
     transactionFee() {
       if (this.maxSwapFee) {
-        return this.maxSwapFee.toString();
+        return Dec.div(this.maxSwapFee, 10 ** 6).toFixed(2);
       } else {
         return "";
       }
@@ -156,6 +160,7 @@ export default defineComponent({
   methods: {
     ...mapActions(["getSimulation", "getReverseSimulation", "swapTokens"]),
     formatTokenAmount,
+    formatTokenPrice,
     setInputValue(value, direction) {
       clearTimeout(this.simulationTimeout);
       this.simulationTimeout = setTimeout(async () => {
@@ -186,7 +191,9 @@ export default defineComponent({
             : this.isReverseSimulation
             ? amount / value
             : value / amount;
-          const priceImpact = this.tokenPrice.value / simulatedPrice;
+          const priceImpact =
+            ((-1 + simulatedPrice / this.tokenPrice.value) * 100).toFixed(2) +
+            "%";
 
           Object.assign(this.simulation, {
             priceImpact,

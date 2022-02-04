@@ -98,10 +98,10 @@ export default defineComponent({
   ]),
   methods: {
     ...mapActions(["initWallet", "fetchCurrentPair"]),
-    formatTokenAmount,
     durationString,
     formatAmount,
     formatAddress,
+    formatTokenAmount,
     formatTokenPrice,
   },
 });
