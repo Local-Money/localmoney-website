@@ -30,7 +30,7 @@
           class="text-primary"
           :loading="tokenPrice.loading"
           :label="'LOCAL Price'"
-          :value="'$' + tokenPrice.value"
+          :value="'$' + formatTokenPrice(tokenPrice.value)"
         />
         <InfoCard
           :label="'Tokens Remaining'"
@@ -64,7 +64,10 @@
 import { defineComponent } from "vue";
 import { formatAddress, formatAmount } from "@/shared";
 import { mapActions, mapGetters } from "vuex";
-import { formatTokenAmount } from "@/helpers/number_formatters";
+import {
+  formatTokenAmount,
+  formatTokenPrice,
+} from "@/helpers/number_formatters";
 import { durationString } from "@/helpers/time_formatters";
 import Chart from "@/components/Chart";
 import InfoCard from "@/components/InfoCard.vue";
@@ -99,6 +102,7 @@ export default defineComponent({
     durationString,
     formatAmount,
     formatAddress,
+    formatTokenPrice,
   },
 });
 </script>
