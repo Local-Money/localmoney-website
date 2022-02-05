@@ -15,7 +15,7 @@
     />
     <p v-if="symbol != null" class="balance">
       Balance:
-      <span style="text-decoration: underline">
+      <span style="text-decoration: underline" @click="setFromBalance">
         {{ balance }}
         {{ symbol }}
       </span>
@@ -26,6 +26,7 @@
 <script>
 import { ref, watch } from "vue-demi";
 import CurrencyInput from "./CurrencyInput.vue";
+import { Dec } from "@terra-money/terra.js";
 
 export default {
   name: "TokenInput",
@@ -57,12 +58,26 @@ export default {
       this.$emit("change", newValue);
     },
   },
-  methods: {},
+  methods: {
+    setFromBalance() {
+      this.$emit("focus");
+      this.$nextTick(() => {
+        let balance = Dec.withPrec(this.balance.replace(",", ""), 6).mul(
+          10 ** 6
+        );
+        this.localValue = balance * 10 ** 6;
+      });
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/style/tokens.scss";
+
+span {
+  cursor: pointer;
+}
 
 label {
   display: block;
