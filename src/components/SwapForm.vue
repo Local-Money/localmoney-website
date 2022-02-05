@@ -66,6 +66,7 @@ import { mapActions, mapGetters } from "vuex";
 import {
   formatTokenAmount,
   formatTokenPrice,
+  fromFormattedString,
 } from "@/helpers/number_formatters";
 import TokenInput from "@/components/TokenInput.vue";
 import { Dec } from "@terra-money/terra.js";
@@ -137,10 +138,17 @@ export default defineComponent({
     },
     isValid() {
       const fromBalanceInt = parseInt(this.fromBalance.replace(/\D/g, ""));
+
+      const maxSwapFeeInt = parseInt(this.maxSwapFee);
+      const nativeAssetBalance = fromFormattedString(this.nativeAsset.balance)
+        .mul(10 ** 6)
+        .toNumber();
+
+      const canAffordFees = nativeAssetBalance > maxSwapFeeInt + 1;
       const addressIsValid = this.walletAddress.length > 0;
       let fromAmount = this.simulation.fromAmount;
       const fromIsValid = fromAmount > 0 && fromAmount <= fromBalanceInt;
-      return addressIsValid && fromIsValid;
+      return addressIsValid && fromIsValid && canAffordFees;
     },
     transactionFee() {
       if (this.maxSwapFee) {

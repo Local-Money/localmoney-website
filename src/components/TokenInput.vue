@@ -26,7 +26,7 @@
 <script>
 import { ref, watch } from "vue-demi";
 import CurrencyInput from "./CurrencyInput.vue";
-import { Dec } from "@terra-money/terra.js";
+import { fromFormattedString } from "@/helpers/number_formatters";
 
 export default {
   name: "TokenInput",
@@ -62,9 +62,7 @@ export default {
     setFromBalance() {
       this.$emit("focus");
       this.$nextTick(() => {
-        let balance = Dec.withPrec(this.balance.replace(",", ""), 6).mul(
-          10 ** 6
-        );
+        let balance = fromFormattedString(this.balance);
         this.localValue = balance * 10 ** 6;
       });
     },

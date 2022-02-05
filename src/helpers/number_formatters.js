@@ -38,3 +38,7 @@ export function formatTokenPrice(tokenPrice) {
     return "$0.000";
   }
 }
+
+export function fromFormattedString(numString) {
+  return Dec.withPrec(numString.replace(",", ""), 6).mul(10 ** 6);
+}
