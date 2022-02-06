@@ -90,6 +90,47 @@ main {
     color: $base-text;
   }
 
+  .lbp-teaser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    .wrap-img {
+      width: 30%;
+      img {
+        width: 90%;
+      }
+    }
+    .wrap-content {
+      width: 45%;
+
+      h2 {
+        font-size: 38px;
+        margin-bottom: 32px;
+        line-height: 140%;
+      }
+      p {
+        margin-bottom: 16px;
+      }
+      .wrap-cta {
+        margin-top: 24px;
+        p {
+          font-size: 16px;
+          font-weight: $regular;
+        }
+      }
+
+      button {
+        margin-top: 24px;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: $gray200;
+        }
+      }
+    }
+  }
+
   .team {
     background-color: $surface;
     border-top: 1px solid $border;
@@ -100,8 +141,10 @@ main {
       .wrap-members {
         display: flex;
         justify-content: space-between;
+
         .team-member {
           text-align: center;
+          width: 20%;
           .avatar {
             width: 140px;
           }
@@ -114,6 +157,14 @@ main {
           .role {
             font-size: 16px;
             font-weight: $regular;
+          }
+          .bio {
+            font-size: 14px;
+            margin: 24px 8px;
+            padding: 16px 8px;
+            border-radius: 8px;
+            color: $gray700;
+            background-color: $gray150;
           }
         }
       }
@@ -217,15 +268,17 @@ main {
       }
       .wrap-cta {
         display: flex;
+        flex-direction: column;
         margin-top: 32px;
         align-items: center;
         justify-content: space-between;
         p {
-          width: 50%;
+          width: 80%;
           font-size: 16px;
+          text-align: center;
         }
         button {
-          margin-top: 0;
+          margin-top: 24px;
         }
       }
     }
@@ -240,6 +293,47 @@ main {
     h2 {
       font-size: 24px;
     }
+
+    .lbp-teaser {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      text-align: center;
+      .wrap-img {
+        width: 100%;
+        img {
+          width: 50%;
+        }
+      }
+      .wrap-content {
+        width: 100%;
+
+        h2 {
+          font-size: 24px;
+          font-weight: $semi-bold;
+          margin-bottom: 32px;
+          line-height: 120%;
+        }
+        .wrap-cta {
+          display: flex;
+          flex-direction: column;
+          margin-top: 32px;
+          margin-bottom: 32px;
+          padding-top: 32px;
+          align-items: center;
+          justify-content: space-between;
+          border-top: 1px solid $border;
+          p {
+            width: 80%;
+            font-size: 16px;
+          }
+          button {
+            margin-top: 8px;
+          }
+        }
+      }
+    }
+
     .team {
       .wrap-team {
         h2 {
@@ -248,15 +342,13 @@ main {
         .wrap-members {
           flex-wrap: wrap;
           justify-content: space-around;
-          gap: 16px;
+          gap: 8px;
           .team-member {
             width: 45%;
             margin-bottom: 16px;
 
             .avatar {
               width: 80%;
-
-              border: 1px solid $border;
             }
             .name {
               font-size: 18px;
@@ -264,6 +356,10 @@ main {
             }
             .role {
               font-size: 14px;
+            }
+            .bio {
+              margin: 24px 0px;
+              padding: 16px 16px;
             }
           }
         }
