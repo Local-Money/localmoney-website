@@ -13,7 +13,10 @@ import {
 } from "@/terra/queries";
 import { nativeTokenFromPair, saleAssetFromPair } from "@/helpers/asset_pairs";
 import { Dec, Int } from "@terra-money/terra.js";
-import { formatTokenAmount } from "@/helpers/number_formatters";
+import {
+  formatTokenAmount,
+  fromFormattedString,
+} from "@/helpers/number_formatters";
 import { NATIVE_TOKEN_SYMBOLS } from "@/helpers/token_info";
 import {
   buildSwapFromContractTokenMsg,
@@ -25,11 +28,13 @@ import { loading, success } from "@/terra/result";
 let terrarium = buildClient({
   URL: "http://143.244.190.1:3060",
   chainID: "localterra",
+  gasPrices: "0.15",
 });
 
 let testnet = buildClient({
   URL: "https://bombay-lcd.terra.dev",
-  chainID: "columbus-5",
+  chainID: "bombay-12",
+  gasPrices: "0.15",
 });
 
 let isTestNet = true;
@@ -315,6 +320,15 @@ const actions = {
       swapInfo.fromSymbol.toLowerCase() ===
       getters.nativeTokenSymbol.toLowerCase()
     ) {
+      const balance = fromFormattedString(getters.balance)
+        .mul(10 ** 6)
+        .toNumber();
+
+      //Deduct fees if amount + fees is higher than balance
+      if (swapInfo.fromAmount + getters.maxSwapFee > balance) {
+        buildSwapOptions.intAmount =
+          balance - Math.ceil(getters.maxSwapFee * 1.1);
+      }
       msg = buildSwapFromNativeTokenMsg(buildSwapOptions);
     } else if (
       swapInfo.fromSymbol.toLowerCase() ===
