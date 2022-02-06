@@ -13,10 +13,7 @@ import {
 } from "@/terra/queries";
 import { nativeTokenFromPair, saleAssetFromPair } from "@/helpers/asset_pairs";
 import { Dec, Int } from "@terra-money/terra.js";
-import {
-  dropInsignificantZeroes,
-  formatTokenAmount,
-} from "@/helpers/number_formatters";
+import { formatTokenAmount } from "@/helpers/number_formatters";
 import { NATIVE_TOKEN_SYMBOLS } from "@/helpers/token_info";
 import {
   buildSwapFromContractTokenMsg,
@@ -238,13 +235,12 @@ const actions = {
   },
   async fetchTokenPrice({ dispatch, commit }) {
     const oneToken = new Dec(1).mul(10 ** 6).toInt();
-    const tokenPrice = await dispatch("getReverseSimulation", oneToken);
-    // Set token price formatted
-    // TODO round up/down price
-    commit(
-      "setTokenPrice",
-      success(dropInsignificantZeroes(tokenPrice.toFixed(3)))
+    const reverseSimulationResult = await dispatch(
+      "getReverseSimulation",
+      oneToken
     );
+    const tokenPrice = reverseSimulationResult.amount;
+    commit("setTokenPrice", success(tokenPrice));
   },
   async fetchPriceHistory({ commit }) {
     //TODO: Cleanup
@@ -291,7 +287,9 @@ const actions = {
       amount,
       assetInfo
     );
-    return Dec.withPrec(simulation["return_amount"], 6);
+    const returnAmount = Dec.withPrec(simulation["return_amount"], 6);
+    const spread = Dec.withPrec(simulation["spread_amount"], 6);
+    return { amount: returnAmount, spread };
   },
   async getReverseSimulation({ getters }, amount) {
     const pair = getters.currentPair;
@@ -302,7 +300,9 @@ const actions = {
       amount,
       assetInfo
     );
-    return Dec.withPrec(simulation["offer_amount"], 6);
+    const returnAmount = Dec.withPrec(simulation["offer_amount"], 6);
+    const spread = Dec.withPrec(simulation["spread_amount"], 6);
+    return { amount: returnAmount, spread };
   },
   async swapTokens({ getters, dispatch, commit }, swapInfo) {
     let msg;

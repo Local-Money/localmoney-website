@@ -2,7 +2,7 @@
   <div class="swap card">
     <h2>Swap</h2>
     <TokenInput
-      :value="fromAmount"
+      :value="simulation.fromAmount"
       :label="'From'"
       :balance="fromBalance"
       :symbol="fromSymbol"
@@ -45,13 +45,17 @@
       </g>
     </svg>
     <TokenInput
-      :value="toAmount"
+      :value="simulation.toAmount"
       :label="'To (estimated)'"
       :balance="toBalance"
       :symbol="toSymbol"
       @change="setTo"
       @focus="this.isReverseSimulation = true"
     />
+    <h4>Transaction Summary:</h4>
+    <p>Transaction Fee: ~{{ transactionFee }}</p>
+    <p>Price Impact: {{ priceImpact }}</p>
+    <p>Simulated Price: ${{ formatTokenPrice(simulation.simulatedPrice) }}</p>
     <button class="primary" @click="swap()" :disabled="!isValid">Swap</button>
   </div>
 </template>
@@ -59,8 +63,15 @@
 <script>
 import { defineComponent } from "vue";
 import { mapActions, mapGetters } from "vuex";
-import { formatTokenAmount } from "@/helpers/number_formatters";
+import {
+  formatTokenAmount,
+  formatTokenPrice,
+} from "@/helpers/number_formatters";
 import TokenInput from "@/components/TokenInput.vue";
+import { Dec } from "@terra-money/terra.js";
+
+const DIRECTION_FROM = 0;
+const DIRECTION_TO = 1;
 
 export default defineComponent({
   name: "SwapForm",
@@ -73,8 +84,12 @@ export default defineComponent({
       simulationTimeout: undefined,
       simulate: this.getSimulation,
       reverseSimulate: this.getReverseSimulation,
-      fromAmount: undefined,
-      toAmount: undefined,
+      simulation: {
+        fromAmount: undefined,
+        toAmount: undefined,
+        priceImpact: 0,
+        simulatedPrice: 0,
+      },
       isReverseSimulation: true,
       isSelling: false,
     };
@@ -88,8 +103,8 @@ export default defineComponent({
         this.simulate = this.getSimulation;
         this.reverseSimulate = this.getReverseSimulation;
       }
-      this.fromAmount = this.toAmount;
-      this.toAmount = null;
+      this.simulation.fromAmount = this.simulation.toAmount;
+      this.simulation.toAmount = null;
     },
   },
   computed: {
@@ -99,6 +114,7 @@ export default defineComponent({
       "walletAddress",
       "balance",
       "tokenBalance",
+      "tokenPrice",
       "nativeTokenSymbol",
       "saleTokenInfo",
       "maxSwapFee",
@@ -122,50 +138,92 @@ export default defineComponent({
     isValid() {
       const fromBalanceInt = parseInt(this.fromBalance.replace(/\D/g, ""));
       const addressIsValid = this.walletAddress.length > 0;
-      let fromAmount = this.fromAmount;
+      let fromAmount = this.simulation.fromAmount;
       const fromIsValid = fromAmount > 0 && fromAmount <= fromBalanceInt;
       return addressIsValid && fromIsValid;
+    },
+    transactionFee() {
+      if (this.maxSwapFee) {
+        return Dec.div(this.maxSwapFee, 10 ** 6).toFixed(2);
+      } else {
+        return "";
+      }
+    },
+    priceImpact() {
+      if (this.simulation.priceImpact) {
+        return this.simulation.priceImpact;
+      } else {
+        return "";
+      }
     },
   },
   methods: {
     ...mapActions(["getSimulation", "getReverseSimulation", "swapTokens"]),
     formatTokenAmount,
-    setFrom(value) {
-      this.fromAmount = parseInt(value);
-      if (!this.isReverseSimulation) {
-        clearTimeout(this.simulationTimeout);
-        this.simulationTimeout = setTimeout(async () => {
-          if (value === undefined || value === null) {
-            this.toAmount = null;
-          } else {
-            const amount = await this.simulate(value.toString());
-            this.toAmount = parseInt(amount.mul(10 ** 6));
+    formatTokenPrice,
+    setInputValue(value, direction) {
+      clearTimeout(this.simulationTimeout);
+      this.simulationTimeout = setTimeout(async () => {
+        if (value === undefined || value === null) {
+          switch (direction) {
+            case DIRECTION_FROM:
+              this.simulation.toAmount = null;
+              break;
+            case DIRECTION_TO:
+              this.simulation.fromAmount = null;
+              break;
           }
-        }, 500);
+        } else {
+          const simulationResult = this.isReverseSimulation
+            ? await this.reverseSimulate(value.toString())
+            : await this.simulate(value.toString());
+
+          const amount = parseInt(simulationResult.amount.mul(10 ** 6));
+          const fromAmount =
+            direction === DIRECTION_FROM ? amount : this.simulation.fromAmount;
+          const toAmount =
+            direction === DIRECTION_TO ? amount : this.simulation.toAmount;
+
+          const simulatedPrice = this.isSelling
+            ? this.isReverseSimulation
+              ? value / amount
+              : amount / value
+            : this.isReverseSimulation
+            ? amount / value
+            : value / amount;
+          const priceImpact =
+            ((-1 + simulatedPrice / this.tokenPrice.value) * 100).toFixed(2) +
+            "%";
+
+          Object.assign(this.simulation, {
+            priceImpact,
+            fromAmount,
+            toAmount,
+            simulatedPrice,
+          });
+        }
+      }, 500);
+    },
+    setFrom(value) {
+      this.simulation.fromAmount = parseInt(value);
+      if (!this.isReverseSimulation) {
+        this.setInputValue(value, DIRECTION_TO);
       }
     },
     setTo(value) {
-      this.toAmount = value;
+      this.simulation.toAmount = value;
       if (this.isReverseSimulation) {
-        clearTimeout(this.simulationTimeout);
-        this.simulationTimeout = setTimeout(async () => {
-          if (value === undefined || value === null) {
-            this.fromAmount = null;
-          } else {
-            const amount = await this.reverseSimulate(value.toString());
-            this.fromAmount = parseInt(amount.mul(10 ** 6));
-          }
-        }, 500);
+        this.setInputValue(value, DIRECTION_FROM);
       }
     },
     async swap() {
       await this.swapTokens({
-        fromAmount: this.fromAmount,
+        fromAmount: this.simulation.fromAmount,
         fromSymbol: this.fromSymbol,
       });
       await this.$nextTick(() => {
         this.fromAmount = null;
-        this.toAmount = null;
+        this.simulation.toAmount = null;
       });
     },
   },
