@@ -239,6 +239,18 @@ main {
   }
 }
 
+footer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: $surface;
+  border-top: 1px solid $border;
+
+  img {
+    width: 150px;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   header {
     padding-top: 24px;

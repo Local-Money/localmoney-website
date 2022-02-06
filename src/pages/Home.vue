@@ -231,6 +231,15 @@
         <!-- END ROADMAP ITEM -->
       </section>
     </main>
+    <footer class="section-spacer page-layout">
+      <router-link to="/">
+        <img
+          src="@/assets/logo-horizontal-dark.svg"
+          alt="Local Terra Logo"
+          class="logo"
+        />
+      </router-link>
+    </footer>
   </body>
 </template>
 
