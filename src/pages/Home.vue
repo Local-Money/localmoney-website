@@ -48,7 +48,7 @@
           <div class="wrap-members">
             <div class="team-member">
               <img
-                src="@/assets/bull-3.jpg"
+                src="@/assets/team/01.png"
                 alt="Local Terra Bull"
                 class="avatar squircicle"
               />
@@ -58,7 +58,7 @@
 
             <div class="team-member">
               <img
-                src="@/assets/gb-avatar.png"
+                src="@/assets/team/02.png"
                 alt="Local Terra Bull"
                 class="avatar squircicle"
               />
@@ -68,7 +68,7 @@
 
             <div class="team-member">
               <img
-                src="@/assets/davi-avatar.jpg"
+                src="@/assets/team/03.png"
                 alt="Local Terra Bull"
                 class="avatar squircicle"
               />
@@ -78,7 +78,7 @@
 
             <div class="team-member">
               <img
-                src="@/assets/bull-1.jpg"
+                src="@/assets/team/04.png"
                 alt="Local Terra Bull"
                 class="avatar squircicle"
               />
@@ -88,7 +88,7 @@
 
             <div class="team-member">
               <img
-                src="@/assets/bull-2.jpg"
+                src="@/assets/team/05.png"
                 alt="Local Terra Bull"
                 class="avatar squircicle"
               />
@@ -201,7 +201,7 @@ export default defineComponent({
 @import "@/style/app.scss";
 
 .squircicle {
-  mask: url(../assets/squircicle.svg);
+  mask: url(../assets/team/squircicle-mask.svg);
   mask-size: 100%;
 }
 </style>
