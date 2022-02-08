@@ -242,25 +242,29 @@ main {
 }
 
 footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
   background-color: $surface;
   border-top: 1px solid $border;
 
-  img {
-    width: 150px;
-  }
-  .social {
-    color: $base-text;
+  .wrap-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    a {
-      margin-left: 24px;
+    img {
+      width: 150px;
     }
+    .social {
+      color: $base-text;
 
-    svg {
-      width: 24px;
-      stroke: $base-text;
+      a {
+        margin-left: 24px;
+      }
+
+      svg {
+        width: 24px;
+        stroke: $base-text;
+      }
     }
   }
 }
