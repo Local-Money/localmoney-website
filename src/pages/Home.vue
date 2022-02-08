@@ -11,11 +11,14 @@
           class="logo"
         />
       </router-link>
+      <!--
+      LBP BUTTON
       <nav>
         <button class="primary">
           <router-link to="/lbp">webapp</router-link>
         </button>
       </nav>
+      -->
     </header>
 
     <div class="wrap-hero page-layout section-spacer">
@@ -55,14 +58,16 @@
             <span class="text-primary">LOCAL.</span>
           </h2>
           <p>
-            In a couple of days we will be intodrucing the LOCAL token. This
+            In a couple of days we will be introducing the LOCAL token. This
             will be your first chance to help us create a better access to
             financial freedom.
           </p>
+          <!-- Launch Post Button
           <div class="wrap-cta">
             <p>Check out our launch post.</p>
             <button class="primary">Read more</button>
           </div>
+          -->
         </div>
       </section>
 
@@ -136,7 +141,7 @@
           <div class="wrap-content">
             <div class="content">
               <p class="title">LBP</p>
-              <p class="description">$LOCAL token initial offer</p>
+              <p class="description">$LOCAL token initial offer.</p>
             </div>
             <div class="content">
               <p class="title">Beta</p>
