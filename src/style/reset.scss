@@ -7,6 +7,10 @@
 a {
   text-decoration: none;
   cursor: pointer;
+
+  &:visited {
+    color: inherit;
+  }
 }
 li {
   list-style: none;

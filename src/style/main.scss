@@ -243,13 +243,25 @@ main {
 
 footer {
   display: flex;
-  flex-direction: column;
-  align-content: center;
+  justify-content: space-between;
+  align-items: center;
   background-color: $surface;
   border-top: 1px solid $border;
 
   img {
     width: 150px;
+  }
+  .social {
+    color: $base-text;
+
+    a {
+      margin-left: 24px;
+    }
+
+    svg {
+      width: 24px;
+      stroke: $base-text;
+    }
   }
 }
 
