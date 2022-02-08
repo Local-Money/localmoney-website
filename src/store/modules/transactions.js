@@ -14,8 +14,8 @@ import {
 import { nativeTokenFromPair, saleAssetFromPair } from "@/helpers/asset_pairs";
 import { Dec, Int } from "@terra-money/terra.js";
 import {
-  dropInsignificantZeroes,
   formatTokenAmount,
+  fromFormattedString,
 } from "@/helpers/number_formatters";
 import { NATIVE_TOKEN_SYMBOLS } from "@/helpers/token_info";
 import {
@@ -28,11 +28,13 @@ import { loading, success } from "@/terra/result";
 let terrarium = buildClient({
   URL: "http://143.244.190.1:3060",
   chainID: "localterra",
+  gasPrices: "0.15",
 });
 
 let testnet = buildClient({
   URL: "https://bombay-lcd.terra.dev",
-  chainID: "columbus-5",
+  chainID: "bombay-12",
+  gasPrices: "0.15",
 });
 
 let isTestNet = true;
@@ -238,13 +240,12 @@ const actions = {
   },
   async fetchTokenPrice({ dispatch, commit }) {
     const oneToken = new Dec(1).mul(10 ** 6).toInt();
-    const tokenPrice = await dispatch("getReverseSimulation", oneToken);
-    // Set token price formatted
-    // TODO round up/down price
-    commit(
-      "setTokenPrice",
-      success(dropInsignificantZeroes(tokenPrice.toFixed(3)))
+    const reverseSimulationResult = await dispatch(
+      "getReverseSimulation",
+      oneToken
     );
+    const tokenPrice = reverseSimulationResult.amount;
+    commit("setTokenPrice", success(tokenPrice));
   },
   async fetchPriceHistory({ commit }) {
     //TODO: Cleanup
@@ -291,7 +292,9 @@ const actions = {
       amount,
       assetInfo
     );
-    return Dec.withPrec(simulation["return_amount"], 6);
+    const returnAmount = Dec.withPrec(simulation["return_amount"], 6);
+    const spread = Dec.withPrec(simulation["spread_amount"], 6);
+    return { amount: returnAmount, spread };
   },
   async getReverseSimulation({ getters }, amount) {
     const pair = getters.currentPair;
@@ -302,7 +305,9 @@ const actions = {
       amount,
       assetInfo
     );
-    return Dec.withPrec(simulation["offer_amount"], 6);
+    const returnAmount = Dec.withPrec(simulation["offer_amount"], 6);
+    const spread = Dec.withPrec(simulation["spread_amount"], 6);
+    return { amount: returnAmount, spread };
   },
   async swapTokens({ getters, dispatch, commit }, swapInfo) {
     let msg;
@@ -315,6 +320,15 @@ const actions = {
       swapInfo.fromSymbol.toLowerCase() ===
       getters.nativeTokenSymbol.toLowerCase()
     ) {
+      const balance = fromFormattedString(getters.balance)
+        .mul(10 ** 6)
+        .toNumber();
+
+      //Deduct fees if amount + fees is higher than balance
+      if (swapInfo.fromAmount + getters.maxSwapFee > balance) {
+        buildSwapOptions.intAmount =
+          balance - Math.ceil(getters.maxSwapFee * 1.1);
+      }
       msg = buildSwapFromNativeTokenMsg(buildSwapOptions);
     } else if (
       swapInfo.fromSymbol.toLowerCase() ===
