@@ -51,15 +51,16 @@
         </div>
         <div class="wrap-content">
           <h2>
-            <span class="text-primary">Join us</span> in the creation of
-            something incredible.
+            Take your place in the future of
+            <span class="text-primary">LOCAL.</span>
           </h2>
           <p>
-            In a couple of days we will be intodrucing the LOCAL token. This is
-            our way to give the chance for you to help us build this community.
+            In a couple of days we will be intodrucing the LOCAL token. This
+            will be your first chance to help us create a better access to
+            financial freedom.
           </p>
           <div class="wrap-cta">
-            <p>To know more about it, check out our launch post.</p>
+            <p>Check out our launch post.</p>
             <button class="primary">Read more</button>
           </div>
         </div>
@@ -75,13 +76,8 @@
                 alt="Local Terra Bull"
                 class="avatar squircicle"
               />
-              <p class="name">Sam B.UST</p>
+              <p class="name">Sam B</p>
               <p class="role">Rust Intern</p>
-              <p class="bio">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque mauris metus, aliquam ut malesuada ut, convallis in
-                magna.
-              </p>
             </div>
 
             <div class="team-member">
@@ -90,13 +86,8 @@
                 alt="Local Terra Bull"
                 class="avatar squircicle"
               />
-              <p class="name">gabs.ust</p>
+              <p class="name">Gabs</p>
               <p class="role">Designer</p>
-              <p class="bio">
-                Phasellus vitae convallis tellus. Maecenas nulla urna, malesuada
-                vitae fringilla et, hendrerit ut nisi. Phasellus convallis lacus
-                luctus molestie malesuada.
-              </p>
             </div>
 
             <div class="team-member">
@@ -105,12 +96,8 @@
                 alt="Local Terra Bull"
                 class="avatar squircicle"
               />
-              <p class="name">davirds.ust</p>
-              <p class="role">Team Member</p>
-              <p class="bio">
-                Sed pretium, mauris nec fermentum tristique, eros magna accumsan
-                lacus, a efficitur turpis sem a velit.
-              </p>
+              <p class="name">Davi</p>
+              <p class="role">Smart Contract Developer</p>
             </div>
 
             <div class="team-member">
@@ -120,11 +107,7 @@
                 class="avatar squircicle"
               />
               <p class="name">Revo</p>
-              <p class="role">Team Member</p>
-              <p class="bio">
-                Vestibulum lobortis varius lectus, a rutrum metus faucibus eu.
-                Aenean et felis tempor, fringilla augue eget, lobortis tortor.
-              </p>
+              <p class="role">Smart Contract Developer</p>
             </div>
 
             <div class="team-member">
@@ -134,12 +117,7 @@
                 class="avatar squircicle"
               />
               <p class="name">Gus</p>
-              <p class="role">Team Member</p>
-              <p class="bio">
-                Vivamus in dolor lectus. Phasellus justo risus, consequat
-                molestie molestie in, gravida at quam. Sed eget fermentum felis.
-                Aenean quis nisl quam.
-              </p>
+              <p class="role">Business Development</p>
             </div>
           </div>
         </div>
@@ -161,11 +139,26 @@
               <p class="description">$LOCAL token initial offer</p>
             </div>
             <div class="content">
-              <p class="title">v1.0 - UST Trading</p>
+              <p class="title">Beta</p>
+              <p class="description">Beta on Testnet with community members.</p>
+              <p class="description">Security Audit.</p>
+            </div>
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="circle"></div>
+            <p class="date">Q2 . 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content">
+              <p class="title">UST Trading v1.0</p>
               <p class="description">
-                Within the first release of the platform, makers will be able to
+                Within the first release of Local Terra, makers will be able to
                 create offers to buy and sell UST.
               </p>
+              <p class="description">Astroport LOCAL-UST pool.</p>
             </div>
           </div>
         </div>
@@ -174,28 +167,15 @@
         <div class="roadmap-item">
           <div class="wrap-date">
             <div class="circle"></div>
-            <p class="date">Q2 . 2022</p>
+            <p class="date">Q3 . 2022</p>
           </div>
           <div class="wrap-content">
             <div class="content">
-              <p class="title">v1.1</p>
-              <p class="description">Luna and CW20 tokens support.</p>
-            </div>
-          </div>
-        </div>
-        <!-- END ROADMAP ITEM -->
-
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="circle"></div>
-            <p class="date">Q2 . 2022</p>
-          </div>
-          <div class="wrap-content">
-            <div class="content">
-              <p class="title">v1.2</p>
+              <p class="title">Luna and CW20 tokens support.</p>
               <p class="description">
-                Support for IBC (Inter-Blockchain Communication protocol)
-                tokens.
+                We'll provide easy and quick fiat conversion to and from your
+                favorite Terra Alt by leveraging the existing UST pairs on
+                different AMMs and the composability of DeFi.
               </p>
             </div>
           </div>
@@ -205,12 +185,19 @@
         <div class="roadmap-item">
           <div class="wrap-date">
             <div class="circle"></div>
-            <p class="date">Q2 . 2022</p>
+            <p class="date">Q4 . 2022</p>
           </div>
           <div class="wrap-content">
             <div class="content">
-              <p class="title">v1.3</p>
-              <p class="description">Mobile App</p>
+              <p class="title">IBC integration</p>
+              <p class="description">
+                (Inter-Blockchain Communication Protocol)
+              </p>
+              <p class="description">
+                Your Cosmos native asset will have a direct bridge with fiat
+                providers, powered by the combination of the best makers and
+                liquidity pools with the decentralized stablecoin, $UST.
+              </p>
             </div>
           </div>
         </div>
@@ -219,12 +206,14 @@
         <div class="roadmap-item">
           <div class="wrap-date">
             <div class="circle"></div>
-            <p class="date">Q2 . 2022</p>
+            <p class="date">2023</p>
           </div>
           <div class="wrap-content">
             <div class="content">
-              <p class="title">v2.0</p>
+              <p class="title">To the future and beyond</p>
+              <p class="description">Mobile App</p>
               <p class="description">Thorchain integration</p>
+              <p class="description">Deeper Anchor integration</p>
             </div>
           </div>
         </div>
