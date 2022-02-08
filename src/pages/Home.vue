@@ -58,9 +58,9 @@
             <span class="text-primary">LOCAL.</span>
           </h2>
           <p>
-            In a couple of days we will be introducing the LOCAL token. This
-            will be your first chance to help us create a better access to
-            financial freedom.
+            In a few days we will be introducing the LOCAL token. This will be
+            your first chance to help us create a better access to financial
+            freedom.
           </p>
           <!-- Launch Post Button
           <div class="wrap-cta">
