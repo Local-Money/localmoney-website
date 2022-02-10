@@ -166,7 +166,12 @@ export default defineComponent({
     },
   },
   methods: {
-    ...mapActions(["getSimulation", "getReverseSimulation", "swapTokens"]),
+    ...mapActions([
+      "getSimulation",
+      "getReverseSimulation",
+      "swapTokens",
+      "fetchTokenPrice",
+    ]),
     formatTokenAmount,
     formatTokenPrice,
     setInputValue(value, direction) {
@@ -182,6 +187,7 @@ export default defineComponent({
               break;
           }
         } else {
+          await this.fetchTokenPrice();
           const simulationResult = this.isReverseSimulation
             ? await this.reverseSimulate(value.toString())
             : await this.simulate(value.toString());
