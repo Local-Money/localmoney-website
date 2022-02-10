@@ -46,6 +46,7 @@ const state = {
     label: undefined,
     transaction: undefined,
   },
+  pageModal: successSwapModal(),
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,
@@ -81,6 +82,7 @@ const getters = {
   secondsRemaining: (state) => state.secondsRemaining,
   saleTokenInfo: (state) => state.saleTokenInfo,
   pageLoading: (state) => state.pageLoading,
+  pageModal: (state) => state.pageModal,
   priceHistory: (state) => () => {
     return {
       time: state.time,
@@ -105,6 +107,7 @@ const getters = {
 
 const mutations = {
   setPageLoading: (state, pageLoading) => (state.pageLoading = pageLoading),
+  setPageModal: (state, pageModal) => (state.pageModal = pageModal),
   setWalletAddress: (state, walletAddress) =>
     (state.walletAddress = walletAddress),
   setBalance: (state, balance) => (state.balance = balance),
@@ -358,15 +361,36 @@ const actions = {
             dispatch("updateBalance");
             dispatch("fetchCurrentPair");
             commit("setPageLoading", { isLoading: false });
+            commit("setPageModal", successSwapModal());
           }
         }, 1000);
       },
       () => {
         commit("setPageLoading", { isLoading: false });
+        commit("setPageModal", errorSwapModal());
       }
     );
   },
 };
+
+export function successSwapModal() {
+  return {
+    show: true,
+    isSuccess: true,
+    title: "Congratulations",
+    message:
+      "You are now part of <span class='text-primary'>LOCAL</span> community. ",
+  };
+}
+
+export function errorSwapModal() {
+  return {
+    show: true,
+    isSuccess: false,
+    title: "Something went wrong",
+    message: "Error",
+  };
+}
 
 export default {
   state,
