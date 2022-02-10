@@ -175,10 +175,10 @@ export default defineComponent({
         if (value === undefined || value === null) {
           switch (direction) {
             case DIRECTION_FROM:
-              this.simulation.toAmount = null;
+              Object.assign(this.simulation, { fromAmount: null });
               break;
             case DIRECTION_TO:
-              this.simulation.fromAmount = null;
+              Object.assign(this.simulation, { toAmount: null });
               break;
           }
         } else {
