@@ -249,7 +249,7 @@ const actions = {
   },
   async fetchPriceHistory({ commit }) {
     //TODO: Cleanup
-    let res = await fetch("http://143.244.190.178/");
+    let res = await fetch("https://price-api.localterra.money");
     let data = await res.json();
     let time = [];
     let price = [];
