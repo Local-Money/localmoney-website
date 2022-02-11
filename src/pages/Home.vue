@@ -13,7 +13,7 @@
       </router-link>
       <nav>
         <button class="primary">
-          <router-link to="/lbp">webapp</router-link>
+          <router-link to="/lbp">wagmi</router-link>
         </button>
       </nav>
     </header>
@@ -22,9 +22,9 @@
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          And get access to all that
-          <a href="https://www.terra.money/" target="_blank">@terra_money</a>
-          has to offer.
+          Access all that
+          <a href="https://terra.money/" target="_blank">Terra Money</a> has to
+          offer.
         </p>
         <div class="wrap-cta">
           <p>Want to get notified when we launch?</p>
@@ -42,10 +42,10 @@
     </div>
 
     <main>
-      <section class="lbp-teaser section-spacer page-layout">
+      <section class="lbp-teaser page-layout">
         <div class="wrap-img">
           <img
-            src="@/assets/lbp-illustration.png"
+            src="@/assets/lbp-hands.png"
             alt="Girl holding a LOCAL token smiling"
           />
         </div>
@@ -55,13 +55,18 @@
             <span class="text-primary">LOCAL.</span>
           </h2>
           <p>
-            In a couple of days we will be intodrucing the LOCAL token. This
-            will be your first chance to help us create a better access to
-            financial freedom.
+            In a few days we will be introducing the LOCAL token. This will be
+            your first chance to help us create a better access to financial
+            freedom.
           </p>
           <div class="wrap-cta">
             <p>Check out our launch post.</p>
-            <button class="primary">Read more</button>
+            <a
+              href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16?source=friends_link&sk=ea26c8b52c1d48e060ce259eac438de8"
+              target="_blank"
+            >
+              <button class="primary">Read more</button>
+            </a>
           </div>
         </div>
       </section>
@@ -136,7 +141,7 @@
           <div class="wrap-content">
             <div class="content">
               <p class="title">LBP</p>
-              <p class="description">$LOCAL token initial offer</p>
+              <p class="description">$LOCAL token initial offer.</p>
             </div>
             <div class="content">
               <p class="title">Beta</p>
