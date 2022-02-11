@@ -46,7 +46,12 @@ const state = {
     label: undefined,
     transaction: undefined,
   },
-  pageModal: successSwapModal(),
+  pageModal: {
+    show: false,
+    isSuccess: true,
+    title: undefined,
+    message: undefined,
+  },
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,
@@ -134,24 +139,39 @@ const mutations = {
 
 const actions = {
   async initWallet({ commit, dispatch }) {
-    const { wallet, info } = await connectExtension();
-    terra = buildClient({
-      URL: info.lcd,
-      chainID: info.chainID,
-    });
+    try {
+      const { wallet, info } = await connectExtension();
+      terra = buildClient({
+        URL: info.lcd,
+        chainID: info.chainID,
+      });
+      commit("setPageLoading", {
+        isLoading: true,
+        label: "Connecting wallet...",
+      });
+      commit("setWalletAddress", wallet.address);
+      const balance = await dispatch("fetchBalance");
+      const tokenBalance = await dispatch("fetchTokenBalance");
+      commit("setBalance", balance);
+      commit("setTokenBalance", tokenBalance);
+      commit("setPageLoading", { isLoading: false });
 
-    commit("setPageLoading", {
-      isLoading: true,
-      label: "Connecting wallet...",
-    });
-    commit("setWalletAddress", wallet.address);
-    const balance = await dispatch("fetchBalance");
-    const tokenBalance = await dispatch("fetchTokenBalance");
-    commit("setBalance", balance);
-    commit("setTokenBalance", tokenBalance);
-    commit("setPageLoading", { isLoading: false });
-
-    dispatch("fetchCurrentPair");
+      dispatch("fetchCurrentPair");
+    } catch (e) {
+      commit("setWalletAddress", "");
+      commit(
+        "setPageModal",
+        errorModal(
+          "Houston, we have a problem!",
+          "We had a problem connecting your wallet. Make sure it is connect to the right network."
+        )
+      );
+      console.log(e);
+    } finally {
+      commit("setPageLoading", {
+        isLoading: false,
+      });
+    }
   },
   async updateBalance({ dispatch, commit }) {
     const balance = await dispatch("fetchBalance");
@@ -361,34 +381,36 @@ const actions = {
             dispatch("updateBalance");
             dispatch("fetchCurrentPair");
             commit("setPageLoading", { isLoading: false });
-            commit("setPageModal", successSwapModal());
+            commit("setPageModal", successModal());
           }
         }, 1000);
       },
       () => {
         commit("setPageLoading", { isLoading: false });
-        commit("setPageModal", errorSwapModal());
+        commit("setPageModal", errorModal());
       }
     );
   },
 };
 
-export function successSwapModal() {
+export function successModal(
+  title = "Congratulations",
+  message = "You are now part of <span class='text-primary'>LOCAL</span> community. "
+) {
   return {
     show: true,
     isSuccess: true,
-    title: "Congratulations",
-    message:
-      "You are now part of <span class='text-primary'>LOCAL</span> community. ",
+    title,
+    message,
   };
 }
 
-export function errorSwapModal() {
+export function errorModal(title = "Something went wrong", message = "Error") {
   return {
     show: true,
     isSuccess: false,
-    title: "Something went wrong",
-    message: "Error",
+    title,
+    message,
   };
 }
 

@@ -167,7 +167,6 @@ export default defineComponent({
     .content-info {
       display: inline-flex;
       margin-bottom: 24px;
-      margin-right: 36px;
       p {
         width: 250px;
       }
