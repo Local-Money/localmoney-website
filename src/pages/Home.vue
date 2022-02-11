@@ -26,8 +26,8 @@
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
           Access all that
-          <a href="https://www.terra.money/" target="_blank">Terra Money</a> has
-          to offer.
+          <a href="https://terra.money/" target="_blank">Terra Money</a> has to
+          offer.
         </p>
         <div class="wrap-cta">
           <p>Want to get notified when we launch?</p>
@@ -65,7 +65,7 @@
           <div class="wrap-cta">
             <p>Check out our launch post.</p>
             <a
-              href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16"
+              href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16?source=friends_link&sk=ea26c8b52c1d48e060ce259eac438de8"
               target="_blank"
             >
               <button class="primary">Read more</button>
