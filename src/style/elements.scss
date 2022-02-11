@@ -2,11 +2,23 @@
 
 .page-layout {
   max-width: 1440px;
-  padding: 80px;
+  padding-left: 80px;
+  padding-right: 80px;
   margin: 0 auto;
 
   @media only screen and (max-width: 600px) {
-    padding: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.section-spacer {
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  @media only screen and (max-width: 600px) {
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 }
 
@@ -16,6 +28,29 @@
   border: 1px solid $border;
   border-radius: 8px;
   box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.05);
+
+  @media only screen and (max-width: 600px) {
+    padding: 16px;
+  }
+}
+
+.apexcharts-tooltip {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 16px;
+
+  .graph-tooltip {
+    background: $gray100;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 56px;
+    vertical-align: middle;
+
+    p {
+      font-weight: $bold;
+    }
+  }
 }
 
 .divider-horizontal {
@@ -54,7 +89,7 @@ button {
   // Button Types
   &.primary {
     font-size: 16px;
-    background-color: $gray300;
+    background-color: $surface;
     color: $primary;
   }
   &.secondary {
