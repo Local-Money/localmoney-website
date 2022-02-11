@@ -25,9 +25,9 @@
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          And get access to all that
-          <a href="https://www.terra.money/" target="_blank">@terra_money</a>
-          has to offer.
+          Access all that
+          <a href="https://www.terra.money/" target="_blank">Terra Money</a> has
+          to offer.
         </p>
         <div class="wrap-cta">
           <p>Want to get notified when we launch?</p>
@@ -45,10 +45,10 @@
     </div>
 
     <main>
-      <section class="lbp-teaser section-spacer page-layout">
+      <section class="lbp-teaser page-layout">
         <div class="wrap-img">
           <img
-            src="@/assets/lbp-illustration.png"
+            src="@/assets/lbp-hands.png"
             alt="Girl holding a LOCAL token smiling"
           />
         </div>
@@ -64,8 +64,10 @@
           </p>
           <div class="wrap-cta">
             <p>Check out our launch post.</p>
-            <a href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16"
-               target="_blank">
+            <a
+              href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16"
+              target="_blank"
+            >
               <button class="primary">Read more</button>
             </a>
           </div>

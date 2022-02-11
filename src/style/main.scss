@@ -51,14 +51,14 @@ nav {
     }
 
     .sub-header {
-      width: 80%;
+      width: 75%;
       font-size: 24px;
       line-height: 140%;
       margin-top: 56px;
     }
 
     .wrap-cta {
-      margin-top: 56px;
+      margin-top: 32px;
       p {
         font-size: 20px;
         font-weight: $regular;
@@ -95,8 +95,10 @@ main {
     justify-content: center;
     align-items: center;
     gap: 40px;
+    padding-top: 0px;
+    padding-bottom: 56px;
     .wrap-img {
-      width: 30%;
+      width: 50%;
       img {
         width: 90%;
       }
@@ -111,11 +113,12 @@ main {
       }
       p {
         margin-bottom: 16px;
+        font-size: 20px;
       }
       .wrap-cta {
         margin-top: 24px;
         p {
-          font-size: 16px;
+          font-size: 20px;
           font-weight: $regular;
         }
       }
@@ -192,6 +195,7 @@ main {
 
     .roadmap-item {
       position: relative;
+      max-width: 1000px;
       margin-bottom: 32px;
       margin-left: 40px;
       z-index: 100;
@@ -214,11 +218,11 @@ main {
         }
       }
       .wrap-content {
-        display: flex;
+        display: inline-flex;
         flex-direction: column;
 
         .content {
-          display: inline-flex;
+          display: flex;
           flex-direction: column;
           padding: 24px 32px;
           background-color: $surface;
@@ -226,14 +230,25 @@ main {
           border: 1px solid $border;
           margin-top: 24px;
           margin-left: 40px;
+          transition: border 500ms ease-out;
+
+          &:hover {
+            border: 1px solid $primary;
+            transition: border 500ms ease-out;
+          }
 
           .title {
             font-size: 24px;
             font-weight: $semi-bold;
+            margin-bottom: 16px;
+            border-bottom: 1px solid $border;
+            padding-bottom: 16px;
           }
           .description {
             margin-top: 8px;
-            font-size: 16px;
+            font-size: 18px;
+            font-weight: $regular;
+            color: $gray900;
           }
         }
       }
@@ -417,16 +432,13 @@ footer {
           }
           .date {
             font-size: 18px;
-
             margin-left: 16px;
           }
         }
         .wrap-content {
           .content {
             padding: 16px 24px;
-
             border-radius: 16px;
-
             margin-left: 32px;
 
             .title {
