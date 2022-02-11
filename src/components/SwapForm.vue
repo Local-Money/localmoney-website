@@ -55,9 +55,9 @@
     <div class="wrap-summary">
       <!-- <h4>Transaction Summary:</h4> -->
       <div class="wrap-label">
-        <p>Transaction Fee:</p>
-        <p>Price Impact:</p>
-        <p>Simulated LOCAL Price:</p>
+        <p>Transaction Fee</p>
+        <p>Price Impact</p>
+        <p>LOCAL Price (estimated</p>
       </div>
       <div class="wrap-value">
         <p>~ {{ transactionFee }}</p>
@@ -360,7 +360,12 @@ export default defineComponent({
   border: 1px solid $border;
 
   p {
-    font-size: 16px;
+    font-size: 14px;
+    margin-bottom: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   .wrap-label {
