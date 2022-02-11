@@ -24,6 +24,11 @@ import {
   postMsg,
 } from "@/terra/swap";
 import { loading, success } from "@/terra/result";
+import {
+  baseFeedback,
+  errorFeedback,
+  successFeedback,
+} from "@/components/ModalFeedback";
 
 let terrarium = buildClient({
   URL: "http://143.244.190.1:3060",
@@ -46,6 +51,7 @@ const state = {
     label: undefined,
     transaction: undefined,
   },
+  pageFeedback: baseFeedback(),
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,
@@ -81,6 +87,7 @@ const getters = {
   secondsRemaining: (state) => state.secondsRemaining,
   saleTokenInfo: (state) => state.saleTokenInfo,
   pageLoading: (state) => state.pageLoading,
+  pageFeedback: (state) => state.pageFeedback,
   priceHistory: (state) => () => {
     return {
       time: state.time,
@@ -105,6 +112,7 @@ const getters = {
 
 const mutations = {
   setPageLoading: (state, pageLoading) => (state.pageLoading = pageLoading),
+  setPageFeedback: (state, pageFeedback) => (state.pageFeedback = pageFeedback),
   setWalletAddress: (state, walletAddress) =>
     (state.walletAddress = walletAddress),
   setBalance: (state, balance) => (state.balance = balance),
@@ -131,24 +139,39 @@ const mutations = {
 
 const actions = {
   async initWallet({ commit, dispatch }) {
-    const { wallet, info } = await connectExtension();
-    terra = buildClient({
-      URL: info.lcd,
-      chainID: info.chainID,
-    });
+    try {
+      const { wallet, info } = await connectExtension();
+      terra = buildClient({
+        URL: info.lcd,
+        chainID: info.chainID,
+      });
+      commit("setPageLoading", {
+        isLoading: true,
+        label: "Connecting wallet...",
+      });
+      commit("setWalletAddress", wallet.address);
+      const balance = await dispatch("fetchBalance");
+      const tokenBalance = await dispatch("fetchTokenBalance");
+      commit("setBalance", balance);
+      commit("setTokenBalance", tokenBalance);
+      commit("setPageLoading", { isLoading: false });
 
-    commit("setPageLoading", {
-      isLoading: true,
-      label: "Connecting wallet...",
-    });
-    commit("setWalletAddress", wallet.address);
-    const balance = await dispatch("fetchBalance");
-    const tokenBalance = await dispatch("fetchTokenBalance");
-    commit("setBalance", balance);
-    commit("setTokenBalance", tokenBalance);
-    commit("setPageLoading", { isLoading: false });
-
-    dispatch("fetchCurrentPair");
+      dispatch("fetchCurrentPair");
+    } catch (e) {
+      commit("setWalletAddress", "");
+      commit(
+        "setPageFeedback",
+        errorFeedback(
+          "Houston, we have a problem!",
+          "We had a problem connecting your wallet. Make sure it is connect to the right network."
+        )
+      );
+      console.log(e);
+    } finally {
+      commit("setPageLoading", {
+        isLoading: false,
+      });
+    }
   },
   async updateBalance({ dispatch, commit }) {
     const balance = await dispatch("fetchBalance");
@@ -358,11 +381,13 @@ const actions = {
             dispatch("updateBalance");
             dispatch("fetchCurrentPair");
             commit("setPageLoading", { isLoading: false });
+            commit("setPageFeedback", successFeedback());
           }
         }, 1000);
       },
       () => {
         commit("setPageLoading", { isLoading: false });
+        commit("setPageFeedback", errorFeedback());
       }
     );
   },

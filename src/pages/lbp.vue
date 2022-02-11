@@ -54,10 +54,15 @@
         <SwapForm />
         <Chart :title="'LOCAL Chart'" />
       </section>
+
+      <ModalLoading :loading="pageLoading" />
+
+      <ModalFeedback
+        :modalFeedback="pageFeedback"
+        @close="pageFeedback.dismiss()"
+      />
     </main>
   </body>
-
-  <ModalLoading :loading="pageLoading" />
 </template>
 
 <script>
@@ -73,10 +78,12 @@ import Chart from "@/components/Chart";
 import InfoCard from "@/components/InfoCard.vue";
 import SwapForm from "@/components/SwapForm.vue";
 import ModalLoading from "@/components/ModalLoading";
+import ModalFeedback from "@/components/ModalFeedback";
 
 export default defineComponent({
   name: "lbp",
   components: {
+    ModalFeedback,
     ModalLoading,
     Chart,
     InfoCard,
@@ -95,6 +102,7 @@ export default defineComponent({
     "currentLbpWeight",
     "secondsRemaining",
     "pageLoading",
+    "pageFeedback",
   ]),
   methods: {
     ...mapActions(["initWallet", "fetchCurrentPair"]),
