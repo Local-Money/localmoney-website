@@ -57,22 +57,10 @@
 
       <ModalLoading :loading="pageLoading" />
 
-      <Modal @close="dismissDialog" :modalActive="pageModal.show">
-        <div class="modal-content card">
-          <div class="content">
-            <h2 v-html="pageModal.title" />
-            <div class="content-info">
-              <img
-                v-if="pageModal.isSuccess"
-                src="@/assets/lbp-illustration.png"
-                alt="Girl holding a LOCAL token smiling"
-              />
-              <p v-html="pageModal.message" />
-            </div>
-            <button class="primary" @click="dismissDialog">Dismiss</button>
-          </div>
-        </div>
-      </Modal>
+      <ModalFeedback
+        :modalFeedback="pageFeedback"
+        @close="pageFeedback.dismiss()"
+      />
     </main>
   </body>
 </template>
@@ -90,12 +78,12 @@ import Chart from "@/components/Chart";
 import InfoCard from "@/components/InfoCard.vue";
 import SwapForm from "@/components/SwapForm.vue";
 import ModalLoading from "@/components/ModalLoading";
-import Modal from "@/components/Modal";
+import ModalFeedback from "@/components/ModalFeedback";
 
 export default defineComponent({
   name: "lbp",
   components: {
-    Modal,
+    ModalFeedback,
     ModalLoading,
     Chart,
     InfoCard,
@@ -119,7 +107,7 @@ export default defineComponent({
     "currentLbpWeight",
     "secondsRemaining",
     "pageLoading",
-    "pageModal",
+    "pageFeedback",
   ]),
   methods: {
     ...mapActions(["initWallet", "fetchCurrentPair"]),
@@ -128,9 +116,6 @@ export default defineComponent({
     formatAddress,
     formatTokenAmount,
     formatTokenPrice,
-    dismissDialog: function () {
-      this.pageModal.show = false;
-    },
   },
 });
 </script>
@@ -150,36 +135,6 @@ export default defineComponent({
   gap: 24px;
   margin-top: 80px;
   margin-bottom: 24px;
-}
-
-.modal-content {
-  display: inline-flex;
-  background-color: $gray150;
-  margin-top: 10%;
-  z-index: 100;
-  .content {
-    h2 {
-      font-size: 28px;
-      margin-top: 16px;
-      margin-bottom: 32px;
-      text-align: center;
-    }
-    .content-info {
-      display: inline-flex;
-      margin-bottom: 24px;
-      p {
-        width: 250px;
-      }
-      img {
-        width: 300px;
-        height: 300px;
-      }
-    }
-    button {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
 }
 
 @media only screen and (max-width: 600px) {

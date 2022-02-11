@@ -24,6 +24,11 @@ import {
   postMsg,
 } from "@/terra/swap";
 import { loading, success } from "@/terra/result";
+import {
+  baseFeedback,
+  errorFeedback,
+  successFeedback,
+} from "@/components/ModalFeedback";
 
 let terrarium = buildClient({
   URL: "http://143.244.190.1:3060",
@@ -46,12 +51,7 @@ const state = {
     label: undefined,
     transaction: undefined,
   },
-  pageModal: {
-    show: false,
-    isSuccess: true,
-    title: undefined,
-    message: undefined,
-  },
+  pageFeedback: baseFeedback(),
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,
@@ -87,7 +87,7 @@ const getters = {
   secondsRemaining: (state) => state.secondsRemaining,
   saleTokenInfo: (state) => state.saleTokenInfo,
   pageLoading: (state) => state.pageLoading,
-  pageModal: (state) => state.pageModal,
+  pageFeedback: (state) => state.pageFeedback,
   priceHistory: (state) => () => {
     return {
       time: state.time,
@@ -112,7 +112,7 @@ const getters = {
 
 const mutations = {
   setPageLoading: (state, pageLoading) => (state.pageLoading = pageLoading),
-  setPageModal: (state, pageModal) => (state.pageModal = pageModal),
+  setPageFeedback: (state, pageFeedback) => (state.pageFeedback = pageFeedback),
   setWalletAddress: (state, walletAddress) =>
     (state.walletAddress = walletAddress),
   setBalance: (state, balance) => (state.balance = balance),
@@ -160,8 +160,8 @@ const actions = {
     } catch (e) {
       commit("setWalletAddress", "");
       commit(
-        "setPageModal",
-        errorModal(
+        "setPageFeedback",
+        errorFeedback(
           "Houston, we have a problem!",
           "We had a problem connecting your wallet. Make sure it is connect to the right network."
         )
@@ -381,38 +381,17 @@ const actions = {
             dispatch("updateBalance");
             dispatch("fetchCurrentPair");
             commit("setPageLoading", { isLoading: false });
-            commit("setPageModal", successModal());
+            commit("setPageFeedback", successFeedback());
           }
         }, 1000);
       },
       () => {
         commit("setPageLoading", { isLoading: false });
-        commit("setPageModal", errorModal());
+        commit("setPageFeedback", errorFeedback());
       }
     );
   },
 };
-
-export function successModal(
-  title = "Congratulations",
-  message = "You are now part of <span class='text-primary'>LOCAL</span> community. "
-) {
-  return {
-    show: true,
-    isSuccess: true,
-    title,
-    message,
-  };
-}
-
-export function errorModal(title = "Something went wrong", message = "Error") {
-  return {
-    show: true,
-    isSuccess: false,
-    title,
-    message,
-  };
-}
 
 export default {
   state,
