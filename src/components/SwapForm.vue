@@ -166,7 +166,12 @@ export default defineComponent({
     },
   },
   methods: {
-    ...mapActions(["getSimulation", "getReverseSimulation", "swapTokens"]),
+    ...mapActions([
+      "getSimulation",
+      "getReverseSimulation",
+      "swapTokens",
+      "fetchTokenPrice",
+    ]),
     formatTokenAmount,
     formatTokenPrice,
     setInputValue(value, direction) {
@@ -175,13 +180,14 @@ export default defineComponent({
         if (value === undefined || value === null) {
           switch (direction) {
             case DIRECTION_FROM:
-              this.simulation.toAmount = null;
+              Object.assign(this.simulation, { fromAmount: null });
               break;
             case DIRECTION_TO:
-              this.simulation.fromAmount = null;
+              Object.assign(this.simulation, { toAmount: null });
               break;
           }
         } else {
+          await this.fetchTokenPrice();
           const simulationResult = this.isReverseSimulation
             ? await this.reverseSimulate(value.toString())
             : await this.simulate(value.toString());
