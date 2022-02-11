@@ -115,6 +115,9 @@ button {
   }
 
   // Background Color
+  &.bg-gray300 {
+    background-color: $gray300;
+  }
   &.bg-gray600 {
     background-color: $gray600;
   }
