@@ -344,10 +344,11 @@ footer {
       flex-direction: column;
       gap: 24px;
       text-align: center;
+      padding-bottom: 32px;
       .wrap-img {
         width: 100%;
         img {
-          width: 50%;
+          width: 100%;
         }
       }
       .wrap-content {
@@ -358,6 +359,10 @@ footer {
           font-weight: $semi-bold;
           margin-bottom: 32px;
           line-height: 120%;
+        }
+
+        p {
+          font-size: 18px;
         }
         .wrap-cta {
           display: flex;
@@ -390,7 +395,7 @@ footer {
           gap: 8px;
           .team-member {
             width: 45%;
-            margin-bottom: 16px;
+            margin-bottom: 32px;
 
             .avatar {
               width: 80%;
@@ -437,7 +442,7 @@ footer {
         }
         .wrap-content {
           .content {
-            padding: 16px 24px;
+            padding: 24px 24px;
             border-radius: 16px;
             margin-left: 32px;
 
