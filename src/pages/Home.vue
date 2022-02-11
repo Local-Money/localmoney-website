@@ -11,14 +11,11 @@
           class="logo"
         />
       </router-link>
-      <!--
-      LBP BUTTON
       <nav>
         <button class="primary">
-          <router-link to="/lbp">webapp</router-link>
+          <router-link to="/lbp">wagmi</router-link>
         </button>
       </nav>
-      -->
     </header>
 
     <div class="wrap-hero page-layout section-spacer">
