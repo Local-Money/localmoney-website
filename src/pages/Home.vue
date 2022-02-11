@@ -25,9 +25,7 @@
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          And get access to all that
-          <a href="https://www.terra.money/" target="_blank">@terra_money</a>
-          has to offer.
+          Access all that <a href="https://terra.money/" target="_blank">Terra</a> has to offer.
         </p>
         <div class="wrap-cta">
           <p>Want to get notified when we launch?</p>
