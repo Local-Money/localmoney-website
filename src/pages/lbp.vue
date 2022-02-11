@@ -89,11 +89,6 @@ export default defineComponent({
     InfoCard,
     SwapForm,
   },
-  data() {
-    return {
-      showDialog: true,
-    };
-  },
   mounted: async function () {
     await this.fetchCurrentPair();
     await this.$nextTick(function () {
