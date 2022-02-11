@@ -62,12 +62,13 @@
             your first chance to help us create a better access to financial
             freedom.
           </p>
-          <!-- Launch Post Button
           <div class="wrap-cta">
             <p>Check out our launch post.</p>
-            <button class="primary">Read more</button>
+            <a href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16"
+               target="_blank">
+              <button class="primary">Read more</button>
+            </a>
           </div>
-          -->
         </div>
       </section>
 
