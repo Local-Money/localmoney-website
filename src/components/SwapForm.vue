@@ -52,11 +52,29 @@
       @change="setTo"
       @focus="this.isReverseSimulation = true"
     />
-    <h4>Transaction Summary:</h4>
-    <p>Transaction Fee: ~{{ transactionFee }}</p>
-    <p>Price Impact: {{ priceImpact }}</p>
-    <p>Simulated Price: ${{ formatTokenPrice(simulation.simulatedPrice) }}</p>
-    <button class="primary" @click="swap()" :disabled="!isValid">Swap</button>
+    <div class="wrap-summary">
+      <!-- <h4>Transaction Summary:</h4> -->
+      <div class="wrap-label">
+        <p>Transaction Fee</p>
+        <p>Price Impact</p>
+        <p>LOCAL Price (estimated)</p>
+      </div>
+      <div class="wrap-value">
+        <p>~ {{ transactionFee }}</p>
+        <p>{{ priceImpact }}</p>
+        <p>${{ formatTokenPrice(simulation.simulatedPrice) }}</p>
+      </div>
+    </div>
+    <div class="warning">
+      <p>
+        Warning: The numbers above are estimates and could change based on
+        network activity between the time you submit your transaction and the
+        time it completes.
+      </p>
+    </div>
+    <button class="primary bg-gray300" @click="swap()" :disabled="!isValid">
+      Swap
+    </button>
   </div>
 </template>
 
@@ -329,6 +347,45 @@ export default defineComponent({
     display: block;
     margin: 16px auto;
     stroke: $gray700;
+  }
+}
+
+.wrap-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding: 16px 24px;
+  background-color: $gray150;
+  border-radius: 8px;
+  border: 1px solid $border;
+
+  p {
+    font-size: 14px;
+    margin-bottom: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .wrap-label {
+    color: $gray700;
+  }
+
+  .wrap-value {
+    text-align: right;
+  }
+}
+
+.warning {
+  margin-top: 16px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  border: 1px solid $border;
+
+  p {
+    font-size: 12px;
+    color: $gray700;
   }
 }
 
