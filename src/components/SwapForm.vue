@@ -57,7 +57,7 @@
       <div class="wrap-label">
         <p>Transaction Fee</p>
         <p>Price Impact</p>
-        <p>LOCAL Price (estimated</p>
+        <p>LOCAL Price (estimated)</p>
       </div>
       <div class="wrap-value">
         <p>~ {{ transactionFee }}</p>
