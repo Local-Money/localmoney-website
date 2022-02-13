@@ -51,7 +51,7 @@ const state = {
     label: undefined,
     transaction: undefined,
   },
-  pageFeedback: successFeedback(),
+  pageFeedback: errorFeedback(),
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,

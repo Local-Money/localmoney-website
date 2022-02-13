@@ -27,7 +27,7 @@
         <div class="content-info">
           <h2 v-html="modalFeedback.title" />
           <p v-html="modalFeedback.message" />
-          <div class="extra">
+          <div class="extra" v-if="modalFeedback.isError">
             <p>
               To add your LOCAL tokens to your Terra Station Wallet, use address
               bellow:
@@ -63,7 +63,7 @@ export function successFeedback(
 
 export function errorFeedback(
   title = "Something went wrong",
-  message = "Error"
+  message = "Please try again."
 ) {
   return baseFeedback(true, false, title, message);
 }
