@@ -17,9 +17,8 @@
         </svg>
       </div>
       <div class="content">
-        <div class="wrap-img">
+        <div class="wrap-img" v-if="modalFeedback.isSuccess">
           <img
-            v-if="modalFeedback.isSuccess"
             src="@/assets/lbp-illustration.png"
             alt="Girl holding a LOCAL token smiling"
           />
@@ -27,7 +26,7 @@
         <div class="content-info">
           <h2 v-html="modalFeedback.title" />
           <p v-html="modalFeedback.message" />
-          <div class="extra" v-if="modalFeedback.isError">
+          <div class="extra" v-if="modalFeedback.isSuccess">
             <p>
               To add your LOCAL tokens to your Terra Station Wallet, use address
               bellow:
