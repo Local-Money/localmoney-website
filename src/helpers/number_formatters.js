@@ -35,7 +35,7 @@ export function formatTokenPrice(tokenPrice) {
   if (tokenPrice) {
     return dropInsignificantZeroes(tokenPrice.toFixed(3));
   } else {
-    return "$0.000";
+    return "0.000";
   }
 }
 

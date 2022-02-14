@@ -60,7 +60,7 @@
         <p>LOCAL Price (estimated)</p>
       </div>
       <div class="wrap-value">
-        <p>~ {{ transactionFee }}</p>
+        <p>~ ${{ transactionFee }}</p>
         <p>{{ priceImpact }}</p>
         <p>${{ formatTokenPrice(simulation.simulatedPrice) }}</p>
       </div>
@@ -106,7 +106,7 @@ export default defineComponent({
       simulation: {
         fromAmount: undefined,
         toAmount: undefined,
-        priceImpact: 0,
+        priceImpact: "0.00%",
         simulatedPrice: 0,
       },
       isReverseSimulation: true,
@@ -169,18 +169,11 @@ export default defineComponent({
       return addressIsValid && fromIsValid && canAffordFees;
     },
     transactionFee() {
-      if (this.maxSwapFee) {
-        return Dec.div(this.maxSwapFee, 10 ** 6).toFixed(2);
-      } else {
-        return "";
-      }
+      const fee = this.maxSwapFee ?? 0.0;
+      return Dec.div(fee, 10 ** 6).toFixed(3);
     },
     priceImpact() {
-      if (this.simulation.priceImpact) {
-        return this.simulation.priceImpact;
-      } else {
-        return "";
-      }
+      return this.simulation.priceImpact ?? "0.00%";
     },
   },
   methods: {
@@ -223,9 +216,9 @@ export default defineComponent({
             : this.isReverseSimulation
             ? amount / value
             : value / amount;
-          const priceImpact =
-            ((-1 + simulatedPrice / this.tokenPrice.value) * 100).toFixed(2) +
-            "%";
+
+          const impact = (-1 + simulatedPrice / this.tokenPrice.value) * 100;
+          const priceImpact = (isNaN(impact) ? 0 : impact).toFixed(2) + "%";
 
           Object.assign(this.simulation, {
             priceImpact,
