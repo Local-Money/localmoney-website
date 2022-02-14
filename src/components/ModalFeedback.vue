@@ -29,14 +29,14 @@
         <div class="content-info">
           <h2 v-html="modalFeedback.title" />
           <p v-html="modalFeedback.message" />
-          <div class="extra" v-if="modalFeedback.isSuccess">
+          <div class="extra" v-if="false">
             <p>Add your tokens to your Terra Station Wallet:</p>
             <div class="wrap-addr-btn">
               <button class="primary">Local Token</button>
               <p class="copied">Copied!</p>
             </div>
           </div>
-          <div class="extra" v-else>
+          <div class="extra" v-if="!modalFeedback.isSuccess">
             <button class="primary" @click="$emit('close')">close</button>
           </div>
         </div>

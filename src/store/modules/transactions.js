@@ -25,7 +25,7 @@ import {
 } from "@/terra/swap";
 import { loading, success } from "@/terra/result";
 import {
-  //baseFeedback,
+  baseFeedback,
   errorFeedback,
   successFeedback,
 } from "@/components/ModalFeedback";
@@ -51,7 +51,7 @@ const state = {
     label: undefined,
     transaction: undefined,
   },
-  pageFeedback: errorFeedback(),
+  pageFeedback: baseFeedback(),
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,
