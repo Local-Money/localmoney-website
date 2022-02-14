@@ -23,18 +23,21 @@
             alt="Girl holding a LOCAL token smiling"
           />
         </div>
+        <div class="wrap-img" v-else>
+          <img src="@/assets/img-02.png" alt="Guy thinking" />
+        </div>
         <div class="content-info">
           <h2 v-html="modalFeedback.title" />
           <p v-html="modalFeedback.message" />
           <div class="extra" v-if="modalFeedback.isSuccess">
-            <p>
-              To add your LOCAL tokens to your Terra Station Wallet, use address
-              bellow:
-            </p>
+            <p>Add your tokens to your Terra Station Wallet:</p>
             <div class="wrap-addr-btn">
-              <p class="token-code">terra1 ... vmcwv</p>
+              <button class="primary">Local Token</button>
               <p class="copied">Copied!</p>
             </div>
+          </div>
+          <div class="extra" v-else>
+            <button class="primary" @click="$emit('close')">close</button>
           </div>
         </div>
       </div>
@@ -55,14 +58,14 @@ export default {
 
 export function successFeedback(
   title = "Awesome!",
-  message = "Thanks for participating.</br>You are now part of the <span class='text-primary'>LOCAL</span> community. "
+  message = "Thanks for participating. Now you are part of the <span class='text-primary'>LOCAL</span> community. "
 ) {
   return baseFeedback(true, true, title, message);
 }
 
 export function errorFeedback(
-  title = "Something went wrong",
-  message = "Please try again."
+  title = "Ooops...",
+  message = "Something went wrong, please try again."
 ) {
   return baseFeedback(true, false, title, message);
 }
@@ -90,7 +93,7 @@ export function baseFeedback(
 @import "@/style/tokens.scss";
 
 .modal-content {
-  width: 700px;
+  width: 650px;
   background-color: $gray150;
   margin-top: 10%;
   z-index: 100;
@@ -105,27 +108,26 @@ export function baseFeedback(
       width: 40%;
       display: flex;
       align-items: center;
-      padding: 16px;
+      padding: 8px 24px;
       img {
-        width: 250px;
+        width: 200px;
       }
     }
     .content-info {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-content: center;
       width: 60%;
-      padding: 16px 24px;
-      margin-left: 24px;
+      padding: 16px 16px;
+      margin-left: 16px;
       h2 {
-        margin-bottom: 16px;
+        margin-bottom: 8px;
       }
       p {
       }
     }
     button {
-      display: block;
-      width: 100%;
-      margin-top: auto;
     }
   }
   .extra {
@@ -185,10 +187,14 @@ export function baseFeedback(
         .extra {
           .wrap-addr-btn {
             flex-direction: column;
+
             .copied {
               margin-top: 8px;
               margin-left: 0;
             }
+          }
+          button {
+            display: inline-block;
           }
         }
       }
