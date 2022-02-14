@@ -28,17 +28,17 @@ export default {
   },
 };
 
-export function successFeedback(
+export function successFeedback({
   title = "Congratulations",
-  message = "You are now part of <span class='text-primary'>LOCAL</span> community. "
-) {
+  message = "You are now part of <span class='text-primary'>LOCAL</span> community. ",
+}) {
   return baseFeedback(true, true, title, message);
 }
 
-export function errorFeedback(
+export function errorFeedback({
   title = "Something went wrong",
-  message = "Error"
-) {
+  message = "Error",
+}) {
   return baseFeedback(true, false, title, message);
 }
 
