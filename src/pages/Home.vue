@@ -13,7 +13,7 @@
       </router-link>
       <!-- <nav>
         <button class="primary">
-          <router-link to="/lbp">wagmi</router-link>
+          <router-link to="/lbp">webapp</router-link>
         </button>
       </nav> -->
     </header>
@@ -28,9 +28,12 @@
           offer.
         </p>
         <div class="wrap-cta">
-          <p>Want to get notified when we launch?</p>
-          <a href="https://twitter.com/local_terra" target="_blank">
-            <button class="primary">Follow us</button>
+          <p>Want to know more about us?</p>
+          <a
+            href="https://localterra.money/localterra-litepaper-v1.pdf"
+            target="_blank"
+          >
+            <button class="primary">Litepaper</button>
           </a>
         </div>
       </article>
@@ -56,17 +59,13 @@
             <span class="text-primary">LOCAL.</span>
           </h2>
           <p>
-            In a few days we will be introducing the LOCAL token. This will be
-            your first chance to help us create a better access to financial
-            freedom.
+            Our LBP will take place February 18th. The exact time will be
+            announced one day before on our Twitter.
           </p>
           <div class="wrap-cta">
-            <p>Check out our launch post.</p>
-            <a
-              href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16?source=friends_link&sk=ea26c8b52c1d48e060ce259eac438de8"
-              target="_blank"
-            >
-              <button class="primary">Read more</button>
+            <p>Follow us to get notified.</p>
+            <a href="https://twitter.com/local_terra" target="_blank">
+              <button class="primary">Follow us</button>
             </a>
           </div>
         </div>
@@ -269,6 +268,14 @@
                 d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
               ></path></svg
           ></a>
+
+          <a href="https://local-terra.medium.com/" target="_blank">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+              <circle cx="6" cy="12" r="5" fill="white" />
+              <ellipse cx="15.5" cy="12" rx="2.5" ry="5" fill="white" />
+              <ellipse cx="21" cy="12" rx="1" ry="5" fill="white" />
+            </svg>
+          </a>
         </div>
       </div>
     </footer>
