@@ -136,13 +136,21 @@
         <div class="roadmap-item">
           <div class="wrap-date">
             <div class="circle"></div>
-            <p class="date">Q1 . 2022</p>
+            <p class="date">Feb 18th, 2022</p>
           </div>
           <div class="wrap-content">
             <div class="content">
               <p class="title">LBP</p>
               <p class="description">$LOCAL token initial offer.</p>
             </div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="circle"></div>
+            <p class="date">Q1 . 2022</p>
+          </div>
+          <div class="wrap-content">
             <div class="content">
               <p class="title">Beta</p>
               <p class="description">Beta on Testnet with community members.</p>
