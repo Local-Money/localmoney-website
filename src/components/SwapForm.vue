@@ -254,7 +254,7 @@ export default defineComponent({
         fromSymbol: this.fromSymbol,
       });
       await this.$nextTick(() => {
-        this.fromAmount = null;
+        this.simulation.fromAmount = null;
         this.simulation.toAmount = null;
       });
     },
