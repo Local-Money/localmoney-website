@@ -161,16 +161,14 @@ const actions = {
       commit("setWalletAddress", "");
       commit(
         "setPageFeedback",
-        errorFeedback(
-          "Houston, we have a problem!",
-          "We had a problem connecting your wallet. Make sure it is connect to the right network."
-        )
+        errorFeedback({
+          title: "Houston, we have a problem!",
+          message:
+            "We had a problem connecting your wallet. Make sure it is connect to the right network.",
+        })
       );
-      console.log(e);
     } finally {
-      commit("setPageLoading", {
-        isLoading: false,
-      });
+      commit("setPageLoading", { isLoading: false });
     }
   },
   async updateBalance({ dispatch, commit }) {
@@ -381,13 +379,16 @@ const actions = {
             dispatch("updateBalance");
             dispatch("fetchCurrentPair");
             commit("setPageLoading", { isLoading: false });
-            commit("setPageFeedback", successFeedback());
+            commit("setPageFeedback", successFeedback({}));
           }
         }, 1000);
       },
-      () => {
+      (e) => {
+        // error code 1 is transaction denied by the user
+        if (e.code !== 1) {
+          commit("setPageFeedback", errorFeedback({}));
+        }
         commit("setPageLoading", { isLoading: false });
-        commit("setPageFeedback", errorFeedback());
       }
     );
   },

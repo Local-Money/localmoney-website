@@ -56,17 +56,17 @@ export default {
   },
 };
 
-export function successFeedback(
+export function successFeedback({
   title = "Awesome!",
-  message = "Thanks for participating. Now you are part of the <span class='text-primary'>LOCAL</span> community. "
-) {
+  message = "Thanks for participating. Now you are part of the <span class='text-primary'>LOCAL</span> community. ",
+}) {
   return baseFeedback(true, true, title, message);
 }
 
-export function errorFeedback(
+export function errorFeedback({
   title = "Ooops...",
-  message = "Something went wrong, please try again."
-) {
+  message = "Something went wrong, please try again.",
+}) {
   return baseFeedback(true, false, title, message);
 }
 
