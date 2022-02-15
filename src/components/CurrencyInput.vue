@@ -36,7 +36,7 @@ export default {
           autoDecimalDigits: false,
           valueScaling: "precision",
           autoSign: false,
-          useGrouping: false,
+          useGrouping: true,
           accountingSign: true,
         };
       },

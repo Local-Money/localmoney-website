@@ -30,20 +30,20 @@ import {
   successFeedback,
 } from "@/components/ModalFeedback";
 
-let terrarium = buildClient({
-  URL: "http://143.244.190.1:3060",
-  chainID: "localterra",
-  gasPrices: "0.15",
-});
-
 let testnet = buildClient({
   URL: "https://bombay-lcd.terra.dev",
   chainID: "bombay-12",
   gasPrices: "0.15",
 });
 
-let isTestNet = true;
-let terra = isTestNet ? testnet : terrarium;
+let mainnet = buildClient({
+  URL: "https://lcd.terra.dev",
+  chainID: "columbus-5",
+  gasPrices: "0.15",
+});
+
+let isTestNet = false;
+let terra = isTestNet ? testnet : mainnet;
 
 const state = {
   pageLoading: {

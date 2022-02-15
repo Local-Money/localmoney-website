@@ -22,7 +22,8 @@
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          Access all that
+          Local Terra is a P2P decentralized marketplace that provides access to
+          all that
           <a href="https://terra.money/" target="_blank">Terra Money</a> has to
           offer.
         </p>
