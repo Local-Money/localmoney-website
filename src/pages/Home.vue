@@ -43,31 +43,72 @@
     </div>
 
     <main>
-      <section class="lbp-teaser page-layout">
-        <div class="wrap-img">
-          <img
-            src="@/assets/lbp-hands.png"
-            alt="Girl holding a LOCAL token smiling"
-          />
+      <section class="lbp-teaser">
+        <div class="wrap-lbp page-layout">
+          <div class="wrap-img">
+            <img
+              src="@/assets/lbp-hands.png"
+              alt="Girl holding a LOCAL token smiling"
+            />
+          </div>
+          <div class="wrap-content">
+            <h2>
+              Take your place in the future of
+              <span class="text-primary">LOCAL.</span>
+            </h2>
+            <p>
+              In a few days we will be introducing the LOCAL token. This will be
+              your first chance to help us create a better access to financial
+              freedom.
+            </p>
+            <div class="wrap-cta">
+              <p>Check out our launch post.</p>
+              <a
+                href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16?source=friends_link&sk=ea26c8b52c1d48e060ce259eac438de8"
+                target="_blank"
+              >
+                <button class="primary">Read more</button>
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="wrap-content">
-          <h2>
-            Take your place in the future of
-            <span class="text-primary">LOCAL.</span>
-          </h2>
-          <p>
-            In a few days we will be introducing the LOCAL token. This will be
-            your first chance to help us create a better access to financial
-            freedom.
-          </p>
-          <div class="wrap-cta">
-            <p>Check out our launch post.</p>
-            <a
-              href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16?source=friends_link&sk=ea26c8b52c1d48e060ce259eac438de8"
-              target="_blank"
-            >
-              <button class="primary">Read more</button>
-            </a>
+      </section>
+
+      <section class="featured section-spacer">
+        <div class="wrap-featured page-layout">
+          <div class="feature">
+            <h2>
+              <span class="text-primary">Fast and easy</span> on-off ramps
+            </h2>
+            <div class="wrap-img">
+              <img
+                v-if="!isMobile"
+                src="@/assets/top-feature-01.png"
+                alt="Image displaying a top feature"
+              />
+              <img
+                v-else
+                src="@/assets/top-feature-01-mobile.png"
+                alt="Image displaying a top feature"
+              />
+            </div>
+          </div>
+          <div class="feature">
+            <h2>
+              <span class="text-primary">Trustless</span> trading experience
+            </h2>
+            <div class="wrap-img">
+              <img
+                v-if="!isMobile"
+                src="@/assets/top-feature-02.png"
+                alt="Image displaying a top feature"
+              />
+              <img
+                v-else
+                src="@/assets/top-feature-02-mobile.png"
+                alt="Image displaying a top feature"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -281,6 +322,27 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "Home",
   components: {},
+
+  data: () => ({
+    isMobile: false,
+  }),
+
+  beforeUnmount() {
+    if (typeof window !== "undefined") {
+      window.removeEventListener("resize", this.onResize, { passive: true });
+    }
+  },
+
+  mounted() {
+    this.onResize();
+    window.addEventListener("resize", this.onResize, { passive: true });
+  },
+
+  methods: {
+    onResize() {
+      this.isMobile = window.innerWidth < 600;
+    },
+  },
 });
 </script>
 
