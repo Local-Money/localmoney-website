@@ -340,6 +340,10 @@ export default defineComponent({
     display: block;
     margin: 16px auto;
     stroke: $gray700;
+    cursor: pointer;
+    &:hover {
+      stroke: $primary;
+    }
   }
 }
 
