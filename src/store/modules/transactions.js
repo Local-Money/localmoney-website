@@ -56,6 +56,7 @@ const state = {
   balance: 0,
   tokenBalance: 0,
   currentPair: null,
+  tokenAddress: null,
   tokenPrice: loading(),
   secondsRemaining: loading(),
   tokensRemaining: loading({ amount: 0, percentage: 0 }),
@@ -79,6 +80,7 @@ const getters = {
     const denom = state.pair ? nativeTokenFromPair(state.pair).denom : "uusd";
     return NATIVE_TOKEN_SYMBOLS[denom];
   },
+  tokenAddress: (state) => state.tokenAddress,
   tokenPrice: (state) => state.tokenPrice,
   tokensRemaining: (state) => state.tokensRemaining,
   currentLbpWeight: (state) => state.currentLbpWeight,
@@ -135,6 +137,7 @@ const mutations = {
     state.series = priceHistory.series;
   },
   setMaxSwapFee: (state, maxSwapFee) => (state.maxSwapFee = maxSwapFee),
+  setTokenAddress: (state, tokenAddress) => (state.tokenAddress = tokenAddress),
 };
 
 const actions = {
@@ -154,8 +157,6 @@ const actions = {
       const tokenBalance = await dispatch("fetchTokenBalance");
       commit("setBalance", balance);
       commit("setTokenBalance", tokenBalance);
-      commit("setPageLoading", { isLoading: false });
-
       dispatch("fetchCurrentPair");
     } catch (e) {
       commit("setWalletAddress", "");
@@ -206,6 +207,10 @@ const actions = {
 
     commit("setCurrentPair", currentPair);
     if (currentPair != null) {
+      commit(
+        "setTokenAddress",
+        saleAssetFromPair(currentPair.asset_infos).info.token.contract_addr
+      );
       dispatch("fetchSaleTokenInfo");
       dispatch("fetchWeights");
       dispatch("fetchSecondsRemaining");
