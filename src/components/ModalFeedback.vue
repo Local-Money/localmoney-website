@@ -29,14 +29,16 @@
         <div class="content-info">
           <h2 v-html="modalFeedback.title" />
           <p v-html="modalFeedback.message" />
-          <div class="extra" v-if="false">
+          <div class="extra" v-if="modalFeedback.isSuccess">
             <p>Add your tokens to your Terra Station Wallet:</p>
             <div class="wrap-addr-btn">
-              <button class="primary">Local Token</button>
-              <p class="copied">Copied!</p>
+              <button class="primary" @click="copy">Local Token</button>
+              <transition name="fade">
+                <p v-if="isTokenAddressCopied" class="copied">Copied!</p>
+              </transition>
             </div>
           </div>
-          <div class="extra" v-if="!modalFeedback.isSuccess">
+          <div class="extra" v-else>
             <button class="primary" @click="$emit('close')">close</button>
           </div>
         </div>
@@ -47,12 +49,40 @@
 
 <script>
 import Modal from "@/components/Modal";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ModalFeedback",
   props: ["modalFeedback"],
   components: {
     Modal,
+  },
+  data() {
+    return {
+      isTokenAddressCopied: false,
+      polling: null,
+    };
+  },
+  computed: {
+    ...mapGetters(["tokenAddress"]),
+  },
+  methods: {
+    async copy() {
+      try {
+        clearInterval(this.polling);
+        await navigator.clipboard.writeText(this.tokenAddress);
+        this.isTokenAddressCopied = true;
+        await this.$nextTick(function () {
+          this.polling = setInterval(
+            () => (this.isTokenAddressCopied = false),
+            3000
+          );
+        });
+      } catch ($e) {
+        this.isTokenAddressCopied = false;
+        console.log($e);
+      }
+    },
   },
 };
 
@@ -200,5 +230,15 @@ export function baseFeedback(
       }
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
