@@ -162,9 +162,9 @@ const actions = {
       commit(
         "setPageFeedback",
         errorFeedback({
-          title: "Houston, we have a problem!",
+          title: "Ooops...",
           message:
-            "We had a problem connecting your wallet. Make sure it is connect to the right network.",
+            "We had a problem connecting to your wallet. Make sure it is connected to the right network.",
         })
       );
     } finally {
