@@ -49,7 +49,7 @@
             ><button class="primary">Know more</button></a
           >
           <button class="punch">
-            <router-link to="/lbp">Get some LOCAL</router-link
+            <router-link to="/lbp">Participate</router-link
             ><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
                 d="M5 12H19"
