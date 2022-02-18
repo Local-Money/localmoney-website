@@ -89,10 +89,10 @@ export default defineComponent({
     InfoCard,
     SwapForm,
   },
-  mounted: async function () {
-    await this.fetchCurrentPair();
-    await this.$nextTick(function () {
-      setInterval(() => this.fetchCurrentPair, 60000);
+  mounted: function () {
+    this.fetchCurrentPair();
+    this.$nextTick(function () {
+      setInterval(async () => await this.fetchCurrentPair(), 30000);
     });
   },
   computed: mapGetters([
