@@ -20,13 +20,11 @@
 
     <div class="wrap-hero page-layout section-spacer">
       <article>
-        <h1>Trade with your peers, locally.</h1>
-        <p class="sub-header">
-          Local Terra is a P2P decentralized marketplace that provides access to
-          all that
-          <a href="https://terra.money/" target="_blank">Terra Money</a> has to
-          offer.
-        </p>
+        <h1>
+          Take your place in the future of
+          <span class="text-primary">LOCAL.</span>
+        </h1>
+        <p class="sub-header">Our initial token sale is LIVE!</p>
         <div class="wrap-cta">
           <p>Want to know more about us?</p>
           <a
@@ -39,7 +37,7 @@
       </article>
       <div class="hero-img">
         <img
-          src="@/assets/header-img.png"
+          src="@/assets/lbp-hands.png"
           alt="Two people making a successful trade"
         />
       </div>
