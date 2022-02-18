@@ -51,6 +51,9 @@ const state = {
     label: undefined,
     transaction: undefined,
   },
+  isLbpRunning: true,
+  lbpStartTime: undefined,
+  lbpEndTime: undefined,
   pageFeedback: baseFeedback(),
   walletAddress: "",
   balance: 0,
@@ -69,6 +72,9 @@ const state = {
 
 const getters = {
   walletAddress: (state) => state.walletAddress,
+  isLbpRunning: (state) => state.isLbpRunning,
+  lbpStartTime: (state) => state.lbpStartTime,
+  lbpEndTime: (state) => state.lbpEndTime,
   balance: (state) =>
     formatTokenAmount(state.walletAddress.length > 0 ? state.balance : 0, 6),
   tokenBalance: (state) =>
@@ -113,6 +119,9 @@ const getters = {
 };
 
 const mutations = {
+  setIsLbpRunning: (state, isLbpRunning) => (state.isLbpRunning = isLbpRunning),
+  setLbpStartTime: (state, lbpStartTime) => (state.lbpStartTime = lbpStartTime),
+  setLbpEndTime: (state, lbpEndTime) => (state.lbpEndTime = lbpEndTime),
   setPageLoading: (state, pageLoading) => (state.pageLoading = pageLoading),
   setPageFeedback: (state, pageFeedback) => (state.pageFeedback = pageFeedback),
   setWalletAddress: (state, walletAddress) =>
@@ -206,7 +215,10 @@ const actions = {
     );
 
     commit("setCurrentPair", currentPair);
+    commit("setLbpStartTime", lbps[0].start_time);
+    commit("setLbpEndTime", lbps[0].end_time);
     if (currentPair != null) {
+      commit("setIsLbpRunning", true);
       commit(
         "setTokenAddress",
         saleAssetFromPair(currentPair.asset_infos).info.token.contract_addr
@@ -216,6 +228,8 @@ const actions = {
       dispatch("fetchSecondsRemaining");
       dispatch("fetchTokenPrice");
       dispatch("fetchMaxSwapFee");
+    } else {
+      commit("setIsLbpRunning", false);
     }
   },
   async fetchSecondsRemaining({ getters, commit }) {
