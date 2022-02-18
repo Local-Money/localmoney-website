@@ -72,9 +72,8 @@
         time it completes.
       </p>
     </div>
-    <button class="primary bg-gray300" @click="swap()" :disabled="!isValid">
-      Swap
-    </button>
+    <!--<button class="primary bg-gray300" @click="swap()" :disabled="!isValid">-->
+    <button class="primary bg-gray300" @click="swap()">Swap</button>
   </div>
 </template>
 
