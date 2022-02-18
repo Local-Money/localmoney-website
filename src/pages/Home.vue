@@ -11,11 +11,11 @@
           class="logo"
         />
       </router-link>
-      <nav>
+      <!-- <nav>
         <button class="primary">
           <router-link to="/lbp">webapp</router-link>
         </button>
-      </nav>
+      </nav> -->
     </header>
 
     <div class="wrap-hero page-layout section-spacer">
@@ -46,7 +46,7 @@
     </div>
 
     <main>
-      <section class="lbp-teaser">
+      <!-- <section class="lbp-teaser">
         <div class="wrap-lbp page-layout">
           <div class="wrap-img">
             <img
@@ -71,7 +71,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
 
       <section class="featured section-spacer">
         <div class="wrap-featured page-layout">
