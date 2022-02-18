@@ -12,8 +12,22 @@
         />
       </router-link>
       <nav>
-        <button class="primary">
-          <router-link to="/lbp">webapp</router-link>
+        <button class="wallet">
+          <router-link to="/lbp">webapp</router-link
+          ><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 12H19"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 5L19 12L12 19"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </button>
       </nav>
     </header>
@@ -24,15 +38,33 @@
           Take your place in the future of
           <span class="text-primary">LOCAL.</span>
         </h1>
-        <p class="sub-header">Our initial token sale is LIVE!</p>
+        <p class="sub-header">
+          Our LBP is <span class="text-primary">LIVE!</span>
+        </p>
         <div class="wrap-cta">
-          <p>Want to know more about us?</p>
           <a
-            href="https://localterra.money/localterra-litepaper-v1.pdf"
+            class="more"
+            href="https://twitter.com/local_terra/status/1493691846152921095"
             target="_blank"
+            ><button class="primary">Know more</button></a
           >
-            <button class="primary">Litepaper</button>
-          </a>
+          <button class="punch">
+            <router-link to="/lbp">Get some LOCAL</router-link
+            ><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M5 12H19"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 5L19 12L12 19"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
         </div>
       </article>
       <div class="hero-img">
@@ -48,23 +80,23 @@
         <div class="wrap-lbp page-layout">
           <div class="wrap-img">
             <img
-              src="@/assets/lbp-hands.png"
+              src="@/assets/header-img.png"
               alt="Girl holding a LOCAL token smiling"
             />
           </div>
           <div class="wrap-content">
-            <h2>
-              Take your place in the future of
-              <span class="text-primary">LOCAL.</span>
-            </h2>
+            <h2>Trade with your peers, locally.</h2>
             <p>
-              Our LBP will take place February 18th. The exact time will be
-              announced one day before on our Twitter.
+              Local Terra is a P2P decentralized marketplace that provides
+              access to all that Terra Money has to offer.
             </p>
             <div class="wrap-cta">
-              <p>Follow us to get notified.</p>
-              <a href="https://twitter.com/local_terra" target="_blank">
-                <button class="primary">Follow us</button>
+              <p>Want to know more about us.</p>
+              <a
+                href="https://localterra.money/localterra-litepaper-v1.pdf"
+                target="_blank"
+              >
+                <button class="primary">Litepaper</button>
               </a>
             </div>
           </div>
