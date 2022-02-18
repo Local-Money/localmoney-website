@@ -6,29 +6,37 @@
     <header class="page-layout">
       <router-link to="/">
         <img
+          v-if="!isMobile"
           src="@/assets/logo-horizontal-dark.svg"
+          alt="Local Terra Logo"
+          class="logo"
+        />
+        <img
+          v-else
+          src="@/assets/localterra-icon-white.png"
           alt="Local Terra Logo"
           class="logo"
         />
       </router-link>
       <nav>
-        <button class="wallet">
-          <router-link to="/lbp">webapp</router-link
-          ><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M5 12H19"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M12 5L19 12L12 19"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </button>
+        <router-link to="/lbp"
+          ><button class="wallet">
+            Access LBP
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M5 12H19"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 5L19 12L12 19"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg></button
+        ></router-link>
       </nav>
     </header>
 
@@ -48,23 +56,24 @@
             target="_blank"
             ><button class="primary">Know more</button></a
           >
-          <button class="punch">
-            <router-link to="/lbp">Get some LOCAL</router-link
-            ><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M5 12H19"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M12 5L19 12L12 19"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
+          <router-link to="/lbp"
+            ><button class="punch">
+              Participate
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 12H19"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12 5L19 12L12 19"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg></button
+          ></router-link>
         </div>
       </article>
       <div class="hero-img">
