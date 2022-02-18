@@ -106,13 +106,21 @@ export default defineComponent({
   data() {
     return {
       closedDisclaimer: false,
+      isMobile: false,
     };
+  },
+  beforeUnmount() {
+    if (typeof window !== "undefined") {
+      window.removeEventListener("resize", this.onResize, { passive: true });
+    }
   },
   mounted: function () {
     this.fetchCurrentPair();
     this.$nextTick(function () {
       setInterval(async () => await this.fetchCurrentPair(), 30000);
     });
+    this.onResize();
+    window.addEventListener("resize", this.onResize, { passive: true });
   },
   computed: {
     ...mapGetters([
@@ -142,6 +150,9 @@ export default defineComponent({
     hideDisclaimer: function () {
       this.closedDisclaimer = true;
       localStorage.showDisclaimer = "false";
+    },
+    onResize() {
+      this.isMobile = window.innerWidth < 600;
     },
   },
 });
