@@ -20,7 +20,7 @@
             <h2>Ooops...</h2>
             <p>
               Unfortunately, the location you are trying to access the LBP is
-              not permited.
+              not permitted.
             </p>
           </div>
         </div>
