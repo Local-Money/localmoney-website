@@ -30,15 +30,18 @@ nav {
   align-items: center;
   gap: 80px;
 
-  a {
-    color: $base-text;
+  button {
+    svg {
+      margin-left: 8px;
+      stroke: $primary;
+    }
   }
 }
 .wrap-hero {
   display: flex;
 
   article {
-    width: 50%;
+    width: 55%;
     h1 {
       font-size: 80px;
       font-weight: $semi-bold;
@@ -52,13 +55,18 @@ nav {
 
     .sub-header {
       width: 75%;
-      font-size: 24px;
+      font-size: 32px;
       line-height: 140%;
       margin-top: 56px;
+      margin-bottom: 24px;
     }
 
     .wrap-cta {
-      margin-top: 32px;
+      margin-top: 0px;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      align-content: center;
       p {
         font-size: 20px;
         font-weight: $regular;
@@ -66,17 +74,24 @@ nav {
     }
 
     button {
-      margin-top: 24px;
-      transition: background-color 0.2s ease;
+      transition: all 0.2s ease;
 
-      &:hover {
-        background-color: $gray200;
+      a {
+        color: $base-text;
       }
+
+      svg {
+        margin-left: 8px;
+        stroke: $white;
+      }
+    }
+    .more {
+      color: $base-text;
     }
   }
 
   .hero-img {
-    width: 50%;
+    width: 45%;
     img {
       width: 100%;
     }
