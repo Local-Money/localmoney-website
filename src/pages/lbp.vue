@@ -61,6 +61,11 @@
         :modalFeedback="pageFeedback"
         @close="pageFeedback.dismiss()"
       />
+
+      <ModalDisclaimer
+        :show="showDisclaimer && !closedDisclaimer"
+        @close="hideDisclaimer"
+      />
     </main>
   </body>
 </template>
@@ -79,15 +84,22 @@ import InfoCard from "@/components/InfoCard.vue";
 import SwapForm from "@/components/SwapForm.vue";
 import ModalLoading from "@/components/ModalLoading";
 import ModalFeedback from "@/components/ModalFeedback";
+import ModalDisclaimer from "@/components/ModalDisclaimer";
 
 export default defineComponent({
   name: "lbp",
   components: {
+    ModalDisclaimer,
     ModalFeedback,
     ModalLoading,
     Chart,
     InfoCard,
     SwapForm,
+  },
+  data() {
+    return {
+      closedDisclaimer: false,
+    };
   },
   mounted: function () {
     this.fetchCurrentPair();
@@ -95,15 +107,24 @@ export default defineComponent({
       setInterval(async () => await this.fetchCurrentPair(), 30000);
     });
   },
-  computed: mapGetters([
-    "walletAddress",
-    "tokenPrice",
-    "tokensRemaining",
-    "currentLbpWeight",
-    "secondsRemaining",
-    "pageLoading",
-    "pageFeedback",
-  ]),
+  computed: {
+    ...mapGetters([
+      "walletAddress",
+      "tokenPrice",
+      "tokensRemaining",
+      "currentLbpWeight",
+      "secondsRemaining",
+      "pageLoading",
+      "pageFeedback",
+    ]),
+    showDisclaimer: function () {
+      let show = localStorage.showDisclaimer;
+      if (show === "false") {
+        return false;
+      }
+      return true;
+    },
+  },
   methods: {
     ...mapActions(["initWallet", "fetchCurrentPair"]),
     durationString,
@@ -111,6 +132,10 @@ export default defineComponent({
     formatAddress,
     formatTokenAmount,
     formatTokenPrice,
+    hideDisclaimer: function () {
+      this.closedDisclaimer = true;
+      localStorage.showDisclaimer = "false";
+    },
   },
 });
 </script>

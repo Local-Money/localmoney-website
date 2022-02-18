@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/pages/Home";
 import lbp from "@/pages/lbp";
+import Disclaimer from "@/pages/Disclaimer";
 import Blocked from "@/pages/Blocked";
 
 const router = createRouter({
@@ -15,6 +16,11 @@ const router = createRouter({
       path: "/lbp",
       name: "lbp",
       component: lbp,
+    },
+    {
+      path: "/disclaimer",
+      name: "disclaimer",
+      component: Disclaimer,
     },
     {
       path: "/blocked",
