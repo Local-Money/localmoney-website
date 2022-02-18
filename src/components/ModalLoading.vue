@@ -12,7 +12,7 @@
             class="transaction"
             target="_blank"
             :href="
-              'https://finder.terra.money/testnet/tx/' + loading.transaction
+              'https://finder.terra.money/columbus-5/tx/' + loading.transaction
             "
             >{{ formatAddress(loading.transaction) }}</a
           >
