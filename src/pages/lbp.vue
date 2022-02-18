@@ -6,7 +6,14 @@
     <header class="page-layout">
       <router-link to="/">
         <img
+          v-if="!isMobile"
           src="@/assets/logo-horizontal-dark.svg"
+          alt="Local Terra Logo"
+          class="logo"
+        />
+        <img
+          v-else
+          src="@/assets/localterra-icon-white.png"
           alt="Local Terra Logo"
           class="logo"
         />
