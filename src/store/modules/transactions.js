@@ -42,7 +42,7 @@ let mainnet = buildClient({
   gasPrices: "0.15",
 });
 
-let isTestNet = true;
+let isTestNet = false;
 let terra = isTestNet ? testnet : mainnet;
 
 const state = {
