@@ -18,7 +18,7 @@
           class="logo"
         />
       </router-link>
-      <nav>
+      <nav v-if="this.isLbpRunning">
         <a href="#">
           <button class="wallet" @click="initWallet()">
             <p v-if="walletAddress.length > 0">
@@ -31,7 +31,7 @@
       </nav>
     </header>
 
-    <main>
+    <main v-if="this.isLbpRunning">
       <section class="lbp-info page-layout">
         <InfoCard
           class="text-primary"
@@ -74,6 +74,14 @@
         @close="hideDisclaimer"
       />
     </main>
+    <main v-else>
+      <section class="wrap-content page-layout lbp-over-wrap">
+        <div class="card lbp-over-item">
+          <h2 v-if="willStartSoon">The LBP will start soon! :)</h2>
+          <h2 v-if="alreadyFinished">The LBP is over! :(</h2>
+        </div>
+      </section>
+    </main>
   </body>
 </template>
 
@@ -106,6 +114,7 @@ export default defineComponent({
   data() {
     return {
       closedDisclaimer: false,
+      secondsToStart: undefined,
       isMobile: false,
     };
   },
@@ -131,6 +140,9 @@ export default defineComponent({
       "secondsRemaining",
       "pageLoading",
       "pageFeedback",
+      "isLbpRunning",
+      "lbpStartTime",
+      "lbpEndTime",
     ]),
     showDisclaimer: function () {
       let show = localStorage.showDisclaimer;
@@ -138,6 +150,14 @@ export default defineComponent({
         return false;
       }
       return true;
+    },
+    willStartSoon: function () {
+      const currentTime = Math.floor(Date.now() / 1000);
+      return this.lbpStartTime > currentTime;
+    },
+    alreadyFinished: function () {
+      const currentTime = Math.floor(Date.now() / 1000);
+      return currentTime > this.lbpEndTime;
     },
   },
   methods: {
@@ -166,6 +186,13 @@ export default defineComponent({
   display: flex;
   gap: 24px;
   padding-bottom: 24px;
+}
+
+.lbp-over-wrap {
+  width: 100%;
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
 }
 
 .lbp-info {
