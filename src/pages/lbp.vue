@@ -61,6 +61,8 @@
         :modalFeedback="pageFeedback"
         @close="pageFeedback.dismiss()"
       />
+
+      <ModalDisclaimer :show="showDisclaimer" @close="showDisclaimer = false" />
     </main>
   </body>
 </template>
@@ -79,15 +81,22 @@ import InfoCard from "@/components/InfoCard.vue";
 import SwapForm from "@/components/SwapForm.vue";
 import ModalLoading from "@/components/ModalLoading";
 import ModalFeedback from "@/components/ModalFeedback";
+import ModalDisclaimer from "@/components/ModalDisclaimer";
 
 export default defineComponent({
   name: "lbp",
   components: {
+    ModalDisclaimer,
     ModalFeedback,
     ModalLoading,
     Chart,
     InfoCard,
     SwapForm,
+  },
+  data() {
+    return {
+      showDisclaimer: true,
+    };
   },
   mounted: async function () {
     await this.fetchCurrentPair();
