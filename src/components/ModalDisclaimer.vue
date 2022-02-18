@@ -3,21 +3,24 @@
     <div class="modal-content card">
       <div class="content">
         <div class="wrap-img">
-          <img src="@/assets/img-02.png" alt="Guy thinking" />
+          <img src="@/assets/localterra-icon-white.png" alt="Guy thinking" />
         </div>
         <div class="content-info">
-          <h2>Please attention!</h2>
+          <h2>Disclaimer</h2>
           <p>
-            By participating in ths LOCAL LBP you accept our legal disclaimer.
+            By participating in the LBP you accept the risks stated in our legal
+            disclaimer.
           </p>
           <p>
-            You can check it on this
+            You can read more
             <router-link to="/disclaimer">
-              <span class="text-primary">link</span>
+              <span class="text-primary">here.</span>
             </router-link>
           </p>
           <div class="extra">
-            <button class="primary" @click="$emit('close')">Agree</button>
+            <button class="primary" @click="$emit('close')">
+              Agree and continue
+            </button>
           </div>
         </div>
       </div>

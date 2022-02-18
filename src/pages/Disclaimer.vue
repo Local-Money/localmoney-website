@@ -14,12 +14,10 @@
     </header>
 
     <main>
-      <section class="featured section-spacer">
-        <div class="wrap-featured page-layout">
-          <div class="feature">
-            <h2>
-              Local Terra <span class="text-primary">Legal Disclaimer</span>
-            </h2>
+      <section class="disclaimer section-spacer">
+        <div class="wrap-disclaimer page-layout">
+          <div class="inner-disclaimer">
+            <h2>Local Terra <span class="text-primary">Disclaimer</span></h2>
             <br />
             <p>
               Local Terra is currently in the initial development stages and
@@ -30,6 +28,8 @@
               lead to the loss of all or part of Local token held. If you decide
               to acquire Local token or participate in Local Terra, you
               expressly acknowledge, accept and assume the following risks.
+            </p>
+            <p>
               Uncertain Regulations and Enforcement Actions: The regulatory
               status of Local Terra, Local token and distributed ledger
               technology is unclear or unsettled in many jurisdictions. The
@@ -38,17 +38,22 @@
               to predict how, when or whether regulatory agencies may apply
               existing regulations or create new regulations with respect to
               such technology and its applications, including Local token and/or
-              Local Terra. Regulatory actions could negatively impact Local
-              token and/or Local Terra in various ways. The Company, the
-              Distributor (or their respective affiliates) may cease operations
-              in a jurisdiction in the event that regulatory actions, or changes
-              to law or regulation, make it illegal to operate in such
+              Local Terra.
+            </p>
+            <p>
+              Regulatory actions could negatively impact Local token and/or
+              Local Terra in various ways. The Company, the Distributor (or
+              their respective affiliates) may cease operations in a
+              jurisdiction in the event that regulatory actions, or changes to
+              law or regulation, make it illegal to operate in such
               jurisdiction, or commercially undesirable to obtain the necessary
               regulatory approval(s) to operate in such jurisdiction. Inadequate
               disclosure of information: As at the date hereof, Local Terra is
               still under development and its design concepts, consensus
               mechanisms, algorithms, codes, and other technical details and
               parameters may be constantly and frequently updated and changed.
+            </p>
+            <p>
               Although this whitepaper contains the most current information
               relating to Local Terra, it is not absolutely complete and may
               still be adjusted and updated by the Local Terra team from time to
@@ -56,18 +61,20 @@
               to keep holders of Local token informed of every detail (including
               development progress and expected milestones) regarding the
               project to develop Local Terra, hence insufficient information
-              disclosure is inevitable and reasonable. Disclaimer 13 Risks
-              Failure to develop: There is the risk that the development of
-              Local Terra will not be executed or implemented as planned, for a
-              variety of reasons, including without limitation the event of a
-              decline in the prices of any digital asset, virtual currency or
-              Local token, unforeseen technical difficulties, and shortage of
-              development funds for activities. Security weaknesses: Hackers or
-              other malicious groups or organizations may attempt to interfere
-              with Local token and/or Local Terra in a variety of ways,
-              including, but not limited to, malware attacks, denial of service
-              attacks, consensus-based attacks, Sybil attacks, smurfing and
-              spoofing. Furthermore, there is a risk that a third party or a
+              disclosure is inevitable and reasonable.
+            </p>
+            <p>
+              Disclaimer 13 Risks Failure to develop: There is the risk that the
+              development of Local Terra will not be executed or implemented as
+              planned, for a variety of reasons, including without limitation
+              the event of a decline in the prices of any digital asset, virtual
+              currency or Local token, unforeseen technical difficulties, and
+              shortage of development funds for activities. Security weaknesses:
+              Hackers or other malicious groups or organizations may attempt to
+              interfere with Local token and/or Local Terra in a variety of
+              ways, including, but not limited to, malware attacks, denial of
+              service attacks, consensus-based attacks, Sybil attacks, smurfing
+              and spoofing. Furthermore, there is a risk that a third party or a
               member of the Company, the Distributor or their respective
               affiliates may intentionally or unintentionally introduce
               weaknesses into the core infrastructure of Local token and/or
@@ -77,19 +84,21 @@
               or technical advances (including without limitation development of
               quantum computing), could present unknown risks to Local token
               and/or Local Terra by rendering ineffective the cryptographic
-              consensus mechanism that underpins that blockchain protocol. Other
-              risks: In addition, the potential risks briefly mentioned above
-              are not exhaustive and there are other risks (as more particularly
-              set out in the Terms and Conditions) associated with your
-              participation in Local Terra, as well as acquisition of, holding
-              and use of Local token, including those that the Company or the
-              Distributor cannot anticipate. Such risks may further materialize
-              as unanticipated variations or combinations of the aforementioned
-              risks. You should conduct full due diligence on the Distributor,
-              their respective affiliates, and the Local Terra team, as well as
-              understand the overall framework, mission and vision for Local
-              Terra prior to participating in the same and/or acquiring Local
-              token.
+              consensus mechanism that underpins that blockchain protocol.
+            </p>
+            <p>
+              Other risks: In addition, the potential risks briefly mentioned
+              above are not exhaustive and there are other risks (as more
+              particularly set out in the Terms and Conditions) associated with
+              your participation in Local Terra, as well as acquisition of,
+              holding and use of Local token, including those that the Company
+              or the Distributor cannot anticipate. Such risks may further
+              materialize as unanticipated variations or combinations of the
+              aforementioned risks. You should conduct full due diligence on the
+              Distributor, their respective affiliates, and the Local Terra
+              team, as well as understand the overall framework, mission and
+              vision for Local Terra prior to participating in the same and/or
+              acquiring Local token.
             </p>
           </div>
         </div>
@@ -163,4 +172,31 @@ export default defineComponent({
 
 <style lang="scss">
 @import "@/style/app.scss";
+
+.disclaimer {
+  .wrap-disclaimer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    .inner-disclaimer {
+      width: 70%;
+      margin-bottom: 80px;
+
+      p {
+        margin-bottom: 16px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .disclaimer {
+    .wrap-disclaimer {
+      .inner-disclaimer {
+        width: 100%;
+      }
+    }
+  }
+}
 </style>
