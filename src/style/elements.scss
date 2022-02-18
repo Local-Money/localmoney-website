@@ -97,6 +97,16 @@ button {
     background-color: inherit;
     color: $base-text;
   }
+  &.ghost {
+    font-size: 16px;
+    background-color: $background;
+    color: $base-text;
+  }
+  &.punch {
+    font-size: 16px;
+    background-color: $primary;
+    color: $base-text;
+  }
 
   &:disabled {
     opacity: 0.5;

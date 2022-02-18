@@ -3,79 +3,82 @@
     <title>Local Terra LBP</title>
   </head>
   <body>
-  <header class="page-layout">
-    <router-link to="/">
-      <img
+    <header class="page-layout">
+      <router-link to="/">
+        <img
           src="@/assets/logo-horizontal-dark.svg"
           alt="Local Terra Logo"
           class="logo"
-      />
-    </router-link>
-    <nav>
-      <a href="#">
-        <button class="wallet" @click="initWallet()">
-          <p v-if="walletAddress.length > 0">
-            {{ formatAddress(walletAddress) }}
-          </p>
-          <p v-else>connect</p>
-          <img src="@/assets/ic_wallet.svg" alt="Connect your wallet"/>
-        </button>
-      </a>
-    </nav>
-  </header>
+        />
+      </router-link>
+      <nav>
+        <a href="#">
+          <button class="wallet" @click="initWallet()">
+            <p v-if="walletAddress.length > 0">
+              {{ formatAddress(walletAddress) }}
+            </p>
+            <p v-else>connect</p>
+            <img src="@/assets/ic_wallet.svg" alt="Connect your wallet" />
+          </button>
+        </a>
+      </nav>
+    </header>
 
-  <main>
-    <section class="lbp-info page-layout">
-      <InfoCard
+    <main>
+      <section class="lbp-info page-layout">
+        <InfoCard
           class="text-primary"
           :loading="tokenPrice.loading"
           :label="'LOCAL Price'"
           :value="'$' + formatTokenPrice(tokenPrice.value)"
-      />
-      <InfoCard
+        />
+        <InfoCard
           :label="'Tokens Remaining'"
           :loading="tokensRemaining.loading"
           :value="formatTokenAmount(tokensRemaining.value.amount, 0)"
           :more="tokensRemaining.value.percentage + '%'"
-      />
-      <InfoCard
+        />
+        <InfoCard
           :label="'Current LBP Weight'"
           :loading="currentLbpWeight.loading"
           :value="currentLbpWeight.value"
-      />
-      <InfoCard
+        />
+        <InfoCard
           :label="'Time Remaining'"
           :loading="secondsRemaining.loading"
           :value="durationString(secondsRemaining.value)"
-      />
-    </section>
+        />
+      </section>
 
-    <section class="wrap-content page-layout">
-      <SwapForm/>
-      <Chart :title="'LOCAL Chart'"/>
-    </section>
+      <section class="wrap-content page-layout">
+        <SwapForm />
+        <Chart :title="'LOCAL Chart'" />
+      </section>
 
-    <ModalLoading :loading="pageLoading"/>
+      <ModalLoading :loading="pageLoading" />
 
-    <ModalFeedback
+      <ModalFeedback
         :modalFeedback="pageFeedback"
         @close="pageFeedback.dismiss()"
-    />
+      />
 
-    <ModalDisclaimer :show="showDisclaimer && !closedDisclaimer" @close="hideDisclaimer"/>
-  </main>
+      <ModalDisclaimer
+        :show="showDisclaimer && !closedDisclaimer"
+        @close="hideDisclaimer"
+      />
+    </main>
   </body>
 </template>
 
 <script>
-import {defineComponent} from "vue";
-import {formatAddress, formatAmount} from "@/shared";
-import {mapActions, mapGetters} from "vuex";
+import { defineComponent } from "vue";
+import { formatAddress, formatAmount } from "@/shared";
+import { mapActions, mapGetters } from "vuex";
 import {
   formatTokenAmount,
   formatTokenPrice,
 } from "@/helpers/number_formatters";
-import {durationString} from "@/helpers/time_formatters";
+import { durationString } from "@/helpers/time_formatters";
 import Chart from "@/components/Chart";
 import InfoCard from "@/components/InfoCard.vue";
 import SwapForm from "@/components/SwapForm.vue";
@@ -95,13 +98,13 @@ export default defineComponent({
   },
   data() {
     return {
-      closedDisclaimer: false
+      closedDisclaimer: false,
     };
   },
-  mounted: async function () {
-    await this.fetchCurrentPair();
-    await this.$nextTick(function () {
-      setInterval(() => this.fetchCurrentPair, 60000);
+  mounted: function () {
+    this.fetchCurrentPair();
+    this.$nextTick(function () {
+      setInterval(async () => await this.fetchCurrentPair(), 30000);
     });
   },
   computed: {
@@ -116,11 +119,11 @@ export default defineComponent({
     ]),
     showDisclaimer: function () {
       let show = localStorage.showDisclaimer;
-      if (show === 'false') {
-        return false
+      if (show === "false") {
+        return false;
       }
-      return true
-    }
+      return true;
+    },
   },
   methods: {
     ...mapActions(["initWallet", "fetchCurrentPair"]),
@@ -130,9 +133,9 @@ export default defineComponent({
     formatTokenAmount,
     formatTokenPrice,
     hideDisclaimer: function () {
-      this.closedDisclaimer = true
-      localStorage.showDisclaimer = 'false'
-    }
+      this.closedDisclaimer = true;
+      localStorage.showDisclaimer = "false";
+    },
   },
 });
 </script>
