@@ -13,7 +13,7 @@
       </router-link>
       <nav>
         <button class="wallet">
-          <router-link to="/lbp">webapp</router-link
+          <router-link to="/lbp">Access LBP</router-link
           ><svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path
               d="M5 12H19"
