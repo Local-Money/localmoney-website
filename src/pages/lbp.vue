@@ -25,7 +25,16 @@
               {{ formatAddress(walletAddress) }}
             </p>
             <p v-else>connect</p>
-            <img src="@/assets/ic_wallet.svg" alt="Connect your wallet" />
+            <img
+              v-if="walletAddress.length > 0"
+              src="@/assets/ic_close.svg"
+              alt="Connect your wallet"
+            />
+            <img
+              v-else
+              src="@/assets/ic_wallet.svg"
+              alt="Connect your wallet"
+            />
           </button>
         </a>
       </nav>

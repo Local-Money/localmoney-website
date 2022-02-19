@@ -12,6 +12,7 @@
     "@terra-money/wallet-provider": "^3.8.0",
     "apexcharts": "^3.33.0",
     "core-js": "^3.6.5",
+    "react": "^17.0.2",
     "rxjs": "^7.4.0",
     "vue": "^3.0.0",
     "vue-currency-input": "^2.4.0",
