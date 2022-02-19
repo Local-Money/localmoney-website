@@ -100,7 +100,7 @@
               access to all that Terra Money has to offer.
             </p>
             <div class="wrap-cta">
-              <p>Want to know more about us.</p>
+              <p>Want to know more about us?</p>
               <a
                 href="https://localterra.money/localterra-litepaper-v1.pdf"
                 target="_blank"
