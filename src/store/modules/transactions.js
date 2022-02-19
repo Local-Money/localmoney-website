@@ -1,5 +1,4 @@
 import { FACTORY_CONTRACT, PAIR_CONTRACT } from "@/constants";
-import { connectExtension } from "@/terra/extension";
 import { buildClient } from "@/terra/client";
 import {
   getBalance,
@@ -29,21 +28,24 @@ import {
   errorFeedback,
   successFeedback,
 } from "@/components/ModalFeedback";
+import { getController } from "@/controller";
+import { UserDenied } from "@terra-money/wallet-provider";
 
-let testnet = buildClient({
+let testnet = {
   URL: "https://bombay-lcd.terra.dev",
   chainID: "bombay-12",
   gasPrices: "0.15",
-});
+};
 
-let mainnet = buildClient({
+let mainnet = {
   URL: "https://lcd.terra.dev",
   chainID: "columbus-5",
   gasPrices: "0.15",
-});
+};
 
 let isTestNet = false;
-let terra = isTestNet ? testnet : mainnet;
+const networkConfig = isTestNet ? testnet : mainnet;
+let terra = buildClient(networkConfig);
 
 const state = {
   pageLoading: {
@@ -51,6 +53,7 @@ const state = {
     label: undefined,
     transaction: undefined,
   },
+  isConnected: false,
   isLbpRunning: true,
   lbpStartTime: undefined,
   lbpEndTime: undefined,
@@ -150,36 +153,57 @@ const mutations = {
 };
 
 const actions = {
-  async initWallet({ commit, dispatch }) {
-    try {
-      const { wallet, info } = await connectExtension();
-      terra = buildClient({
-        URL: info.lcd,
-        chainID: info.chainID,
-      });
-      commit("setPageLoading", {
-        isLoading: true,
-        label: "Connecting wallet...",
-      });
-      commit("setWalletAddress", wallet.address);
-      const balance = await dispatch("fetchBalance");
-      const tokenBalance = await dispatch("fetchTokenBalance");
-      commit("setBalance", balance);
-      commit("setTokenBalance", tokenBalance);
-      dispatch("fetchCurrentPair");
-    } catch (e) {
-      commit("setWalletAddress", "");
-      commit(
-        "setPageFeedback",
-        errorFeedback({
-          title: "Ooops...",
-          message:
-            "We had a problem connecting to your wallet. Make sure it is connected to the right network.",
-        })
-      );
-    } finally {
-      commit("setPageLoading", { isLoading: false });
+  async initWallet({ getters }) {
+    const controller = getController();
+    if (getters.walletAddress === "") {
+      controller.connect();
+    } else {
+      controller.disconnect();
     }
+  },
+  async observeWalletInformation({ commit, dispatch }) {
+    const controller = getController();
+    controller.states().subscribe({
+      next(_walletConnected) {
+        if (_walletConnected.status === "WALLET_CONNECTED") {
+          commit("setPageLoading", {
+            isLoading: true,
+            label: "Connecting wallet...",
+          });
+          if (_walletConnected.network.chainID === networkConfig.chainID) {
+            terra = buildClient({
+              URL: _walletConnected.network.lcd,
+              chainID: _walletConnected.network.chainID,
+            });
+            const wallet = _walletConnected.wallets[0].terraAddress;
+            commit("setWalletAddress", wallet);
+            dispatch("updateBalance");
+            dispatch("fetchCurrentPair");
+          } else {
+            this.error();
+          }
+          commit("setPageLoading", { isLoading: false });
+        } else {
+          commit("setWalletAddress", "");
+          commit("setTokenBalance", 0);
+          commit("setBalance", 0);
+          dispatch("fetchCurrentPair");
+        }
+      },
+      error(e) {
+        commit("setWalletAddress", "");
+        commit("setPageLoading", { isLoading: false });
+        commit(
+          "setPageFeedback",
+          errorFeedback({
+            title: "Ooops...",
+            message:
+              "We had a problem connecting to your wallet. Make sure it is connected to the right network.",
+          })
+        );
+        console.log(e);
+      },
+    });
   },
   async updateBalance({ dispatch, commit }) {
     const balance = await dispatch("fetchBalance");
@@ -403,8 +427,7 @@ const actions = {
         }, 1000);
       },
       (e) => {
-        // error code 1 is transaction denied by the user
-        if (e.code !== 1) {
+        if (!(e instanceof UserDenied)) {
           commit("setPageFeedback", errorFeedback({}));
         }
         commit("setPageLoading", { isLoading: false });

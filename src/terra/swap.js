@@ -1,13 +1,13 @@
 import {
   Coin,
   Coins,
-  Extension,
   Int,
   MsgExecuteContract,
   StdFee,
 } from "@terra-money/terra.js";
 import { nativeTokenFromPair, saleAssetFromPair } from "@/helpers/asset_pairs";
 import { getBalance, getTokenBalance } from "./queries";
+import { getController } from "@/controller";
 
 /**
  * Terra account address
@@ -20,23 +20,24 @@ export function estimateFee(terraClient, msg) {
 }
 
 export function postMsg(terraClient, { msg, fee }) {
-  const extension = new Extension();
-  const promise = new Promise((resolve, reject) => {
-    extension.once("onPost", ({ success, error, result }) => {
-      if (success) {
-        resolve(result);
-      } else {
-        reject(error);
-      }
+  const controller = getController();
+  return new Promise((resolve, reject) => {
+    controller.connectedWallet().subscribe((_connectedWallet) => {
+      _connectedWallet
+        .post({
+          msgs: [msg],
+          fee,
+        })
+        .then(({ success, error, result }) => {
+          if (success) {
+            resolve(result);
+          } else {
+            reject(error);
+          }
+        })
+        .catch(reject);
     });
   });
-
-  extension.post({
-    msgs: [msg],
-    fee,
-  });
-
-  return promise;
 }
 
 /**
