@@ -100,6 +100,7 @@ import SwapForm from "@/components/SwapForm.vue";
 import ModalLoading from "@/components/ModalLoading";
 import ModalFeedback from "@/components/ModalFeedback";
 import ModalDisclaimer from "@/components/ModalDisclaimer";
+import { getController, initController } from "@/controller";
 
 export default defineComponent({
   name: "lbp",
@@ -126,10 +127,15 @@ export default defineComponent({
   mounted: function () {
     this.fetchCurrentPair();
     this.$nextTick(function () {
+      initController().then(() => this.observeWalletInformation());
       setInterval(async () => await this.fetchCurrentPair(), 30000);
     });
     this.onResize();
     window.addEventListener("resize", this.onResize, { passive: true });
+  },
+  onUnmounted: function () {
+    getController().states().unsubscribe();
+    getController().connectedWallet().unsubscribe();
   },
   computed: {
     ...mapGetters([
@@ -161,7 +167,11 @@ export default defineComponent({
     },
   },
   methods: {
-    ...mapActions(["initWallet", "fetchCurrentPair"]),
+    ...mapActions([
+      "initWallet",
+      "fetchCurrentPair",
+      "observeWalletInformation",
+    ]),
     durationString,
     formatAmount,
     formatAddress,

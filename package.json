@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "@terra-money/terra.js": "^2.0.15",
+    "@terra-money/wallet-provider": "^3.8.0",
     "apexcharts": "^3.33.0",
     "core-js": "^3.6.5",
+    "rxjs": "^7.4.0",
     "vue": "^3.0.0",
     "vue-currency-input": "^2.4.0",
     "vue-router": "^4.0.11",
