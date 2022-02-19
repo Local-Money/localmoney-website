@@ -153,10 +153,11 @@ const mutations = {
 };
 
 const actions = {
-  async initWallet({ getters }) {
+  async initWallet({ getters }, isMobile) {
     const controller = getController();
     if (getters.walletAddress === "") {
-      controller.connect();
+      const config = isMobile ? "WALLETCONNECT" : "EXTENSION";
+      controller.connect(config);
     } else {
       controller.disconnect();
     }

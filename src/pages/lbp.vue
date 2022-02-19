@@ -20,7 +20,7 @@
       </router-link>
       <nav v-if="this.isLbpRunning">
         <a href="#">
-          <button class="wallet" @click="initWallet()">
+          <button class="wallet" @click="initWallet($isMobile())">
             <p v-if="walletAddress.length > 0">
               {{ formatAddress(walletAddress) }}
             </p>
