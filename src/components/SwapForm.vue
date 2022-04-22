@@ -106,7 +106,11 @@ export default defineComponent({
       simulation: {
         fromAmount: undefined,
         toAmount: undefined,
+<<<<<<< HEAD
         priceImpact: "0.00%",
+=======
+        priceImpact: 0,
+>>>>>>> main
         simulatedPrice: 0,
       },
       isReverseSimulation: true,
@@ -169,11 +173,26 @@ export default defineComponent({
       return addressIsValid && fromIsValid && canAffordFees;
     },
     transactionFee() {
+<<<<<<< HEAD
       const fee = this.maxSwapFee ?? 0.0;
       return Dec.div(fee, 10 ** 6).toFixed(3);
     },
     priceImpact() {
       return this.simulation.priceImpact ?? "0.00%";
+=======
+      if (this.maxSwapFee) {
+        return Dec.div(this.maxSwapFee, 10 ** 6).toFixed(2);
+      } else {
+        return "";
+      }
+    },
+    priceImpact() {
+      if (this.simulation.priceImpact) {
+        return this.simulation.priceImpact;
+      } else {
+        return "";
+      }
+>>>>>>> main
     },
   },
   methods: {
@@ -216,9 +235,15 @@ export default defineComponent({
             : this.isReverseSimulation
             ? amount / value
             : value / amount;
+<<<<<<< HEAD
 
           const impact = (-1 + simulatedPrice / this.tokenPrice.value) * 100;
           const priceImpact = (isNaN(impact) ? 0 : impact).toFixed(2) + "%";
+=======
+          const priceImpact =
+            ((-1 + simulatedPrice / this.tokenPrice.value) * 100).toFixed(2) +
+            "%";
+>>>>>>> main
 
           Object.assign(this.simulation, {
             priceImpact,
@@ -247,7 +272,11 @@ export default defineComponent({
         fromSymbol: this.fromSymbol,
       });
       await this.$nextTick(() => {
+<<<<<<< HEAD
         this.simulation.fromAmount = null;
+=======
+        this.fromAmount = null;
+>>>>>>> main
         this.simulation.toAmount = null;
       });
     },
@@ -340,6 +369,7 @@ export default defineComponent({
     display: block;
     margin: 16px auto;
     stroke: $gray700;
+<<<<<<< HEAD
     cursor: pointer;
     &:hover {
       stroke: $primary;
@@ -383,6 +413,8 @@ export default defineComponent({
   p {
     font-size: 12px;
     color: $gray700;
+=======
+>>>>>>> main
   }
 }
 
