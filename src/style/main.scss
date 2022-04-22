@@ -215,7 +215,7 @@ main {
     .timeline-line {
       position: absolute;
       width: 2px;
-      height: 85%;
+      height: 90%;
       left: 127px;
       margin-top: -32px;
       background-color: $surface;
@@ -226,7 +226,7 @@ main {
       position: relative;
       max-width: 1000px;
       margin-bottom: 32px;
-      margin-left: 40px;
+      margin-left: 36px;
       z-index: 100;
       .wrap-date {
         display: flex;
@@ -240,10 +240,30 @@ main {
           background-color: $primary;
         }
         .date {
-          color: $primary;
+          color: $base-text;
           font-size: 20px;
           font-weight: $bold;
           margin-left: 24px;
+        }
+        .icon-todo {
+          width: 24px;
+          height: 48px;
+          background-color: $background;
+          fill: $primary;
+          stroke: $primary;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .icon-done {
+          width: 24px;
+          height: 48px;
+          background-color: $background;
+          fill: $done;
+          stroke: $done;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
       }
       .wrap-content {
@@ -261,11 +281,6 @@ main {
           margin-left: 40px;
           transition: border 500ms ease-out;
 
-          &:hover {
-            border: 1px solid $primary;
-            transition: border 500ms ease-out;
-          }
-
           .title {
             font-size: 24px;
             font-weight: $semi-bold;
@@ -278,6 +293,30 @@ main {
             font-size: 18px;
             font-weight: $regular;
             color: $gray900;
+
+            a {
+              color: $primary;
+              vertical-align: middle;
+            }
+
+            svg {
+              margin-left: 12px;
+              stroke: $primary;
+              vertical-align: middle;
+            }
+          }
+        }
+        .todo {
+          &:hover {
+            border: 1px solid $primary;
+            transition: border 500ms ease-out;
+          }
+        }
+        .done {
+          opacity: 100%;
+          &:hover {
+            border: 1px solid $done;
+            transition: border 500ms ease-out;
           }
         }
       }
@@ -481,7 +520,7 @@ footer {
 
       .roadmap-item {
         margin-bottom: 24px;
-        margin-left: 8px;
+        margin-left: 4px;
         .wrap-date {
           .circle {
             width: 12px;
