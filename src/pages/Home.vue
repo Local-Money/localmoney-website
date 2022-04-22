@@ -183,8 +183,8 @@
             <div class="content done">
               <p class="title">Astroport LOCAL-UST pool</p>
               <p class="description">
-                We are happy to announce that now the $LOCAL is officially
-                available on Astroport.
+                We are happy to announce that $LOCAL is now officially available
+                on Astroport.
               </p>
               <p class="description">
                 <a
