@@ -52,11 +52,29 @@
       @change="setTo"
       @focus="this.isReverseSimulation = true"
     />
-    <h4>Transaction Summary:</h4>
-    <p>Transaction Fee: ~{{ transactionFee }}</p>
-    <p>Price Impact: {{ priceImpact }}</p>
-    <p>Simulated Price: ${{ formatTokenPrice(simulation.simulatedPrice) }}</p>
-    <button class="primary" @click="swap()" :disabled="!isValid">Swap</button>
+    <div class="wrap-summary">
+      <!-- <h4>Transaction Summary:</h4> -->
+      <div class="wrap-label">
+        <p>Transaction Fee</p>
+        <p>Price Impact</p>
+        <p>LOCAL Price (estimated)</p>
+      </div>
+      <div class="wrap-value">
+        <p>~ ${{ transactionFee }}</p>
+        <p>{{ priceImpact }}</p>
+        <p>${{ formatTokenPrice(simulation.simulatedPrice) }}</p>
+      </div>
+    </div>
+    <div class="warning">
+      <p>
+        Warning: The numbers above are estimates and could change based on
+        network activity between the time you submit your transaction and the
+        time it completes.
+      </p>
+    </div>
+    <button class="primary bg-gray300" @click="swap()" :disabled="!isValid">
+      Swap
+    </button>
   </div>
 </template>
 
@@ -88,7 +106,11 @@ export default defineComponent({
       simulation: {
         fromAmount: undefined,
         toAmount: undefined,
+<<<<<<< HEAD
+        priceImpact: "0.00%",
+=======
         priceImpact: 0,
+>>>>>>> main
         simulatedPrice: 0,
       },
       isReverseSimulation: true,
@@ -151,6 +173,13 @@ export default defineComponent({
       return addressIsValid && fromIsValid && canAffordFees;
     },
     transactionFee() {
+<<<<<<< HEAD
+      const fee = this.maxSwapFee ?? 0.0;
+      return Dec.div(fee, 10 ** 6).toFixed(3);
+    },
+    priceImpact() {
+      return this.simulation.priceImpact ?? "0.00%";
+=======
       if (this.maxSwapFee) {
         return Dec.div(this.maxSwapFee, 10 ** 6).toFixed(2);
       } else {
@@ -163,6 +192,7 @@ export default defineComponent({
       } else {
         return "";
       }
+>>>>>>> main
     },
   },
   methods: {
@@ -205,9 +235,15 @@ export default defineComponent({
             : this.isReverseSimulation
             ? amount / value
             : value / amount;
+<<<<<<< HEAD
+
+          const impact = (-1 + simulatedPrice / this.tokenPrice.value) * 100;
+          const priceImpact = (isNaN(impact) ? 0 : impact).toFixed(2) + "%";
+=======
           const priceImpact =
             ((-1 + simulatedPrice / this.tokenPrice.value) * 100).toFixed(2) +
             "%";
+>>>>>>> main
 
           Object.assign(this.simulation, {
             priceImpact,
@@ -236,7 +272,11 @@ export default defineComponent({
         fromSymbol: this.fromSymbol,
       });
       await this.$nextTick(() => {
+<<<<<<< HEAD
+        this.simulation.fromAmount = null;
+=======
         this.fromAmount = null;
+>>>>>>> main
         this.simulation.toAmount = null;
       });
     },
@@ -329,6 +369,52 @@ export default defineComponent({
     display: block;
     margin: 16px auto;
     stroke: $gray700;
+<<<<<<< HEAD
+    cursor: pointer;
+    &:hover {
+      stroke: $primary;
+    }
+  }
+}
+
+.wrap-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding: 16px 24px;
+  background-color: $gray150;
+  border-radius: 8px;
+  border: 1px solid $border;
+
+  p {
+    font-size: 14px;
+    margin-bottom: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .wrap-label {
+    color: $gray700;
+  }
+
+  .wrap-value {
+    text-align: right;
+  }
+}
+
+.warning {
+  margin-top: 16px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  border: 1px solid $border;
+
+  p {
+    font-size: 12px;
+    color: $gray700;
+=======
+>>>>>>> main
   }
 }
 

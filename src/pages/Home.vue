@@ -11,28 +11,24 @@
           class="logo"
         />
       </router-link>
-      <!--
-      LBP BUTTON
-      <nav>
-        <button class="primary">
-          <router-link to="/lbp">webapp</router-link>
-        </button>
-      </nav>
-      -->
     </header>
 
     <div class="wrap-hero page-layout section-spacer">
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          Access all that
+          Local Terra is a P2P decentralized marketplace that provides access to
+          all that
           <a href="https://terra.money/" target="_blank">Terra Money</a> has to
           offer.
         </p>
         <div class="wrap-cta">
-          <p>Want to get notified when we launch?</p>
-          <a href="https://twitter.com/local_terra" target="_blank">
-            <button class="primary">Follow us</button>
+          <p>Want to know more about us?</p>
+          <a
+            href="https://localterra.money/localterra-litepaper-v1.pdf"
+            target="_blank"
+          >
+            <button class="primary">Litepaper</button>
           </a>
         </div>
       </article>
@@ -45,31 +41,68 @@
     </div>
 
     <main>
-      <section class="lbp-teaser page-layout">
-        <div class="wrap-img">
-          <img
-            src="@/assets/lbp-hands.png"
-            alt="Girl holding a LOCAL token smiling"
-          />
+      <!-- <section class="lbp-teaser">
+        <div class="wrap-lbp page-layout">
+          <div class="wrap-img">
+            <img
+              src="@/assets/lbp-hands.png"
+              alt="Girl holding a LOCAL token smiling"
+            />
+          </div>
+          <div class="wrap-content">
+            <h2>
+              Take your place in the future of
+              <span class="text-primary">LOCAL.</span>
+            </h2>
+            <p>
+              Our LBP will take place February 18th. The exact time will be
+              announced one day before on our Twitter.
+            </p>
+            <div class="wrap-cta">
+              <p>Follow us to get notified.</p>
+              <a href="https://twitter.com/local_terra" target="_blank">
+                <button class="primary">Follow us</button>
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="wrap-content">
-          <h2>
-            Take your place in the future of
-            <span class="text-primary">LOCAL.</span>
-          </h2>
-          <p>
-            In a few days we will be introducing the LOCAL token. This will be
-            your first chance to help us create a better access to financial
-            freedom.
-          </p>
-          <div class="wrap-cta">
-            <p>Check out our launch post.</p>
-            <a
-              href="https://local-terra.medium.com/announcing-our-launch-sequence-ed8431261d16?source=friends_link&sk=ea26c8b52c1d48e060ce259eac438de8"
-              target="_blank"
-            >
-              <button class="primary">Read more</button>
-            </a>
+      </section> -->
+
+      <section class="featured section-spacer">
+        <div class="wrap-featured page-layout">
+          <div class="feature">
+            <h2>
+              <span class="text-primary">Fast and easy</span> on-off ramps
+            </h2>
+            <div class="wrap-img">
+              <img
+                v-if="!isMobile"
+                src="@/assets/top-feature-01.png"
+                alt="Image displaying a top feature"
+              />
+              <img
+                v-else
+                src="@/assets/top-feature-01-mobile.png"
+                alt="Image displaying a top feature"
+              />
+            </div>
+          </div>
+          <div class="feature">
+            <h2>
+              <span class="text-primary">Trustless</span> trading experience
+            </h2>
+            <div class="wrap-img">
+              <img
+                v-if="!isMobile"
+                src="@/assets/top-feature-02.png"
+                alt="Image displaying a top feature"
+              />
+              <img
+                v-else
+                src="@/assets/top-feature-02-mobile.png"
+                alt="Image displaying a top feature"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -139,13 +172,21 @@
         <div class="roadmap-item">
           <div class="wrap-date">
             <div class="circle"></div>
-            <p class="date">Q1 . 2022</p>
+            <p class="date">Feb 18th, 2022</p>
           </div>
           <div class="wrap-content">
             <div class="content">
               <p class="title">LBP</p>
               <p class="description">$LOCAL token initial offer.</p>
             </div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="circle"></div>
+            <p class="date">Q1 . 2022</p>
+          </div>
+          <div class="wrap-content">
             <div class="content">
               <p class="title">Beta</p>
               <p class="description">Beta on Testnet with community members.</p>
@@ -271,6 +312,13 @@
                 d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
               ></path></svg
           ></a>
+          <a href="https://local-terra.medium.com/" target="_blank">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+              <circle cx="6" cy="12" r="5" fill="white" />
+              <ellipse cx="15.5" cy="12" rx="2.5" ry="5" fill="white" />
+              <ellipse cx="21" cy="12" rx="1" ry="5" fill="white" />
+            </svg>
+          </a>
         </div>
       </div>
     </footer>
@@ -283,6 +331,27 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "Home",
   components: {},
+
+  data: () => ({
+    isMobile: false,
+  }),
+
+  beforeUnmount() {
+    if (typeof window !== "undefined") {
+      window.removeEventListener("resize", this.onResize, { passive: true });
+    }
+  },
+
+  mounted() {
+    this.onResize();
+    window.addEventListener("resize", this.onResize, { passive: true });
+  },
+
+  methods: {
+    onResize() {
+      this.isMobile = window.innerWidth < 600;
+    },
+  },
 });
 </script>
 

@@ -24,12 +24,11 @@ import {
   postMsg,
 } from "@/terra/swap";
 import { loading, success } from "@/terra/result";
-
-let terrarium = buildClient({
-  URL: "http://143.244.190.1:3060",
-  chainID: "localterra",
-  gasPrices: "0.15",
-});
+import {
+  baseFeedback,
+  errorFeedback,
+  successFeedback,
+} from "@/components/ModalFeedback";
 
 let testnet = buildClient({
   URL: "https://bombay-lcd.terra.dev",
@@ -37,8 +36,14 @@ let testnet = buildClient({
   gasPrices: "0.15",
 });
 
+let mainnet = buildClient({
+  URL: "https://lcd.terra.dev",
+  chainID: "columbus-5",
+  gasPrices: "0.15",
+});
+
 let isTestNet = true;
-let terra = isTestNet ? testnet : terrarium;
+let terra = isTestNet ? testnet : mainnet;
 
 const state = {
   pageLoading: {
@@ -46,10 +51,12 @@ const state = {
     label: undefined,
     transaction: undefined,
   },
+  pageFeedback: baseFeedback(),
   walletAddress: "",
   balance: 0,
   tokenBalance: 0,
   currentPair: null,
+  tokenAddress: null,
   tokenPrice: loading(),
   secondsRemaining: loading(),
   tokensRemaining: loading({ amount: 0, percentage: 0 }),
@@ -73,6 +80,7 @@ const getters = {
     const denom = state.pair ? nativeTokenFromPair(state.pair).denom : "uusd";
     return NATIVE_TOKEN_SYMBOLS[denom];
   },
+  tokenAddress: (state) => state.tokenAddress,
   tokenPrice: (state) => state.tokenPrice,
   tokensRemaining: (state) => state.tokensRemaining,
   currentLbpWeight: (state) => state.currentLbpWeight,
@@ -81,6 +89,7 @@ const getters = {
   secondsRemaining: (state) => state.secondsRemaining,
   saleTokenInfo: (state) => state.saleTokenInfo,
   pageLoading: (state) => state.pageLoading,
+  pageFeedback: (state) => state.pageFeedback,
   priceHistory: (state) => () => {
     return {
       time: state.time,
@@ -105,6 +114,7 @@ const getters = {
 
 const mutations = {
   setPageLoading: (state, pageLoading) => (state.pageLoading = pageLoading),
+  setPageFeedback: (state, pageFeedback) => (state.pageFeedback = pageFeedback),
   setWalletAddress: (state, walletAddress) =>
     (state.walletAddress = walletAddress),
   setBalance: (state, balance) => (state.balance = balance),
@@ -127,28 +137,40 @@ const mutations = {
     state.series = priceHistory.series;
   },
   setMaxSwapFee: (state, maxSwapFee) => (state.maxSwapFee = maxSwapFee),
+  setTokenAddress: (state, tokenAddress) => (state.tokenAddress = tokenAddress),
 };
 
 const actions = {
   async initWallet({ commit, dispatch }) {
-    const { wallet, info } = await connectExtension();
-    terra = buildClient({
-      URL: info.lcd,
-      chainID: info.chainID,
-    });
-
-    commit("setPageLoading", {
-      isLoading: true,
-      label: "Connecting wallet...",
-    });
-    commit("setWalletAddress", wallet.address);
-    const balance = await dispatch("fetchBalance");
-    const tokenBalance = await dispatch("fetchTokenBalance");
-    commit("setBalance", balance);
-    commit("setTokenBalance", tokenBalance);
-    commit("setPageLoading", { isLoading: false });
-
-    dispatch("fetchCurrentPair");
+    try {
+      const { wallet, info } = await connectExtension();
+      terra = buildClient({
+        URL: info.lcd,
+        chainID: info.chainID,
+      });
+      commit("setPageLoading", {
+        isLoading: true,
+        label: "Connecting wallet...",
+      });
+      commit("setWalletAddress", wallet.address);
+      const balance = await dispatch("fetchBalance");
+      const tokenBalance = await dispatch("fetchTokenBalance");
+      commit("setBalance", balance);
+      commit("setTokenBalance", tokenBalance);
+      dispatch("fetchCurrentPair");
+    } catch (e) {
+      commit("setWalletAddress", "");
+      commit(
+        "setPageFeedback",
+        errorFeedback({
+          title: "Ooops...",
+          message:
+            "We had a problem connecting to your wallet. Make sure it is connected to the right network.",
+        })
+      );
+    } finally {
+      commit("setPageLoading", { isLoading: false });
+    }
   },
   async updateBalance({ dispatch, commit }) {
     const balance = await dispatch("fetchBalance");
@@ -185,6 +207,10 @@ const actions = {
 
     commit("setCurrentPair", currentPair);
     if (currentPair != null) {
+      commit(
+        "setTokenAddress",
+        saleAssetFromPair(currentPair.asset_infos).info.token.contract_addr
+      );
       dispatch("fetchSaleTokenInfo");
       dispatch("fetchWeights");
       dispatch("fetchSecondsRemaining");
@@ -358,10 +384,15 @@ const actions = {
             dispatch("updateBalance");
             dispatch("fetchCurrentPair");
             commit("setPageLoading", { isLoading: false });
+            commit("setPageFeedback", successFeedback({}));
           }
         }, 1000);
       },
-      () => {
+      (e) => {
+        // error code 1 is transaction denied by the user
+        if (e.code !== 1) {
+          commit("setPageFeedback", errorFeedback({}));
+        }
         commit("setPageLoading", { isLoading: false });
       }
     );
