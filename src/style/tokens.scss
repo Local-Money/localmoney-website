@@ -30,6 +30,14 @@ $extra-bold: 800;
   color: $primary;
 }
 
+.text-done {
+  color: $done !important;
+}
+
+.background-done {
+  background-color: $done !important;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 /*Assets */

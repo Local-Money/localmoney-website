@@ -41,33 +41,6 @@
     </div>
 
     <main>
-      <!-- <section class="lbp-teaser">
-        <div class="wrap-lbp page-layout">
-          <div class="wrap-img">
-            <img
-              src="@/assets/lbp-hands.png"
-              alt="Girl holding a LOCAL token smiling"
-            />
-          </div>
-          <div class="wrap-content">
-            <h2>
-              Take your place in the future of
-              <span class="text-primary">LOCAL.</span>
-            </h2>
-            <p>
-              Our LBP will take place February 18th. The exact time will be
-              announced one day before on our Twitter.
-            </p>
-            <div class="wrap-cta">
-              <p>Follow us to get notified.</p>
-              <a href="https://twitter.com/local_terra" target="_blank">
-                <button class="primary">Follow us</button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section> -->
-
       <section class="featured section-spacer">
         <div class="wrap-featured page-layout">
           <div class="feature">
@@ -171,11 +144,21 @@
 
         <div class="roadmap-item">
           <div class="wrap-date">
-            <div class="circle"></div>
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
             <p class="date">Feb 18th, 2022</p>
           </div>
           <div class="wrap-content">
-            <div class="content">
+            <div class="content done">
               <p class="title">LBP</p>
               <p class="description">$LOCAL token initial offer.</p>
             </div>
@@ -183,31 +166,133 @@
         </div>
         <div class="roadmap-item">
           <div class="wrap-date">
-            <div class="circle"></div>
-            <p class="date">Q1 . 2022</p>
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">Feb 23th, 2022</p>
           </div>
           <div class="wrap-content">
-            <div class="content">
-              <p class="title">Beta</p>
-              <p class="description">Beta on Testnet with community members.</p>
-              <p class="description">Security Audit.</p>
+            <div class="content done">
+              <p class="title">Astroport LOCAL-UST pool</p>
+              <p class="description">
+                We are happy to announce that $LOCAL is now officially available
+                on Astroport.
+              </p>
+              <p class="description">
+                <a
+                  href="https://app.astroport.fi/swap?from=uusd&to=terra1vchw83qt25j89zqwdpmdzj722sqxthnckqzxxp"
+                  target="_blank"
+                  >$LOCAL on Astroport</a
+                >
+              </p>
             </div>
           </div>
         </div>
-        <!-- END ROADMAP ITEM -->
         <div class="roadmap-item">
           <div class="wrap-date">
-            <div class="circle"></div>
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">Mar 7th, 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content done">
+              <p class="title">Discord Server Launch</p>
+              <p class="description">
+                Our community has a cozy place to get together now.
+              </p>
+              <p class="description">
+                <a href="https://discord.gg/meXhfQ8TWr" target="_blank"
+                  >Discord Server</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">Apr 2nd, 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content done">
+              <p class="title">Testnet Launch</p>
+              <p class="description">
+                Beta on Testnet with community members. We're looking forward to
+                receive your feedback and suggestions on the Testnet channel on
+                our Discord.
+              </p>
+              <p class="description">
+                <a href="https://testnet.localterra.money/" target="_blank"
+                  >Testnet</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-todo">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 16V8.00002C20.9996 7.6493 20.9071 7.30483 20.7315 7.00119C20.556 6.69754 20.3037 6.44539 20 6.27002L13 2.27002C12.696 2.09449 12.3511 2.00208 12 2.00208C11.6489 2.00208 11.304 2.09449 11 2.27002L4 6.27002C3.69626 6.44539 3.44398 6.69754 3.26846 7.00119C3.09294 7.30483 3.00036 7.6493 3 8.00002V16C3.00036 16.3508 3.09294 16.6952 3.26846 16.9989C3.44398 17.3025 3.69626 17.5547 4 17.73L11 21.73C11.304 21.9056 11.6489 21.998 12 21.998C12.3511 21.998 12.696 21.9056 13 21.73L20 17.73C20.3037 17.5547 20.556 17.3025 20.7315 16.9989C20.9071 16.6952 20.9996 16.3508 21 16Z"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3.27 6.96002L12 12.01L20.73 6.96002"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12 22.08V12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
             <p class="date">Q2 . 2022</p>
           </div>
           <div class="wrap-content">
-            <div class="content">
-              <p class="title">UST Trading v1.0</p>
+            <div class="content todo">
+              <p class="title">v1.0</p>
+              <p class="description">Security Audit</p>
               <p class="description">
                 Within the first release of Local Terra, makers will be able to
                 create offers to buy and sell UST.
               </p>
-              <p class="description">Astroport LOCAL-UST pool.</p>
             </div>
           </div>
         </div>
@@ -215,11 +300,35 @@
 
         <div class="roadmap-item">
           <div class="wrap-date">
-            <div class="circle"></div>
+            <div class="icon-todo">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 16V8.00002C20.9996 7.6493 20.9071 7.30483 20.7315 7.00119C20.556 6.69754 20.3037 6.44539 20 6.27002L13 2.27002C12.696 2.09449 12.3511 2.00208 12 2.00208C11.6489 2.00208 11.304 2.09449 11 2.27002L4 6.27002C3.69626 6.44539 3.44398 6.69754 3.26846 7.00119C3.09294 7.30483 3.00036 7.6493 3 8.00002V16C3.00036 16.3508 3.09294 16.6952 3.26846 16.9989C3.44398 17.3025 3.69626 17.5547 4 17.73L11 21.73C11.304 21.9056 11.6489 21.998 12 21.998C12.3511 21.998 12.696 21.9056 13 21.73L20 17.73C20.3037 17.5547 20.556 17.3025 20.7315 16.9989C20.9071 16.6952 20.9996 16.3508 21 16Z"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3.27 6.96002L12 12.01L20.73 6.96002"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12 22.08V12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
             <p class="date">Q3 . 2022</p>
           </div>
           <div class="wrap-content">
-            <div class="content">
+            <div class="content todo">
               <p class="title">Luna and CW20 tokens support.</p>
               <p class="description">
                 We'll provide easy and quick fiat conversion to and from your
@@ -233,11 +342,35 @@
 
         <div class="roadmap-item">
           <div class="wrap-date">
-            <div class="circle"></div>
+            <div class="icon-todo">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 16V8.00002C20.9996 7.6493 20.9071 7.30483 20.7315 7.00119C20.556 6.69754 20.3037 6.44539 20 6.27002L13 2.27002C12.696 2.09449 12.3511 2.00208 12 2.00208C11.6489 2.00208 11.304 2.09449 11 2.27002L4 6.27002C3.69626 6.44539 3.44398 6.69754 3.26846 7.00119C3.09294 7.30483 3.00036 7.6493 3 8.00002V16C3.00036 16.3508 3.09294 16.6952 3.26846 16.9989C3.44398 17.3025 3.69626 17.5547 4 17.73L11 21.73C11.304 21.9056 11.6489 21.998 12 21.998C12.3511 21.998 12.696 21.9056 13 21.73L20 17.73C20.3037 17.5547 20.556 17.3025 20.7315 16.9989C20.9071 16.6952 20.9996 16.3508 21 16Z"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3.27 6.96002L12 12.01L20.73 6.96002"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12 22.08V12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
             <p class="date">Q4 . 2022</p>
           </div>
           <div class="wrap-content">
-            <div class="content">
+            <div class="content todo">
               <p class="title">IBC integration</p>
               <p class="description">
                 (Inter-Blockchain Communication Protocol)
@@ -254,11 +387,35 @@
 
         <div class="roadmap-item">
           <div class="wrap-date">
-            <div class="circle"></div>
+            <div class="icon-todo">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 16V8.00002C20.9996 7.6493 20.9071 7.30483 20.7315 7.00119C20.556 6.69754 20.3037 6.44539 20 6.27002L13 2.27002C12.696 2.09449 12.3511 2.00208 12 2.00208C11.6489 2.00208 11.304 2.09449 11 2.27002L4 6.27002C3.69626 6.44539 3.44398 6.69754 3.26846 7.00119C3.09294 7.30483 3.00036 7.6493 3 8.00002V16C3.00036 16.3508 3.09294 16.6952 3.26846 16.9989C3.44398 17.3025 3.69626 17.5547 4 17.73L11 21.73C11.304 21.9056 11.6489 21.998 12 21.998C12.3511 21.998 12.696 21.9056 13 21.73L20 17.73C20.3037 17.5547 20.556 17.3025 20.7315 16.9989C20.9071 16.6952 20.9996 16.3508 21 16Z"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3.27 6.96002L12 12.01L20.73 6.96002"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12 22.08V12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
             <p class="date">2023</p>
           </div>
           <div class="wrap-content">
-            <div class="content">
+            <div class="content todo">
               <p class="title">To the future and beyond</p>
               <p class="description">Mobile App</p>
               <p class="description">Thorchain integration</p>
