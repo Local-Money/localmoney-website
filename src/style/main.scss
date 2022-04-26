@@ -313,7 +313,6 @@ main {
           }
         }
         .done {
-          opacity: 100%;
           &:hover {
             border: 1px solid $done;
             transition: border 500ms ease-out;
