@@ -17,10 +17,8 @@
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          Local Terra is a P2P decentralized marketplace that provides access to
-          all that
-          <a href="https://terra.money/" target="_blank">Terra Money</a> has to
-          offer.
+          <b class="text-primary">Local</b> is a P2P decentralized marketplace
+          for the multi-chain world.
         </p>
         <div class="wrap-cta">
           <p>Want to know more about us?</p>
@@ -41,7 +39,56 @@
     </div>
 
     <main>
-      <section class="featured section-spacer">
+      <section class="video section-spacer">
+        <div class="wrap-outter page-layout">
+          <h2><span class="text-primary">Fast and easy</span> on-off ramps</h2>
+          <div class="wrap-video">
+            <iframe
+              srcdoc="<style>
+          * {
+          padding: 0;
+          margin: 0;
+          overflow: hidden;
+          }
+          
+          body, html {
+            height: 100%;
+          }
+          
+          img, svg {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+          }
+          
+          svg {
+            filter: drop-shadow(1px 1px 10px hsl(206.5, 70.7%, 8%));
+            transition: all 250ms ease-in-out;
+          }
+          
+          body:hover svg {
+            filter: drop-shadow(1px 1px 10px hsl(206.5, 0%, 10%));
+            transform: scale(1.2);
+          }
+        </style>
+        <a href='https://www.youtube.com/embed/PUmyJ4t_W78?autoplay=1'>
+          <img src='https://localterra.money/img/top-feature-01.68c7e072.png' alt='Local Video Thumbnail'>
+          <svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#ef6100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'><polygon points='5 3 19 12 5 21 5 3'></polygon></svg>
+        </a>
+        "
+              src="https://www.youtube.com/embed/PUmyJ4t_W78?autoplay=1"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- <section class="featured section-spacer">
         <div class="wrap-featured page-layout">
           <div class="feature">
             <h2>
@@ -78,7 +125,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
 
       <section class="team section-spacer">
         <div class="wrap-team page-layout">
