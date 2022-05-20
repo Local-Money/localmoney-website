@@ -17,13 +17,13 @@
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          <b class="text-primary">Local</b> is a P2P decentralized marketplace
+          <b class="text-primary">Local</b> is a decentralized P2P marketplace
           for the multi-chain world.
         </p>
         <div class="wrap-cta">
           <p>Want to know more about us?</p>
           <a
-            href="https://localterra.money/localterra-litepaper-v1.pdf"
+            href="https://localterra.money/local-litepaper-v2.pdf"
             target="_blank"
           >
             <button class="primary">Litepaper</button>
@@ -336,7 +336,7 @@
             <div class="content todo">
               <p class="title">v1.0</p>
               <p class="description">
-                First release of LOCAL P2P where makers will be able to create
+                First release of Local P2P where makers will be able to create
                 offers to buy and sell stablecoins.
               </p>
             </div>
@@ -377,7 +377,7 @@
             <div class="content todo">
               <p class="title">Governance</p>
               <p class="description">
-                Provide the community the ability to propose changes to the
+                Provide the community with the ability to propose changes to the
                 protocol.
               </p>
             </div>
