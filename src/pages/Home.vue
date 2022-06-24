@@ -23,7 +23,7 @@
         <div class="wrap-cta">
           <p>Want to know more about us?</p>
           <a
-            href="https://localp2p.money/local-litepaper-v2.pdf"
+            href="https://localp2p.money/local-litepaper-v2-1.pdf"
             target="_blank"
           >
             <button class="primary">Litepaper</button>
@@ -163,16 +163,6 @@
 
             <div class="team-member">
               <img
-                src="@/assets/team/04.png"
-                alt="Local Terra Bull"
-                class="avatar squircicle"
-              />
-              <p class="name">Revo</p>
-              <p class="role">Smart Contract Developer</p>
-            </div>
-
-            <div class="team-member">
-              <img
                 src="@/assets/team/05.png"
                 alt="Local Terra Bull"
                 class="avatar squircicle"
@@ -289,7 +279,7 @@
           </div>
           <div class="wrap-content">
             <div class="content done">
-              <p class="title">Testnet Launch</p>
+              <p class="title">Terra Testnet Launch</p>
               <p class="description">
                 Beta on Testnet with community members. We're looking forward to
                 receive your feedback and suggestions on the Testnet channel on
