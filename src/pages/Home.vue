@@ -1,13 +1,13 @@
 <template>
   <head>
-    <title>Local Terra Roadmap</title>
+    <title>Local Money Roadmap</title>
   </head>
   <body>
     <header class="page-layout">
       <router-link to="/">
         <img
           src="@/assets/logo-horizontal-dark.svg"
-          alt="Local Terra Logo"
+          alt="Local Money Logo"
           class="logo"
         />
       </router-link>
@@ -74,7 +74,7 @@
           }
         </style>
         <a href='https://www.youtube.com/embed/PUmyJ4t_W78?autoplay=1'>
-          <img src='https://localterra.money/img/top-feature-01.68c7e072.png' alt='Local Video Thumbnail'>
+          <img src='https://localp2p.money/top-feature-01.png' alt='Local Video Thumbnail'>
           <svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#ef6100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'><polygon points='5 3 19 12 5 21 5 3'></polygon></svg>
         </a>
         "
@@ -134,7 +134,7 @@
             <div class="team-member">
               <img
                 src="@/assets/team/01.png"
-                alt="Local Terra Bull"
+                alt="Local Money Bull"
                 class="avatar squircicle"
               />
               <p class="name">Sam B</p>
@@ -144,7 +144,7 @@
             <div class="team-member">
               <img
                 src="@/assets/team/02.png"
-                alt="Local Terra Bull"
+                alt="Local Money Bull"
                 class="avatar squircicle"
               />
               <p class="name">Gabs</p>
@@ -154,7 +154,7 @@
             <div class="team-member">
               <img
                 src="@/assets/team/03.png"
-                alt="Local Terra Bull"
+                alt="Local Money Bull"
                 class="avatar squircicle"
               />
               <p class="name">Davi</p>
@@ -164,7 +164,7 @@
             <div class="team-member">
               <img
                 src="@/assets/team/05.png"
-                alt="Local Terra Bull"
+                alt="Local Money Bull"
                 class="avatar squircicle"
               />
               <p class="name">Gus</p>
@@ -286,7 +286,7 @@
                 our Discord.
               </p>
               <p class="description">
-                <a href="https://testnet.localterra.money/" target="_blank"
+                <a href="https://testnet.localp2p.money/" target="_blank"
                   >Testnet</a
                 >
               </p>
@@ -420,7 +420,7 @@
         <router-link to="/">
           <img
             src="@/assets/logo-horizontal-dark.svg"
-            alt="Local Terra Logo"
+            alt="Local P2P Logo"
             class="logo"
           />
         </router-link>
