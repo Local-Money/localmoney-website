@@ -361,10 +361,6 @@
             <div class="content todo">
               <p class="title">Planned Testnet Update</p>
               <p class="description">
-                Finishing up our features before launch, we have in the
-                pipeline:
-              </p>
-              <p class="description">
                 • Arbitration System, that will deal with trade disputes.
               </p>
               <p class="description">
