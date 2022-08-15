@@ -215,18 +215,12 @@
           </div>
           <div class="wrap-content">
             <div class="content done">
-              <p class="title">Astroport LOCAL-UST pool</p>
+              <p class="title">Astroport LOCAL-USTC pool</p>
               <p class="description">
                 We are happy to announce that $LOCAL is now officially available
                 on Astroport.
               </p>
-              <p class="description">
-                <a
-                  href="https://app.astroport.fi/swap?from=uusd&to=terra1vchw83qt25j89zqwdpmdzj722sqxthnckqzxxp"
-                  target="_blank"
-                  >$LOCAL on Astroport</a
-                >
-              </p>
+              <p class="description">(Discontinued)</p>
             </div>
           </div>
         </div>
@@ -283,9 +277,43 @@
                 receive your feedback and suggestions on the Testnet channel on
                 our Discord.
               </p>
+              <p class="description">(Discontinued)</p>
             </div>
           </div>
         </div>
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">May 13th, 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content todo">
+              <p class="title">New Pool on Trader Joe</p>
+              <p class="description">
+                We moved our $LOCAL token liquidity to Trader Joe on Avalanche.
+              </p>
+              <p class="description">
+                <a
+                  href="https://traderjoexyz.com/pool/0xac42f172484f4de5f26959c612e23ddc206998ab/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e#/"
+                  target="_blank"
+                  >Pool link</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
 
         <div class="roadmap-item">
           <div class="wrap-date">
@@ -319,7 +347,7 @@
                 it with us.
               </p>
               <p class="description">
-                <a href="https://testnet.locamoney.io/" target="_blank"
+                <a href="https://testnet.localmoney.io/" target="_blank"
                   >Testnet</a
                 >
               </p>
