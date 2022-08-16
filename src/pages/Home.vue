@@ -22,10 +22,7 @@
         </p>
         <div class="wrap-cta">
           <p>Want to know more about us?</p>
-          <a
-            href="https://localp2p.money/local-litepaper.pdf"
-            target="_blank"
-          >
+          <a href="https://localmoney.io/local-litepaper.pdf" target="_blank">
             <button class="primary">Litepaper</button>
           </a>
         </div>
@@ -218,18 +215,12 @@
           </div>
           <div class="wrap-content">
             <div class="content done">
-              <p class="title">Astroport LOCAL-UST pool</p>
+              <p class="title">Astroport LOCAL-USTC pool</p>
               <p class="description">
                 We are happy to announce that $LOCAL is now officially available
                 on Astroport.
               </p>
-              <p class="description">
-                <a
-                  href="https://app.astroport.fi/swap?from=uusd&to=terra1vchw83qt25j89zqwdpmdzj722sqxthnckqzxxp"
-                  target="_blank"
-                  >$LOCAL on Astroport</a
-                >
-              </p>
+              <p class="description">(Discontinued)</p>
             </div>
           </div>
         </div>
@@ -262,6 +253,7 @@
             </div>
           </div>
         </div>
+
         <div class="roadmap-item">
           <div class="wrap-date">
             <div class="icon-done">
@@ -279,20 +271,139 @@
           </div>
           <div class="wrap-content">
             <div class="content done">
-              <p class="title">Terra Testnet Launch</p>
+              <p class="title">Terra Testnet</p>
               <p class="description">
                 Beta on Testnet with community members. We're looking forward to
                 receive your feedback and suggestions on the Testnet channel on
                 our Discord.
               </p>
+              <p class="description">(Discontinued)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">May 13th, 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content todo">
+              <p class="title">New Pool on Trader Joe</p>
               <p class="description">
-                <a href="https://testnet.localp2p.money/" target="_blank"
+                We moved our $LOCAL token liquidity to Trader Joe on Avalanche.
+              </p>
+              <p class="description">
+                <a
+                  href="https://traderjoexyz.com/pool/0xac42f172484f4de5f26959c612e23ddc206998ab/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e#/"
+                  target="_blank"
+                  >Pool link</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">Jul 11th, 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content todo">
+              <p class="title">Protocol Update</p>
+              <p class="description">Protocol migrated to CW1.0.</p>
+              <p class="description">
+                Compatibility with semi-permissioned model.
+              </p>
+            </div>
+            <div class="content todo">
+              <p class="title">Kujira Testnet</p>
+              <p class="description">
+                Following the announcement of our partnership with Kujira, we
+                have our testnet back online! Again we welcome every feedback
+                and suggestions you may have. Join our Discord channel and share
+                it with us.
+              </p>
+              <p class="description">
+                <a href="https://testnet.localmoney.io/" target="_blank"
                   >Testnet</a
                 >
               </p>
             </div>
           </div>
         </div>
+        <!-- END ROADMAP ITEM -->
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-todo">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 16V8.00002C20.9996 7.6493 20.9071 7.30483 20.7315 7.00119C20.556 6.69754 20.3037 6.44539 20 6.27002L13 2.27002C12.696 2.09449 12.3511 2.00208 12 2.00208C11.6489 2.00208 11.304 2.09449 11 2.27002L4 6.27002C3.69626 6.44539 3.44398 6.69754 3.26846 7.00119C3.09294 7.30483 3.00036 7.6493 3 8.00002V16C3.00036 16.3508 3.09294 16.6952 3.26846 16.9989C3.44398 17.3025 3.69626 17.5547 4 17.73L11 21.73C11.304 21.9056 11.6489 21.998 12 21.998C12.3511 21.998 12.696 21.9056 13 21.73L20 17.73C20.3037 17.5547 20.556 17.3025 20.7315 16.9989C20.9071 16.6952 20.9996 16.3508 21 16Z"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3.27 6.96002L12 12.01L20.73 6.96002"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12 22.08V12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">Q3 . 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content todo">
+              <p class="title">Planned Testnet Update</p>
+              <p class="description">
+                • Arbitration System, that will deal with trade disputes.
+              </p>
+              <p class="description">
+                • Chat System, so people can exchange payment information,
+                receipts and so forth.
+              </p>
+              <p class="description">
+                • Reputation System, that will serve as a way to rank good
+                makers and takers and improve trust.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
+
         <div class="roadmap-item">
           <div class="wrap-date">
             <div class="icon-todo">
@@ -326,8 +437,8 @@
             <div class="content todo">
               <p class="title">v1.0</p>
               <p class="description">
-                First release of Local P2P where makers will be able to create
-                offers to buy and sell stablecoins.
+                First release of Local Money where makers will be able to create
+                offers to buy and sell tokens.
               </p>
             </div>
           </div>
@@ -425,7 +536,7 @@
           />
         </router-link>
         <div class="social">
-          <a href="https://twitter.com/local_p2p" target="_blank">
+          <a href="https://twitter.com/TeamLocalMoney" target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
