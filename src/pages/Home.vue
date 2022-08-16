@@ -22,7 +22,7 @@
         </p>
         <div class="wrap-cta">
           <p>Want to know more about us?</p>
-          <a href="https://localp2p.money/local-litepaper.pdf" target="_blank">
+          <a href="https://localmoney.io/local-litepaper.pdf" target="_blank">
             <button class="primary">Litepaper</button>
           </a>
         </div>
