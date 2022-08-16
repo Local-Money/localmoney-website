@@ -536,7 +536,7 @@
           />
         </router-link>
         <div class="social">
-          <a href="https://twitter.com/local_p2p" target="_blank">
+          <a href="https://twitter.com/TeamLocalMoney" target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
