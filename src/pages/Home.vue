@@ -71,7 +71,7 @@
           }
         </style>
         <a href='https://www.youtube.com/embed/PUmyJ4t_W78?autoplay=1'>
-          <img src='https://localp2p.money/top-feature-01.png' alt='Local Video Thumbnail'>
+          <img src='https://localmoney.io/top-feature-01.png' alt='Local Video Thumbnail'>
           <svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#ef6100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'><polygon points='5 3 19 12 5 21 5 3'></polygon></svg>
         </a>
         "
