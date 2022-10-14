@@ -29,7 +29,7 @@
       </article>
       <div class="hero-img">
         <img
-          src="@/assets/header-img.png"
+          src="@/assets/header-img-2.png"
           alt="Two people making a successful trade"
         />
       </div>
@@ -330,7 +330,7 @@
                 />
               </svg>
             </div>
-            <p class="date">Oct 14th, 2022</p>
+            <p class="date">Oct 17th, 2022</p>
           </div>
           <div class="wrap-content">
             <div class="content todo">
