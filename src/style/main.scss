@@ -77,6 +77,7 @@ nav {
 
   .hero-img {
     width: 50%;
+    padding: 24px;
     img {
       width: 100%;
     }
@@ -370,7 +371,7 @@ footer {
 
       svg {
         width: 24px;
-        stroke: $base-text;
+        fill: $base-text;
       }
     }
   }
