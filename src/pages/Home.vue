@@ -259,7 +259,7 @@
             <p class="date">May 13th, 2022</p>
           </div>
           <div class="wrap-content">
-            <div class="content todo">
+            <div class="content done">
               <p class="title">New Pool on Trader Joe</p>
               <p class="description">
                 We moved our $LOCAL token liquidity to Trader Joe on Avalanche.
@@ -292,14 +292,14 @@
             <p class="date">Jul 11th, 2022</p>
           </div>
           <div class="wrap-content">
-            <div class="content todo">
+            <div class="content done">
               <p class="title">Protocol Update</p>
               <p class="description">Protocol migrated to CW1.0.</p>
               <p class="description">
                 Compatibility with semi-permissioned model.
               </p>
             </div>
-            <div class="content todo">
+            <div class="content done">
               <p class="title">Kujira Testnet</p>
               <p class="description">
                 Following the announcement of our partnership with Kujira, we
@@ -333,7 +333,7 @@
             <p class="date">Oct 17th, 2022</p>
           </div>
           <div class="wrap-content">
-            <div class="content todo">
+            <div class="content done">
               <p class="title">Testnet Update</p>
               <p class="description">
                 • Arbitration System, that will deal with trade disputes.
