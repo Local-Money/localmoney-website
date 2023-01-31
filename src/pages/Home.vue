@@ -344,14 +344,14 @@
             <div class="content done">
               <p class="description">Buy $LOCAL on FIN</p>
               <p class="description">
-                <a href="https://migration.localmoney.io/" target="_blank">Access FIN</a>
+                <a href="https://fin.kujira.app/trade/kujira1sse6a00arh9dalzsyrd3q825dsn2zmrag0u4qx8q0dyks4ftnxyqrj0xds" target="_blank">Access FIN</a>
               </p>
             </div>
 
             <div class="content done">
               <p class="description">Provide liquidity on BOW</p>
               <p class="description">
-                <a href="https://migration.localmoney.io/" target="_blank">Access BOW</a>
+                <a href="https://bow.kujira.app/pools/kujira10wn7s0j66f33kp8rg7cluh9mghkahd5wezkx84wn3kf0cvh2nefsny50r4" target="_blank">Access BOW</a>
               </p>
             </div>
 
