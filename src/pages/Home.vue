@@ -11,14 +11,14 @@
           class="logo"
         />
       </router-link>
+      <a href="https://app.localmoney.io/"><button class="primary">Web app</button></a>
     </header>
 
     <div class="wrap-hero page-layout section-spacer">
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          <b class="text-primary">Local</b> is a decentralized P2P marketplace
-          for the multi-chain world.
+          <b class="text-primary">Local</b> is a decentralized P2P marketplace for the crypto multi-chain world.
         </p>
         <div class="wrap-cta">
           <p>Want to know more about us?</p>
@@ -36,53 +36,18 @@
     </div>
 
     <main>
-      <section class="video section-spacer">
-        <div class="wrap-outter page-layout">
-          <h2><span class="text-primary">Fast and easy</span> on-off ramps</h2>
-          <div class="wrap-video">
-            <iframe
-              srcdoc="<style>
-          * {
-          padding: 0;
-          margin: 0;
-          overflow: hidden;
-          }
-          
-          body, html {
-            height: 100%;
-          }
-          
-          img, svg {
-            position: absolute;
-            width: 100%;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-          }
-          
-          svg {
-            filter: drop-shadow(1px 1px 10px hsl(206.5, 70.7%, 8%));
-            transition: all 250ms ease-in-out;
-          }
-          
-          body:hover svg {
-            filter: drop-shadow(1px 1px 10px hsl(206.5, 0%, 10%));
-            transform: scale(1.2);
-          }
-        </style>
-        <a href='https://www.youtube.com/embed/PUmyJ4t_W78?autoplay=1'>
-          <img src='https://localmoney.io/top-feature-01.png' alt='Local Video Thumbnail'>
-          <svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='#ef6100' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'><polygon points='5 3 19 12 5 21 5 3'></polygon></svg>
-        </a>
-        "
-              src="https://www.youtube.com/embed/PUmyJ4t_W78?autoplay=1"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+
+      <section class="beta section-spacer">
+        <div class="wrap page-layout">
+          <img src="../assets/beta-test-pop-up.png" alt="Group of people excited for the Beta features">
+          <h2>Our Beta is <span class="text-primary">LIVE!</span></h2>
+          <div class="wrap-content">
+            <p>Welcome aboard the beta test of Local Money! We are thrilled to have you join us on this exciting journey of perfecting the platform before release.</p>
+            <p>Right now you will be able to buy and sell $USK and $KUJI for $ARS, $BRL, or $COP. If you have any feedback please join our <a href="https://t.co/P16BhQpcyc" target="_blank">Discord server.</a></p>
           </div>
+          <button class="primary">Access the app</button>
         </div>
+        
       </section>
 
       <section class="team section-spacer">
@@ -353,24 +318,10 @@
 
         <div class="roadmap-item">
           <div class="wrap-date">
-            <div class="icon-todo">
+            <div class="icon-done">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path
-                  d="M21 16V8.00002C20.9996 7.6493 20.9071 7.30483 20.7315 7.00119C20.556 6.69754 20.3037 6.44539 20 6.27002L13 2.27002C12.696 2.09449 12.3511 2.00208 12 2.00208C11.6489 2.00208 11.304 2.09449 11 2.27002L4 6.27002C3.69626 6.44539 3.44398 6.69754 3.26846 7.00119C3.09294 7.30483 3.00036 7.6493 3 8.00002V16C3.00036 16.3508 3.09294 16.6952 3.26846 16.9989C3.44398 17.3025 3.69626 17.5547 4 17.73L11 21.73C11.304 21.9056 11.6489 21.998 12 21.998C12.3511 21.998 12.696 21.9056 13 21.73L20 17.73C20.3037 17.5547 20.556 17.3025 20.7315 16.9989C20.9071 16.6952 20.9996 16.3508 21 16Z"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M3.27 6.96002L12 12.01L20.73 6.96002"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M12 22.08V12"
+                  d="M20 6L9 17L4 12"
                   stroke="inherit"
                   stroke-width="2"
                   stroke-linecap="round"
@@ -378,15 +329,59 @@
                 />
               </svg>
             </div>
-            <p class="date">Q4 . 2022</p>
+            <p class="date">Jan 12th, 2023</p>
           </div>
           <div class="wrap-content">
-            <div class="content todo">
-              <p class="title">v1.0</p>
+
+            <div class="content done">
+              <p class="title">$LOCAL Native on Kujira</p>
               <p class="description">
-                First release of Local Money where makers will be able to create
-                offers to buy and sell tokens.
+                Swap your $LOCAL from Avalanche, Terra2 and Terra Classic into native $LOCAL at Kujira.
               </p>
+              <p class="description"><a href="https://migration.localmoney.io/" target="_blank">$LOCAL Migration page</a></p>
+            </div>
+
+            <div class="content done">
+              <p class="description">Buy $LOCAL on FIN</p>
+              <p class="description">
+                <a href="https://fin.kujira.app/trade/kujira1sse6a00arh9dalzsyrd3q825dsn2zmrag0u4qx8q0dyks4ftnxyqrj0xds" target="_blank">Access FIN</a>
+              </p>
+            </div>
+
+            <div class="content done">
+              <p class="description">Provide liquidity on BOW</p>
+              <p class="description">
+                <a href="https://bow.kujira.app/pools/kujira10wn7s0j66f33kp8rg7cluh9mghkahd5wezkx84wn3kf0cvh2nefsny50r4" target="_blank">Access BOW</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">Jan 30th, 2023</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content done">
+              <p class="title">Beta Release</p>
+              <p class="description">
+                First release of Local Money where you can: 
+              </p>
+              <p class="description">• Buy and sell $USK or $KUJI</p>
+              <p class="description">• For $ARS, $BRL or $COP</p>
             </div>
           </div>
         </div>
