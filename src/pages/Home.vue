@@ -45,7 +45,7 @@
             <p>Welcome aboard the beta test of Local Money! We are thrilled to have you join us on this exciting journey of perfecting the platform before release.</p>
             <p>Right now you will be able to buy and sell $USK and $KUJI for $ARS, $BRL, or $COP. If you have any feedback please join our <a href="https://t.co/P16BhQpcyc" target="_blank">Discord server.</a></p>
           </div>
-          <button class="primary">Access the app</button>
+          <a href="https://app.localmoney.io/"><button class="primary">Access the app</button></a>
         </div>
         
       </section>
