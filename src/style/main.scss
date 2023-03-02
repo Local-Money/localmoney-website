@@ -124,31 +124,6 @@ main {
     }
   }
 
-  .video {
-    text-align: center;
-    h2 {
-      margin-bottom: 64px;
-    }
-    .wrap-video {
-      overflow: hidden;
-      position: relative;
-      width: 100%;
-    }
-    .wrap-video::after {
-      padding-top: 56.25%;
-      display: block;
-      content: "";
-    }
-
-    .wrap-video iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
   .featured {
     .wrap-featured {
       display: flex;
@@ -176,6 +151,7 @@ main {
   .team {
     background-color: $surface;
     border-top: 1px solid $border;
+    margin-bottom: 2px;
     .wrap-team {
       h2 {
         margin-bottom: 64px;
@@ -183,6 +159,8 @@ main {
       .wrap-members {
         display: flex;
         justify-content: space-between;
+        padding: 0 136px;
+        
 
         .team-member {
           text-align: center;
@@ -230,6 +208,89 @@ main {
       margin-top: -32px;
       background-color: $surface;
       z-index: 10;
+    }
+
+    .roadmap-item-done {
+      position: relative;
+      max-width: 1000px;
+      margin-bottom: 24px;
+      margin-left: 36px;
+      z-index: 100;
+      .wrap-date {
+        display: flex;
+        align-items: center;
+
+        .date {
+          color: $base-text;
+          font-size: 16px;
+          font-weight: $bold;
+          margin-left: 24px;
+        }
+        .icon-done {
+          width: 24px;
+          height: 48px;
+          background-color: $background;
+          fill: $done;
+          stroke: $done;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+      .wrap-content {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .content {
+          display: flex;
+          flex-direction: column;
+          padding: 16px 24px;
+          background-color: $surface;
+          border-radius: 16px;
+          border: 1px solid $border;
+          margin-top: 8px;
+          margin-left: 40px;
+          transition: border 500ms ease-out;
+
+          .title {
+            font-size: 18px;
+            font-weight: $semi-bold;
+            margin-bottom: 2px;
+            border-bottom: 1px solid $border;
+            padding-bottom: 8px;
+          }
+          .description {
+            margin-top: 8px;
+            font-size: 15px;
+            font-weight: $regular;
+            color: $gray900;
+
+            a {
+              color: $primary;
+              vertical-align: middle;
+            }
+
+            svg {
+              margin-left: 12px;
+              stroke: $primary;
+              vertical-align: middle;
+            }
+          }
+        }
+        .todo {
+          &:hover {
+            border: 1px solid $primary;
+            transition: border 500ms ease-out;
+          }
+        }
+        .done {
+          &:hover {
+            border: 1px solid $done;
+            transition: border 500ms ease-out;
+          }
+        }
+      }
     }
 
     .roadmap-item {
@@ -474,6 +535,7 @@ footer {
           flex-wrap: wrap;
           justify-content: space-around;
           gap: 8px;
+          padding: 0;
           .team-member {
             width: 45%;
             margin-bottom: 32px;
@@ -506,6 +568,35 @@ footer {
         height: 95%;
         left: 37px;
         margin-top: -16px;
+      }
+
+      .roadmap-item-done {
+        margin-bottom: 16px;
+        margin-left: 4px;
+        .wrap-date {
+          .circle {
+            width: 12px;
+            height: 12px;
+          }
+          .date {
+            font-size: 16px;
+            margin-left: 16px;
+          }
+        }
+        .wrap-content {
+          .content {
+            padding: 24px 24px;
+            border-radius: 16px;
+            margin-left: 32px;
+
+            .title {
+              font-size: 16px;
+            }
+            .description {
+              font-size: 14px;
+            }
+          }
+        }
       }
 
       .roadmap-item {
