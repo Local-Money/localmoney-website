@@ -36,6 +36,55 @@
 
     <main>
 
+      <section class="top-features section-spacer">
+        <div class="inner page-layout">
+          <h2><span class="text-primary">Fast and easy</span> on-off ramp</h2>
+            <div class="wrap">
+              <ul class="wrap-list">
+                  <li>
+                    <div class="wrap-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="inherit" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <div class="wrap-content">
+                      <p class="title">Secure trading</p>
+                    <p class="content">Through escrow contracts, all crypto being traded is secure and will only be released once the trade is completed.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="wrap-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M22 9V6C22 4.89543 21.1046 4 20 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H20C21.1046 20 22 19.1046 22 18V15" stroke="inherit" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="14" y="9" width="9" height="6" rx="1" stroke="inherit" stroke-width="2"/>
+                      </svg>
+                    </div>
+                    <div class="wrap-content">
+                      <p class="title">Non-custodial</p>
+                    <p class="content">You are in full control of your assets, we don't hold any funds and no login necessary. Your keys, your coins.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="wrap-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="inherit" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12H22" stroke="inherit" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="inherit" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <div class="wrap-content">
+                      <p class="title">A P2P built differently</p>
+                    <p class="content">No central entity has control over your data or funds and all trades take place on-chain.</p>
+                    </div>
+                  </li>
+                  
+              </ul>
+              <div class="wrap-img">
+                <img src="../assets/top-feature-03.png" alt="">
+              </div>
+          </div>
+        </div>
+      </section>
 
       <section class="team section-spacer">
         <div class="wrap-team page-layout">
