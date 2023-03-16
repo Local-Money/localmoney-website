@@ -18,12 +18,11 @@
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          <b class="text-primary">Local</b> is a decentralized P2P marketplace for the crypto multi-chain world.
+          <span class="text-primary">Local</span> is a decentralized P2P marketplace for the crypto multi-chain world.
         </p>
         <div class="wrap-cta">
-          <p>Want to know more about us?</p>
-          <a href="https://localmoney.gitbook.io/docs/local/tokenomics" target="_blank">
-            <button class="primary">Litepaper</button>
+          <a href="https://localmoney.gitbook.io/docs/" target="_blank">
+            <button class="primary">learn more</button>
           </a>
         </div>
       </article>
@@ -37,18 +36,6 @@
 
     <main>
 
-      <section class="beta section-spacer">
-        <div class="wrap page-layout">
-          <img src="../assets/beta-test-pop-up.png" alt="Group of people excited for the Beta features">
-          <h2>Our Beta is <span class="text-primary">LIVE!</span></h2>
-          <div class="wrap-content">
-            <p>Welcome aboard the beta test of Local Money! We are thrilled to have you join us on this exciting journey of perfecting the platform before release.</p>
-            <p>Right now you will be able to buy and sell $USK and $KUJI for $ARS, $BRL, or $COP. If you have any feedback please join our <a href="https://t.co/P16BhQpcyc" target="_blank">Discord server.</a></p>
-          </div>
-          <a href="https://app.localmoney.io/"><button class="primary">Access the app</button></a>
-        </div>
-        
-      </section>
 
       <section class="team section-spacer">
         <div class="wrap-team page-layout">
