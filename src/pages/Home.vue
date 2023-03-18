@@ -61,7 +61,7 @@
                     </div>
                     <div class="wrap-content">
                       <p class="title">Non-custodial</p>
-                    <p class="content">You are in full control of your assets, we don't hold any funds and no login necessary. Your keys, your coins.</p>
+                    <p class="content">You are in full control of your assets, we don't hold any funds and no login is necessary. Your keys, your coins.</p>
                     </div>
                   </li>
                   <li>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="wrap-content">
                       <p class="title">A P2P built differently</p>
-                    <p class="content">No central entity has control over your data or funds and all trades take place on-chain.</p>
+                    <p class="content">No central entity has control over your data or funds and all trades take place directly between you and the other trader, on-chain.</p>
                     </div>
                   </li>
                   
