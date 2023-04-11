@@ -182,13 +182,13 @@ main {
       }
       .wrap-members {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
 
         .team-member {
           text-align: center;
           width: 20%;
           .avatar {
-            width: 160px;
+            width: 200px;
           }
           .name {
             font-size: 20px;

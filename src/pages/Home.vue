@@ -56,16 +56,6 @@
           <div class="wrap-members">
             <div class="team-member">
               <img
-                src="@/assets/team/01.png"
-                alt="Local Money Bull"
-                class="avatar squircicle"
-              />
-              <p class="name">Sam B</p>
-              <p class="role">Rust Intern</p>
-            </div>
-
-            <div class="team-member">
-              <img
                 src="@/assets/team/02.png"
                 alt="Local Money Bull"
                 class="avatar squircicle"
