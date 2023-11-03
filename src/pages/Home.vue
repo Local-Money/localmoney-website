@@ -24,7 +24,7 @@
           <b class="text-primary">Local</b> is a <a href="https://app.localmoney.io/">decentralized P2P marketplace</a> for the multi-chain crypto world.
         </p>
         <p class="sub-header">
-          In November 2023 we relaunched as a <a href="https://localdao.money/">DAO</a>. Join us and stake some $LOCAL in order to help shape the future of Local Money.
+          In October 2023 we relaunched as a <a href="https://localdao.money/">DAO</a>. Join us and stake some $LOCAL in order to help shape the future of Local Money.
         </p>
         <p class="sub-header">The $LOCAL token is how we govern the DAO and share the profits of the Local Money market. You can buy $LOCAL on Kujira using <a href="https://fin.kujira.app/trade/kujira1sse6a00arh9dalzsyrd3q825dsn2zmrag0u4qx8q0dyks4ftnxyqrj0xds" target="_blank">FIN</a>.</p>
         <div class="wrap-cta">
