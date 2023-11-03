@@ -47,7 +47,7 @@ nav {
 
     a {
       color: $primary;
-      display: inline-block;
+      display: inline;
     }
 
     .sub-header {
@@ -217,7 +217,7 @@ main {
 
   .roadmap {
     position: relative;
-
+    background: #2A2C30;
     h2 {
       margin-bottom: 64px;
     }
