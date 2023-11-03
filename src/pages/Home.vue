@@ -32,7 +32,6 @@
           <a href="https://medium.com/@bat.razors/the-incredible-return-of-localmoney-as-localdao-a-community-owned-p2p-protocol-on-the-kujira-6be07b35fabd" target="_blank">
             <button class="primary">Our evolution to a DAO</button>
           </a>
-          <br/>
           <a href="https://localmoney.gitbook.io/docs/local/tokenomics" target="_blank">
             <button class="primary">Our original litepaper</button>
           </a>
@@ -48,7 +47,7 @@
 
     <main>
 
-      <section class="beta section-spacer">
+      <section class="beta section-spacer pale">
         <div class="wrap page-layout">
           <img src="../assets/beta-test-pop-up.png" alt="Group of people excited for the Beta features">
           <h2>Our app is <span class="text-primary">LIVE!</span></h2>
@@ -66,7 +65,7 @@
      
       <section class="roadmap page-layout section-spacer">
         <h2>The Local Money story so far</h2>
-
+<div class="timeline-line"></div>
         <div class="timeline-line"></div>
 
         <div class="roadmap-item">

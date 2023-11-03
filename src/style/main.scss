@@ -217,7 +217,7 @@ main {
 
   .roadmap {
     position: relative;
-    background: #2A2C30;
+    background: #202225;
     h2 {
       margin-bottom: 64px;
     }
@@ -543,3 +543,10 @@ footer {
     font-size: 24px;
   }
 }
+
+/** additions 20231103 **/
+.pale {background-color: $gray200}
+.pale button {background:$gray300;}
+.wrap-hero article button:hover, button.primary:hover {background: $gray300;}
+.pale button:hover {background: $gray400;}
+button {transition: background-color 1s ease}
