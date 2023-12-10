@@ -1,6 +1,6 @@
 <template>
   <head>
-    <title>Local Money Roadmap</title>
+    <title>Local Money</title>
   </head>
   <body>
     <header class="page-layout">
@@ -11,19 +11,29 @@
           class="logo"
         />
       </router-link>
-      <a href="https://app.localmoney.io/"><button class="primary">Web app</button></a>
+      <div><a href="https://app.localmoney.io/"><button class="primary">Web app</button></a>
+        <br/>
+      <a href="https://localdao.money/"><button class="primary">Local DAO</button></a>
+      </div>
     </header>
 
     <div class="wrap-hero page-layout section-spacer">
       <article>
         <h1>Trade with your peers, locally.</h1>
         <p class="sub-header">
-          <b class="text-primary">Local</b> is a decentralized P2P marketplace for the crypto multi-chain world.
+          <b class="text-primary">Local</b> is a <a href="https://app.localmoney.io/">decentralized P2P marketplace</a> for the multi-chain crypto world.
         </p>
+        <p class="sub-header">
+          In October 2023 we relaunched as a <a href="https://localdao.money/">DAO</a>. Join us and stake some $LOCAL in order to help shape the future of Local Money.
+        </p>
+        <p class="sub-header">The $LOCAL token is how we govern the DAO and share the profits of the Local Money market. You can buy $LOCAL on Kujira using <a href="https://fin.kujira.app/trade/kujira1sse6a00arh9dalzsyrd3q825dsn2zmrag0u4qx8q0dyks4ftnxyqrj0xds" target="_blank">FIN</a>.</p>
         <div class="wrap-cta">
-          <p>Want to know more about us?</p>
+          <h2>Want to know more about us?</h2>
+          <a href="https://medium.com/@bat.razors/the-incredible-return-of-localmoney-as-localdao-a-community-owned-p2p-protocol-on-the-kujira-6be07b35fabd" target="_blank">
+            <button class="primary">Our evolution to a DAO</button>
+          </a>
           <a href="https://localmoney.gitbook.io/docs/local/tokenomics" target="_blank">
-            <button class="primary">Litepaper</button>
+            <button class="primary">Our original litepaper</button>
           </a>
         </div>
       </article>
@@ -37,345 +47,26 @@
 
     <main>
 
-      <section class="beta section-spacer">
+      <section class="beta section-spacer pale">
         <div class="wrap page-layout">
           <img src="../assets/beta-test-pop-up.png" alt="Group of people excited for the Beta features">
-          <h2>Our Beta is <span class="text-primary">LIVE!</span></h2>
+          <h2>Our app is <span class="text-primary">LIVE!</span></h2>
           <div class="wrap-content">
-            <p>Welcome aboard the beta test of Local Money! We are thrilled to have you join us on this exciting journey of perfecting the platform before release.</p>
-            <p>Right now you will be able to buy and sell $USK and $KUJI for $ARS, $BRL, or $COP. If you have any feedback please join our <a href="https://t.co/P16BhQpcyc" target="_blank">Discord server.</a></p>
+            <p>Welcome aboard Local Money! We are thrilled to have you join us.</p>
+            <p>You can now buy and sell $USK, $USDC and $KUJI using a range of international currenies. 
+            </p>
+            <p>If you have any feedback or ideas, please join us in <a href="https://t.me/LocalMoneyCommunity" target="_blank">Telegram.</a></p>
           </div>
-          <a href="https://app.localmoney.io/"><button class="primary">Access the app</button></a>
+          <a href="https://app.localmoney.io/"><button class="primary">Local Money: the app</button></a>
         </div>
         
       </section>
 
-      <section class="team section-spacer">
-        <div class="wrap-team page-layout">
-          <h2>Meet the <span class="text-primary">team</span></h2>
-          <div class="wrap-members">
-            <div class="team-member">
-              <img
-                src="@/assets/team/02.png"
-                alt="Local Money Bull"
-                class="avatar squircicle"
-              />
-              <p class="name">Gabs</p>
-              <p class="role">Designer</p>
-            </div>
-
-            <div class="team-member">
-              <img
-                src="@/assets/team/03.png"
-                alt="Local Money Bull"
-                class="avatar squircicle"
-              />
-              <p class="name">Davi</p>
-              <p class="role">Smart Contract Developer</p>
-            </div>
-
-            <div class="team-member">
-              <img
-                src="@/assets/team/05.png"
-                alt="Local Money Bull"
-                class="avatar squircicle"
-              />
-              <p class="name">Gus</p>
-              <p class="role">Business Development</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+     
       <section class="roadmap page-layout section-spacer">
-        <h2>Roadmap</h2>
-
+        <h2>The Local Money story so far</h2>
+<div class="timeline-line"></div>
         <div class="timeline-line"></div>
-
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="icon-done">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="date">Feb 18th, 2022</p>
-          </div>
-          <div class="wrap-content">
-            <div class="content done">
-              <p class="title">LBP</p>
-              <p class="description">$LOCAL token initial offer.</p>
-            </div>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="icon-done">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="date">Feb 23th, 2022</p>
-          </div>
-          <div class="wrap-content">
-            <div class="content done">
-              <p class="title">Astroport LOCAL-USTC pool</p>
-              <p class="description">
-                We are happy to announce that $LOCAL is now officially available
-                on Astroport.
-              </p>
-              <p class="description">(Discontinued)</p>
-            </div>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="icon-done">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="date">Mar 7th, 2022</p>
-          </div>
-          <div class="wrap-content">
-            <div class="content done">
-              <p class="title">Discord Server Launch</p>
-              <p class="description">
-                Our community has a cozy place to get together now.
-              </p>
-              <p class="description">
-                <a href="https://discord.gg/meXhfQ8TWr" target="_blank"
-                  >Discord Server</a
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="icon-done">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="date">Apr 2nd, 2022</p>
-          </div>
-          <div class="wrap-content">
-            <div class="content done">
-              <p class="title">Terra Testnet</p>
-              <p class="description">
-                Beta on Testnet with community members. We're looking forward to
-                receive your feedback and suggestions on the Testnet channel on
-                our Discord.
-              </p>
-              <p class="description">(Discontinued)</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="icon-done">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="date">May 13th, 2022</p>
-          </div>
-          <div class="wrap-content">
-            <div class="content done">
-              <p class="title">New Pool on Trader Joe</p>
-              <p class="description">
-                We moved our $LOCAL token liquidity to Trader Joe on Avalanche.
-              </p>
-              <p class="description">
-                <a
-                  href="https://traderjoexyz.com/pool/0xac42f172484f4de5f26959c612e23ddc206998ab/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e#/"
-                  target="_blank"
-                  >Pool link</a
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- END ROADMAP ITEM -->
-
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="icon-done">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="date">Jul 11th, 2022</p>
-          </div>
-          <div class="wrap-content">
-            <div class="content done">
-              <p class="title">Protocol Update</p>
-              <p class="description">Protocol migrated to CW1.0.</p>
-              <p class="description">
-                Compatibility with semi-permissioned model.
-              </p>
-            </div>
-            <div class="content done">
-              <p class="title">Kujira Testnet</p>
-              <p class="description">
-                Following the announcement of our partnership with Kujira, we
-                have our testnet back online! Again we welcome every feedback
-                and suggestions you may have. Join our Discord channel and share
-                it with us.
-              </p>
-              <p class="description">
-                <a href="https://testnet.localmoney.io/" target="_blank"
-                  >Testnet</a
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- END ROADMAP ITEM -->
-
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="icon-done">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="date">Oct 17th, 2022</p>
-          </div>
-          <div class="wrap-content">
-            <div class="content done">
-              <p class="title">Testnet Update</p>
-              <p class="description">
-                • Arbitration System, that will deal with trade disputes.
-              </p>
-              <p class="description">
-                • Chat System, so people can exchange payment information,
-                receipts and so forth.
-              </p>
-              <p class="description">
-                • Reputation System, that will serve as a way to rank good
-                makers and takers and improve trust.
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- END ROADMAP ITEM -->
-
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="icon-done">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="date">Jan 12th, 2023</p>
-          </div>
-          <div class="wrap-content">
-
-            <div class="content done">
-              <p class="title">$LOCAL Native on Kujira</p>
-              <p class="description">
-                Swap your $LOCAL from Avalanche, Terra2 and Terra Classic into native $LOCAL at Kujira.
-              </p>
-              <p class="description"><a href="https://migration.localmoney.io/" target="_blank">$LOCAL Migration page</a></p>
-            </div>
-
-            <div class="content done">
-              <p class="description">Buy $LOCAL on FIN</p>
-              <p class="description">
-                <a href="https://fin.kujira.app/trade/kujira1sse6a00arh9dalzsyrd3q825dsn2zmrag0u4qx8q0dyks4ftnxyqrj0xds" target="_blank">Access FIN</a>
-              </p>
-            </div>
-
-            <div class="content done">
-              <p class="description">Provide liquidity on BOW</p>
-              <p class="description">
-                <a href="https://bow.kujira.app/pools/kujira10wn7s0j66f33kp8rg7cluh9mghkahd5wezkx84wn3kf0cvh2nefsny50r4" target="_blank">Access BOW</a>
-              </p>
-            </div>
-
-          </div>
-        </div>
-        <!-- END ROADMAP ITEM -->
-
-        <div class="roadmap-item">
-          <div class="wrap-date">
-            <div class="icon-done">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="inherit"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="date">Jan 30th, 2023</p>
-          </div>
-          <div class="wrap-content">
-            <div class="content done">
-              <p class="title">Beta Release</p>
-              <p class="description">
-                First release of Local Money where you can: 
-              </p>
-              <p class="description">• Buy and sell $USK or $KUJI</p>
-              <p class="description">• For $ARS, $BRL or $COP</p>
-            </div>
-          </div>
-        </div>
-        <!-- END ROADMAP ITEM -->
 
         <div class="roadmap-item">
           <div class="wrap-date">
@@ -404,18 +95,168 @@
                 />
               </svg>
             </div>
-            <p class="date">2023</p>
+            <p class="date">2023-2024</p>
           </div>
           <div class="wrap-content">
             <div class="content todo">
-              <p class="title">To the future and beyond</p>
-              <p class="description">Governance</p>
-              <p class="description">Mobile App</p>
-              <p class="description">LOCAL Chain</p>
+              <p class="title">To the future and beyond...</p>
+              <p class="description">New tokenomics, new partnerships and an improved user experience!</p>
+
             </div>
           </div>
         </div>
         <!-- END ROADMAP ITEM -->
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">Oct 31, 2023</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content done">
+              <p class="title">DAO</p>
+              <p class="description">Local Money relaunches as a fully fledged, community-run <a href="https://localdao.money/">DAO</a>.</p>
+            </div>
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">Mar 6, 2023</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content done">
+              <p class="title">Go live!</p>
+              <p class="description">Local Money is officially launched as a functioning app.</p>
+            </div>
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">Jan 30th, 2023</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content done">
+              <p class="title">Beta Release</p>
+              <p class="description">
+                First beta release of Local Money.</p>
+            </div>
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">July 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content done">
+              <p class="title">Kujira Testnet</p>
+              <p class="description">
+                Following the Terra crash we move to Kujira and got our testnet back online.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">April 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content done">
+              <p class="title">Terra Testnet</p>
+              <p class="description">
+                The first beta goes live on testnet with community members.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- END ROADMAP ITEM -->
+
+        <div class="roadmap-item">
+          <div class="wrap-date">
+            <div class="icon-done">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="inherit"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="date">February 2022</p>
+          </div>
+          <div class="wrap-content">
+            <div class="content done">
+              <p class="title">LBP</p>
+              <p class="description">$LOCAL token initial offer.</p>
+            </div>
+          </div>
+        </div>
+        <!-- END ROADMAP ITEM -->
+        
       </section>
     </main>
     <footer class="section-spacer">
